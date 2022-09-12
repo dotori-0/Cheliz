@@ -14,7 +14,34 @@
 		0A3F32FF28CB4B7600B51DEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F32FE28CB4B7600B51DEA /* Assets.xcassets */; };
 		0A3F330228CB4B7600B51DEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F330028CB4B7600B51DEA /* LaunchScreen.storyboard */; };
 		0A3F330A28CB4BC400B51DEA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F330928CB4BC400B51DEA /* .gitignore */; };
+		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
+		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
+		0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */; };
+		0A8AA9AE28CE1EA400EB2AF8 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8AA9AD28CE1EA400EB2AF8 /* SwiftyJSON */; };
+		0A8AA9B128CE1EB400EB2AF8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8AA9B028CE1EB400EB2AF8 /* Alamofire */; };
+		0A8AA9B428CE1ECA00EB2AF8 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A8AA9B328CE1ECA00EB2AF8 /* SnapKit */; };
+		0A8AA9B728CF239100EB2AF8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9B628CF239100EB2AF8 /* HomeViewController.swift */; };
+		0A8AA9BB28CF24A900EB2AF8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9BA28CF24A900EB2AF8 /* BaseViewController.swift */; };
+		0A8AA9BD28CF24FE00EB2AF8 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9BC28CF24FE00EB2AF8 /* BaseView.swift */; };
+		0A8AA9BF28CF255300EB2AF8 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9BE28CF255300EB2AF8 /* BaseTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A3F331A28CB932F00B51DEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A3F331528CB932F00B51DEA /* HelpersFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0A0162A628ABC50B0069C4AF;
+			remoteInfo = HelpersFramework;
+		};
+		0A3F331C28CB932F00B51DEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A3F331528CB932F00B51DEA /* HelpersFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0A0162B028ABC50B0069C4AF;
+			remoteInfo = HelpersFrameworkTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0A3F32F228CB4B7500B51DEA /* Cheliz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheliz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +53,14 @@
 		0A3F330128CB4B7600B51DEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A3F330328CB4B7600B51DEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A3F330928CB4BC400B51DEA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0A3F331528CB932F00B51DEA /* HelpersFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HelpersFramework.xcodeproj; path = ../HelpersFramework/HelpersFramework.xcodeproj; sourceTree = "<group>"; };
+		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
+		0A8AA9B628CF239100EB2AF8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0A8AA9BA28CF24A900EB2AF8 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		0A8AA9BC28CF24FE00EB2AF8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		0A8AA9BE28CF255300EB2AF8 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8AA9B428CE1ECA00EB2AF8 /* SnapKit in Frameworks */,
+				0A8AA9AE28CE1EA400EB2AF8 /* SwiftyJSON in Frameworks */,
+				0A8AA9B128CE1EB400EB2AF8 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +80,7 @@
 		0A3F32E928CB4B7500B51DEA = {
 			isa = PBXGroup;
 			children = (
+				0A3F331528CB932F00B51DEA /* HelpersFramework.xcodeproj */,
 				0A3F330928CB4BC400B51DEA /* .gitignore */,
 				0A3F32F428CB4B7500B51DEA /* Cheliz */,
 				0A3F32F328CB4B7500B51DEA /* Products */,
@@ -59,6 +98,9 @@
 		0A3F32F428CB4B7500B51DEA /* Cheliz */ = {
 			isa = PBXGroup;
 			children = (
+				0A8AA9B828CF249800EB2AF8 /* Utility */,
+				0A8AA9A328CE1B0700EB2AF8 /* Networking */,
+				0A8AA9B528CF236A00EB2AF8 /* Scenes */,
 				0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */,
 				0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */,
 				0A3F32F928CB4B7500B51DEA /* ViewController.swift */,
@@ -68,6 +110,59 @@
 				0A3F330328CB4B7600B51DEA /* Info.plist */,
 			);
 			path = Cheliz;
+			sourceTree = "<group>";
+		};
+		0A3F331628CB932F00B51DEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A3F331B28CB932F00B51DEA /* HelpersFramework.framework */,
+				0A3F331D28CB932F00B51DEA /* HelpersFrameworkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0A8AA9A328CE1B0700EB2AF8 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */,
+				0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */,
+				0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		0A8AA9B528CF236A00EB2AF8 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AA9C028CF25A800EB2AF8 /* Home */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		0A8AA9B828CF249800EB2AF8 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AA9B928CF249F00EB2AF8 /* Base */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		0A8AA9B928CF249F00EB2AF8 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AA9BA28CF24A900EB2AF8 /* BaseViewController.swift */,
+				0A8AA9BC28CF24FE00EB2AF8 /* BaseView.swift */,
+				0A8AA9BE28CF255300EB2AF8 /* BaseTableViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		0A8AA9C028CF25A800EB2AF8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AA9B628CF239100EB2AF8 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,6 +181,11 @@
 			dependencies = (
 			);
 			name = Cheliz;
+			packageProductDependencies = (
+				0A8AA9AD28CE1EA400EB2AF8 /* SwiftyJSON */,
+				0A8AA9B028CE1EB400EB2AF8 /* Alamofire */,
+				0A8AA9B328CE1ECA00EB2AF8 /* SnapKit */,
+			);
 			productName = Cheliz;
 			productReference = 0A3F32F228CB4B7500B51DEA /* Cheliz.app */;
 			productType = "com.apple.product-type.application";
@@ -114,14 +214,42 @@
 				Base,
 			);
 			mainGroup = 0A3F32E928CB4B7500B51DEA;
+			packageReferences = (
+				0A8AA9AC28CE1EA400EB2AF8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				0A8AA9AF28CE1EB400EB2AF8 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				0A8AA9B228CE1ECA00EB2AF8 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 0A3F32F328CB4B7500B51DEA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0A3F331628CB932F00B51DEA /* Products */;
+					ProjectRef = 0A3F331528CB932F00B51DEA /* HelpersFramework.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0A3F32F128CB4B7500B51DEA /* Cheliz */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0A3F331B28CB932F00B51DEA /* HelpersFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HelpersFramework.framework;
+			remoteRef = 0A3F331A28CB932F00B51DEA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0A3F331D28CB932F00B51DEA /* HelpersFrameworkTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HelpersFrameworkTests.xctest;
+			remoteRef = 0A3F331C28CB932F00B51DEA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0A3F32F028CB4B7500B51DEA /* Resources */ = {
@@ -143,8 +271,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A3F32FA28CB4B7500B51DEA /* ViewController.swift in Sources */,
+				0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */,
 				0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */,
+				0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */,
 				0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */,
+				0A8AA9BB28CF24A900EB2AF8 /* BaseViewController.swift in Sources */,
+				0A8AA9BD28CF24FE00EB2AF8 /* BaseView.swift in Sources */,
+				0A8AA9B728CF239100EB2AF8 /* HomeViewController.swift in Sources */,
+				0A8AA9BF28CF255300EB2AF8 /* BaseTableViewCell.swift in Sources */,
+				0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +497,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A8AA9AC28CE1EA400EB2AF8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		0A8AA9AF28CE1EB400EB2AF8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		0A8AA9B228CE1ECA00EB2AF8 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A8AA9AD28CE1EA400EB2AF8 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A8AA9AC28CE1EA400EB2AF8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		0A8AA9B028CE1EB400EB2AF8 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A8AA9AF28CE1EB400EB2AF8 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		0A8AA9B328CE1ECA00EB2AF8 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A8AA9B228CE1ECA00EB2AF8 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A3F32EA28CB4B7500B51DEA /* Project object */;
 }
