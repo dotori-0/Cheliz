@@ -45,7 +45,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
 //        label.font = UIFont.dongle(style: .Regular, size: 30)
-        label.font = UIFont.hyemin(style: .Bold, size: 20)
+        label.font = UIFont.hyemin(style: .Bold, size: 16)
 //        label.font = .systemFont(ofSize: 20)
         return label
     }()
@@ -62,6 +62,9 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         let view = UIStackView(arrangedSubviews: [titleLabel, releaseYearLabel])
         view.axis = .vertical
         view.alignment = .leading
+        view.distribution = .fillEqually
+//        view.spacing = 0
+//        view.backgroundColor = .systemMint
         return view
     }()
     
@@ -84,7 +87,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         [checkButton, posterImageView, stackView, separatorView].forEach {
             contentView.addSubview($0)
         }
-        contentView.backgroundColor = .systemMint
+//        contentView.backgroundColor = .systemMint
     }
     
     override func setConstraints() {
@@ -96,7 +99,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         }
         
         posterImageView.snp.makeConstraints { make in
-            make.leading.equalTo(checkButton.snp.trailing).offset(20)
+            make.leading.equalTo(checkButton.snp.trailing).offset(16)
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.7)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
@@ -104,9 +107,9 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(posterImageView.snp.trailing).offset(20)
+            make.leading.equalTo(posterImageView.snp.trailing).offset(12)
             make.trailing.equalToSuperview().offset(-20)
-            make.height.equalToSuperview().multipliedBy(0.7)
+            make.height.equalToSuperview().multipliedBy(0.6)
         }
         
         separatorView.snp.makeConstraints { make in

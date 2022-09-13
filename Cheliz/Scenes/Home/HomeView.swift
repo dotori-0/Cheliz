@@ -17,6 +17,19 @@ class HomeView: BaseView {
         view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.reuseIdentifier)
         return view
     }()
+    
+    let searchButton = UIButton().then {
+        var configuration = UIButton.Configuration.filled()
+        configuration.image = UIImage(systemName: "magnifyingglass",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
+        configuration.cornerStyle = .capsule
+        $0.configuration = configuration
+        
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = .zero
+        $0.layer.shadowRadius = 12
+        $0.layer.shadowOpacity = 0.2
+    }
 
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -29,13 +42,22 @@ class HomeView: BaseView {
     
     // MARK: - Methods
     override func setUI() {
-        addSubview(collectionView)
+        [collectionView, searchButton].forEach {
+            addSubview($0)
+        }
         setCollectionViewLayout()
     }
     
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        searchButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-24)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-24)
+            make.width.equalToSuperview().multipliedBy(0.15)
+            make.height.equalTo(searchButton.snp.width)
         }
     }
     
