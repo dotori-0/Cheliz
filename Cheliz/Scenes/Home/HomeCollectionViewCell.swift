@@ -16,13 +16,11 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
 //        button.configuration = configuration
 //        return button
 //    }()
-    let checkButton = UIButton().then {
+    lazy var checkButton = UIButton().then {
         var configuration = UIButton.Configuration.plain()
-//        configuration.image = UIImage(systemName: "checkmark.circle")
-//        configuration.image = UIImage(systemName: <#T##String#>, withConfiguration: UIImage.SymbolConfiguration(pointSize: <#T##CGFloat#>, weight: <#T##UIImage.SymbolWeight#>, scale: <#T##UIImage.SymbolScale#>))
+//        configuration.image = UIImage(systemName: "circle")
         configuration.image = UIImage(systemName: "circle",
-                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
-//                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: <#T##CGFloat#>, weight: <#T##UIImage.SymbolWeight#>, scale: <#T##UIImage.SymbolScale#>))
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
 //        configuration.imagePadding = 0
 //        configuration.contentInsets = .zero
 //        let imgConfig = UIImage.SymbolConfiguration(pointSize: <#T##CGFloat#>)/
@@ -30,25 +28,20 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
 //        $0.backgroundColor = .systemRed
     }
     
-    let label = UILabel().then {
-      $0.textAlignment = .center
-      $0.textColor = .black
-      $0.text = "Hello, World!"
+//    let posterImageView: UIImageView = {
+//        let view = UIImageView()
+//        view.backgroundColor = .systemYellow
+//        return view
+//    }()
+    let posterImageView = UIImageView().then {
+        $0.backgroundColor = .systemYellow
     }
     
-    let posterImageView: UIImageView = {
-        let view = UIImageView()
-        view.backgroundColor = .systemYellow
-        return view
-    }()
-    
-    let titleLabel: UILabel = {
-        let label = UILabel()
+    let titleLabel = UILabel().then {
+        $0.font = UIFont.hyemin(style: .Bold, size: 16)
 //        label.font = UIFont.dongle(style: .Regular, size: 30)
-        label.font = UIFont.hyemin(style: .Bold, size: 16)
 //        label.font = .systemFont(ofSize: 20)
-        return label
-    }()
+    }
     
     let releaseYearLabel: UILabel = {
         let label = UILabel()
@@ -64,7 +57,6 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         view.alignment = .leading
         view.distribution = .fillEqually
 //        view.spacing = 0
-//        view.backgroundColor = .systemMint
         return view
     }()
     
@@ -82,12 +74,11 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Methods
+    // MARK: - Design Methods
     override func setUI() {
         [checkButton, posterImageView, stackView, separatorView].forEach {
             contentView.addSubview($0)
         }
-//        contentView.backgroundColor = .systemMint
     }
     
     override func setConstraints() {

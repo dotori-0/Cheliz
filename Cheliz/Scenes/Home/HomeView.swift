@@ -40,7 +40,7 @@ class HomeView: BaseView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Methods
+    // MARK: - Design Methods
     override func setUI() {
         [collectionView, searchButton].forEach {
             addSubview($0)
@@ -62,7 +62,6 @@ class HomeView: BaseView {
     }
     
     private func setCollectionViewLayout() {
-        print(#function)
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 0
         layout.sectionInset = .zero
@@ -75,20 +74,5 @@ class HomeView: BaseView {
         layout.itemSize = CGSize(width: screenWidth, height: screenHeight * 0.1)
         
         collectionView.collectionViewLayout = layout
-    }
-    
-    private func getCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 0
-        layout.sectionInset = .zero
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
-        
-        layout.itemSize = CGSize(width: screenWidth, height: screenHeight * 0.1)
-        
-        return layout
     }
 }

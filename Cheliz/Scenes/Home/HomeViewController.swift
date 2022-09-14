@@ -33,12 +33,26 @@ class HomeViewController: BaseViewController {
         homeView.collectionView.delegate = self
     }
     
-    // MARK: - Methods
+    // MARK: - Design Methods
     override func setUI() {
         super.setUI()
         
-        title = "타이틀"
+        navigationItem.title = "나의 리스트"
 //        homeView.collectionView.backgroundColor = .systemMint
+    }
+    
+    // MARK: - Action Methods
+    override func setActions() {
+        setSearchButton()
+    }
+    
+    private func setSearchButton() {
+        homeView.searchButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc private func searchButtonClicked() {
+        let searchVC = SearchViewController()
+        transit(to: searchVC, transitionStyle: .push)
     }
 }
 
