@@ -9,13 +9,6 @@ import UIKit
 
 class HomeCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-//    let checkButton: UIButton = {
-//        let button = UIButton()
-//        var configuration = UIButton.Configuration.plain()
-//        configuration.image = UIImage(systemName: "checkmark.circle")
-//        button.configuration = configuration
-//        return button
-//    }()
     lazy var checkButton = UIButton().then {
         var configuration = UIButton.Configuration.plain()
 //        configuration.image = UIImage(systemName: "circle")
@@ -27,29 +20,24 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         $0.configuration = configuration
 //        $0.backgroundColor = .systemRed
     }
-    
-//    let posterImageView: UIImageView = {
-//        let view = UIImageView()
-//        view.backgroundColor = .systemYellow
-//        return view
-//    }()
+
     let posterImageView = UIImageView().then {
         $0.backgroundColor = .systemYellow
     }
     
     let titleLabel = UILabel().then {
-        $0.font = UIFont.hyemin(style: .Bold, size: 16)
 //        label.font = UIFont.dongle(style: .Regular, size: 30)
 //        label.font = .systemFont(ofSize: 20)
+        $0.font = UIFont.hyemin(style: .Bold, size: 16)
+//        $0.font = UIFont.barunpen(style: .Bold, size: 18)
     }
     
-    let releaseYearLabel: UILabel = {
-        let label = UILabel()
-//        label.font = UIFont.dongle(style: .Regular, size: 12)
-//        label.font = .systemFont(ofSize: 20)
-        label.font = UIFont.hyemin(style: .Bold, size: 12)
-        return label
-    }()
+    let releaseYearLabel = UILabel().then {
+//        $0.font = UIFont.dongle(style: .Regular, size: 12)
+//        $0.font = .systemFont(ofSize: 20)
+        $0.font = UIFont.hyemin(style: .Bold, size: 12)
+//        $0.font = UIFont.barunpen(style: .Regular, size: 14)
+    }
     
     lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [titleLabel, releaseYearLabel])

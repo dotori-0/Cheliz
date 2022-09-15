@@ -9,7 +9,11 @@ import UIKit
 
 class SearchViewController: BaseViewController {
     // MARK: - Properties
-    let searchView = SearchView()
+    private let searchView = SearchView()
+    
+    private var searchText = ""
+    private var searchResults: [MediaModel] = []
+    
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -19,8 +23,18 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setCollectionView()
+        setSearchController()
+    }
+    
+    // MARK: - Setting Methods
+    private func setCollectionView() {
         searchView.collectionView.dataSource = self
         searchView.collectionView.delegate = self
+    }
+    
+    private func setSearchController() {
+        searchView.searchController.searchResultsUpdater = self
     }
     
     // MARK: - Design Methods
@@ -38,6 +52,13 @@ class SearchViewController: BaseViewController {
         
 //        navigationController?.navigationBar.topItem?.title = ""  // nil: Back, 리터럴: 앞 화면의 타이틀까지 바뀜
 //        navigationItem.backButtonTitle = "?"
+    }
+    
+    // MARK: - Search Methods
+    private func search() {
+        TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText) { data in
+            self.searchResults = ParsingManager.parseData(data)
+        }
     }
 }
 
@@ -65,3 +86,19 @@ extension SearchViewController: UICollectionViewDataSource {
 extension SearchViewController: UICollectionViewDelegate {
     
 }
+
+// MARK: - UISearchResultsUpdating
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print(#function)
+        guard let text = searchController.searchBar.text else {
+            print("No text")  // 👻 화면에 검색하라고 띄워 주기
+            return
+        }
+        
+        searchText = text.lowercased()
+        search()
+    }
+}
+
+

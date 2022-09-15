@@ -19,7 +19,19 @@ extension UIFont {
     static func hyemin(style: Style, size: CGFloat) -> UIFont {
         return UIFont(name: "IMHyemin-\(style)", size: size)!
     }
+    
+    static func barunpen(style: Style, size: CGFloat) -> UIFont {
+        let fontName = style == .Regular ? "NanumBarunpen" : "NanumBarunpen-\(style)"
+        return UIFont(name: fontName, size: size)!
+    }
 }
+
+//Dongle-Regular
+//Dongle-Light
+//Dongle-Bold
 
 //IMHyemin-Regular
 //IMHyemin-Bold
+
+//NanumBarunpen
+//NanumBarunpen-Bold
