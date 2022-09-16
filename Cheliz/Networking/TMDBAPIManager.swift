@@ -16,8 +16,9 @@ class TMDBAPIManager {
     private init() { }
     
     func fetchMultiSearchResults(query: String, completionHandler: @escaping (Data) -> Void) {
-        let url = Endpoint.multiSearchURL + APIKey.TMDB + "&language=en-US" + "&query=\(query)" + "&page=1"
+        let url = Endpoint.multiSearchURL + APIKey.TMDB + "&language=ko-KR" + "&query=\(query)" + "&page=1"
         // https://api.themoviedb.org/3/search/multi?api_key={API_KEY}&language=en-US&query=lucy&page=1&include_adult=false
+        // https://api.themoviedb.org/3/search/multi?api_key={API_KEY}&language=ko-KR&query=탑건&page=1&include_adult=false
         
         AF.request(url, method: .get).validate(statusCode: 200...400).responseData { response in
             switch response.result {

@@ -54,7 +54,6 @@ struct ParsingManager {
                                         posterPath: result["poster_path"].stringValue,
                                         releaseDate: releaseDate,
                                         overview: result["overview"].stringValue)
-                
             }
             
             return mediaModel
@@ -65,13 +64,11 @@ struct ParsingManager {
     
     static func parseData(_ data: Data) -> [MediaModel] {
         let json = JSON(data)
-        print("🐶", json)
-//        dump(json)
+//        print("🐶", json)
         
         let JSONMovieAndTvOnly: [JSON] = json["results"].arrayValue.filter { $0["media_type"].stringValue != "person" }
-        print("🐱", JSONMovieAndTvOnly)
+//        print("🐱", JSONMovieAndTvOnly)
         
-//        let mediaArray: [MediaModel] = json["results"].arrayValue.map { result in
         let mediaArray: [MediaModel] = JSONMovieAndTvOnly.map { result in
             let mediaType: MediaType = result["media_type"].stringValue == "movie" ? .movie : .tv
             let title = mediaType == .movie ? result["title"].stringValue : result["name"].stringValue
@@ -84,7 +81,7 @@ struct ParsingManager {
                                     posterPath: result["poster_path"].stringValue,
                                     releaseDate: releaseDate,
                                     overview: result["overview"].stringValue)
-            print(mediaModel)
+//            print(mediaModel)
             return mediaModel
         }
         

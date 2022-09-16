@@ -94,4 +94,11 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
             make.centerX.equalToSuperview()
         }
     }
+    
+    // MARK: - Internal Methods
+    func showResult(with media: MediaModel) {
+        titleLabel.text = media.title
+        releaseYearLabel.text = media.releaseDate
+        mediaTypeLabel.text = media.mediaType.rawValue
+    }
 }

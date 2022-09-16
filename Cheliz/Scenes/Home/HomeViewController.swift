@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class HomeViewController: BaseViewController {
     // MARK: - Properties
@@ -29,6 +30,11 @@ class HomeViewController: BaseViewController {
 //            }
 //        }
         
+        setCollectionView()
+    }
+    
+    // MARK: - Setting Methods
+    private func setCollectionView() {
         homeView.collectionView.dataSource = self
         homeView.collectionView.delegate = self
     }
@@ -71,6 +77,7 @@ extension HomeViewController: UICollectionViewDataSource {
 //        cell.titleLabel.text = "\(indexPath)"
         cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick)"
         cell.releaseYearLabel.text = "\(Date.now)"
+        cell.setConstraints()
         
         return cell
     }
@@ -79,4 +86,10 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     
+}
+
+struct HomeViewController_Previews: PreviewProvider {
+    static var previews: some View {
+        TabBarController().toPreview()
+    }
 }

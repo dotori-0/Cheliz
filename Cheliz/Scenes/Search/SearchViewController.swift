@@ -31,6 +31,8 @@ class SearchViewController: BaseViewController {
     private func setCollectionView() {
         searchView.collectionView.dataSource = self
         searchView.collectionView.delegate = self
+        
+        searchView.collectionView.keyboardDismissMode = .onDrag
     }
     
     private func setSearchController() {
@@ -58,6 +60,8 @@ class SearchViewController: BaseViewController {
     private func search() {
         TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText) { data in
             self.searchResults = ParsingManager.parseData(data)
+            print("searchResults.count: \(self.searchResults.count)")
+            self.searchView.collectionView.reloadData()
         }
     }
 }
@@ -65,18 +69,21 @@ class SearchViewController: BaseViewController {
 // MARK: - UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print(#function)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.reuseIdentifier, for: indexPath) as? SearchCollectionViewCell else {
             print("Cannot find SearchCollectionViewCell")
             return UICollectionViewCell()
         }
         
-        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick) 탑건: 매버릭 (Top Gun: Maverick)"
-        cell.releaseYearLabel.text = "2022-05-24"
-        cell.mediaTypeLabel.text = "movie"
+//        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick) 탑건: 매버릭 (Top Gun: Maverick)"
+//        cell.releaseYearLabel.text = "2022-05-24"
+//        cell.mediaTypeLabel.text = "movie"
+        cell.showResult(with: searchResults[indexPath.row])
+        print(cell.titleLabel.text)
         
         return cell
     }
