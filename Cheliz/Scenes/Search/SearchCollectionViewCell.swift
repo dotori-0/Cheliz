@@ -10,6 +10,10 @@ import Kingfisher
 
 class SearchCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
+    var media: Media?
+    var addErrorHandler: (() -> Void)?
+    var addCompletionHandler: (() -> Void)?
+    
     let posterImageView = UIImageView().then {
         $0.backgroundColor = .systemYellow
     }
@@ -37,14 +41,13 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         $0.distribution = .fillEqually
     }
     
-    let plusButton = UIButton().then {
+    let addButton = UIButton().then {
         var configuration = UIButton.Configuration.plain()
 //        configuration.image = UIImage(systemName: "text.badge.plus")
         configuration.image = UIImage(systemName: "text.badge.plus",
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
         $0.configuration = configuration
     }
-    
     
     let separatorView = UIView().then {
         $0.backgroundColor = .systemGray3
@@ -53,6 +56,8 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        setAddButtonAction()
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +66,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Design Methods
     override func setUI() {
-        [plusButton, posterImageView, stackView, plusButton, separatorView].forEach {
+        [addButton, posterImageView, stackView, addButton, separatorView].forEach {
             contentView.addSubview($0)
         }
     }
@@ -74,17 +79,17 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
             make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
         }
         
-        plusButton.snp.makeConstraints { make in
+        addButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalToSuperview().multipliedBy(0.4)
-            make.width.equalTo(plusButton.snp.height)
+            make.width.equalTo(addButton.snp.height)
         }
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(posterImageView.snp.trailing).offset(12)
-            make.trailing.equalTo(plusButton.snp.leading).offset(-20)
+            make.trailing.equalTo(addButton.snp.leading).offset(-20)
             make.height.equalToSuperview().multipliedBy(0.6)
         }
         
@@ -106,7 +111,14 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         posterImageView.kf.setImage(with: url)
     }
     
-    func showResult(with media: Media) {
+//    func showResult(with media: Media) {
+    func showResult(errorHandler: @escaping () -> Void) {
+        guard let media = media else {
+            errorHandler()
+            print("결과를 찾을 수 없습니다.")
+            return
+        }
+
         titleLabel.text = media.title
         releaseYearLabel.text = media.releaseDate
         mediaTypeLabel.text = media.mediaType
@@ -114,6 +126,29 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
             posterImageView.kf.setImage(with: url)
+        }
+    }
+    
+    // MARK: - Action Methods
+    private func setAddButtonAction() {
+        addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc private func addButtonClicked() {
+        print("🧸")
+//        guard let media = media else {
+//            print("Cannot find media")
+//            return
+//        }
+//
+//        guard let addErrorHandler = addErrorHandler else {
+//            print("Cannot find addErrorHandler")
+//            return
+//        }
+
+        if let media = media, let addErrorHandler = addErrorHandler, let addCompletionHandler = addCompletionHandler {
+            let repository = MediaRepository()
+            repository.add(media: media, completionHandler: addCompletionHandler, errorHandler: addErrorHandler)
         }
     }
 }

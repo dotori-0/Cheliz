@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 class SearchViewController: BaseViewController {
     // MARK: - Properties
@@ -57,6 +58,9 @@ class SearchViewController: BaseViewController {
 //        navigationItem.backButtonTitle = "?"
     }
     
+    // MARK: - Action Methods
+//    private func
+    
     // MARK: - Search Methods
     private func search() {
         TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText) { data in
@@ -75,7 +79,6 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print(#function)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCollectionViewCell.reuseIdentifier, for: indexPath) as? SearchCollectionViewCell else {
             print("Cannot find SearchCollectionViewCell")
             return UICollectionViewCell()
@@ -84,8 +87,16 @@ extension SearchViewController: UICollectionViewDataSource {
 //        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick) 탑건: 매버릭 (Top Gun: Maverick)"
 //        cell.releaseYearLabel.text = "2022-05-24"
 //        cell.mediaTypeLabel.text = "movie"
-        cell.showResult(with: searchResults[indexPath.row])
-        print(cell.titleLabel.text)
+        
+//        cell.showResult(with: searchResults[indexPath.row])
+//        print(cell.titleLabel.text)
+        
+        cell.media = searchResults[indexPath.row]
+        cell.addErrorHandler = { self.alert(title: "오류 안내", message: "추가에 오류가 발생했습니다. 다시 시도해 주세요.") }
+        cell.addCompletionHandler = { self.searchView.makeToast("성공적으로 추가되었습니다.", duration: 1, position: .center) }
+        cell.showResult {
+            self.alert(title: "오류 안내", message: "결과를 찾을 수 없습니다.")
+        }
         
         return cell
     }
