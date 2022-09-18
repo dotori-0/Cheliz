@@ -12,7 +12,8 @@ class SearchViewController: BaseViewController {
     private let searchView = SearchView()
     
     private var searchText = ""
-    private var searchResults: [MediaModel] = []
+//    private var searchResults: [MediaModel] = []
+    private var searchResults: [Media] = []
     
     
     // MARK: - Life Cycle
@@ -59,7 +60,8 @@ class SearchViewController: BaseViewController {
     // MARK: - Search Methods
     private func search() {
         TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText) { data in
-            self.searchResults = ParsingManager.parseData(data)
+//            self.searchResults = ParsingManager.parseData(data)
+            self.searchResults = ParsingManager.parseDataToRealmModel(data)
             print("searchResults.count: \(self.searchResults.count)")
             self.searchView.collectionView.reloadData()
         }

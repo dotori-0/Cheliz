@@ -81,9 +81,34 @@ struct ParsingManager {
                                     posterPath: result["poster_path"].stringValue,
                                     releaseDate: releaseDate,
                                     overview: result["overview"].stringValue)
-//            print(mediaModel)
+            
             return mediaModel
         }
+        
+        return mediaArray
+    }
+        
+        static func parseDataToRealmModel(_ data: Data) -> [Media] {
+            let json = JSON(data)
+    //        print("🐶", json)
+            
+            let JSONMovieAndTvOnly: [JSON] = json["results"].arrayValue.filter { $0["media_type"].stringValue != "person" }
+    //        print("🐱", JSONMovieAndTvOnly)
+            
+            let mediaArray: [Media] = JSONMovieAndTvOnly.map { result in
+                let mediaType = result["media_type"].stringValue
+                
+                let mediaRealmModel = Media(TMDBid: result["id"].intValue,
+                                            title: mediaType == "movie" ? result["title"].stringValue : result["name"].stringValue,
+//                                            title: result["title"].stringValue,
+                                            mediaType: mediaType,
+                                            backdropPath: result["backdrop_path"].stringValue,
+                                            posterPath: result["poster_path"].stringValue,
+                                            releaseDate: result["release_date"].stringValue)
+                
+    //            return mediaModel
+                return mediaRealmModel
+            }
         
         return mediaArray
     }

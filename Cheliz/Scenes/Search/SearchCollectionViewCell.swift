@@ -105,4 +105,15 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         let url = URL(string: Endpoint.imageConfigurationURL + media.posterPath)
         posterImageView.kf.setImage(with: url)
     }
+    
+    func showResult(with media: Media) {
+        titleLabel.text = media.title
+        releaseYearLabel.text = media.releaseDate
+        mediaTypeLabel.text = media.mediaType
+        
+        if let posterPath = media.posterPath {
+            let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
+            posterImageView.kf.setImage(with: url)
+        }
+    }
 }
