@@ -7,10 +7,17 @@
 
 import UIKit
 import SwiftUI
+import RealmSwift
 
 class HomeViewController: BaseViewController {
     // MARK: - Properties
     let homeView = HomeView()
+    let repository = MediaRepository()
+    private var media: Results<Media>! {
+        didSet {
+            print("Media Changed")
+        }
+    }
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -29,6 +36,7 @@ class HomeViewController: BaseViewController {
 //                print(name)
 //            }
 //        }
+        print("🐰 Realm is located at:", repository.realm.configuration.fileURL!)
         
         setCollectionView()
     }
@@ -59,6 +67,11 @@ class HomeViewController: BaseViewController {
     @objc private func searchButtonClicked() {
         let searchVC = SearchViewController()
         transit(to: searchVC, transitionStyle: .push)
+    }
+    
+    // MARK: - Realm Methods
+    private func fetchRealm() {
+        
     }
 }
 
