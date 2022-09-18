@@ -49,7 +49,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     }()
     
     let separatorView = UIView().then {
-        $0.backgroundColor = .systemGray2
+        $0.backgroundColor = .systemGray5  // .systemGray6?
     }
     
 

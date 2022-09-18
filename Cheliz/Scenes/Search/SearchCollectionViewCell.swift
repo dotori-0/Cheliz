@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
@@ -46,7 +47,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     
     
     let separatorView = UIView().then {
-        $0.backgroundColor = .systemGray2
+        $0.backgroundColor = .systemGray3
     }
     
     // MARK: - Initializers
@@ -69,7 +70,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         posterImageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.7)
+            make.height.equalToSuperview().multipliedBy(0.8)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
         }
         
@@ -100,5 +101,8 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = media.title
         releaseYearLabel.text = media.releaseDate
         mediaTypeLabel.text = media.mediaType.rawValue
+        
+        let url = URL(string: Endpoint.imageConfigurationURL + media.posterPath)
+        posterImageView.kf.setImage(with: url)
     }
 }
