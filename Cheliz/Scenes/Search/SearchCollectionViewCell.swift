@@ -118,15 +118,15 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
             print("결과를 찾을 수 없습니다.")
             return
         }
-
-        titleLabel.text = media.title
-        releaseYearLabel.text = media.releaseDate
-        mediaTypeLabel.text = media.mediaType
         
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
             posterImageView.kf.setImage(with: url)
         }
+
+        titleLabel.text = media.title
+        releaseYearLabel.text = media.releaseDate
+        mediaTypeLabel.text = media.mediaType        
     }
     
     // MARK: - Action Methods
@@ -135,17 +135,6 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     @objc private func addButtonClicked() {
-        print("🧸")
-//        guard let media = media else {
-//            print("Cannot find media")
-//            return
-//        }
-//
-//        guard let addErrorHandler = addErrorHandler else {
-//            print("Cannot find addErrorHandler")
-//            return
-//        }
-
         if let media = media, let addErrorHandler = addErrorHandler, let addCompletionHandler = addCompletionHandler {
             let repository = MediaRepository()
             repository.add(media: media, completionHandler: addCompletionHandler, errorHandler: addErrorHandler)

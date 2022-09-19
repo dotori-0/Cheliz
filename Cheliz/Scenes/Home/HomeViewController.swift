@@ -11,11 +11,12 @@ import RealmSwift
 
 class HomeViewController: BaseViewController {
     // MARK: - Properties
-    let homeView = HomeView()
-    let repository = MediaRepository()
+    private let homeView = HomeView()
+    private let repository = MediaRepository()
     private var media: Results<Media>! {
         didSet {
             print("Media Changed")
+            homeView.collectionView.reloadData()
         }
     }
     
@@ -39,6 +40,13 @@ class HomeViewController: BaseViewController {
         print("🐰 Realm is located at:", repository.realm.configuration.fileURL!)
         
         setCollectionView()
+        setDeleteAction()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchRealm()
     }
     
     // MARK: - Setting Methods
@@ -71,14 +79,15 @@ class HomeViewController: BaseViewController {
     
     // MARK: - Realm Methods
     private func fetchRealm() {
-        
+        media = repository.fetch()
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+//        return 10
+        return media.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -88,12 +97,15 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
 //        cell.titleLabel.text = "\(indexPath)"
-        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick)"
-        cell.releaseYearLabel.text = "\(Date.now)"
-        cell.setConstraints()
+//        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick)"
+//        cell.releaseYearLabel.text = "\(Date.now)"
+
+//        cell.media = media[indexPath.row]
+        cell.showSavedMedia(media[indexPath.row])
         
         return cell
     }
+    
 }
 
 // MARK: - UICollectionViewDelegate

@@ -92,10 +92,14 @@ extension SearchViewController: UICollectionViewDataSource {
 //        print(cell.titleLabel.text)
         
         cell.media = searchResults[indexPath.row]
-        cell.addErrorHandler = { self.alert(title: "오류 안내", message: "추가에 오류가 발생했습니다. 다시 시도해 주세요.") }
-        cell.addCompletionHandler = { self.searchView.makeToast("성공적으로 추가되었습니다.", duration: 1, position: .center) }
+        cell.addCompletionHandler = { self.searchView.makeToast(Notice.addSucceeded,
+                                                                duration: 1,
+                                                                position: .center) }
+        cell.addErrorHandler = { self.alert(title: Notice.errorTitle,
+                                            message: Notice.errorInAddMessage) }
         cell.showResult {
-            self.alert(title: "오류 안내", message: "결과를 찾을 수 없습니다.")
+            self.alert(title: Notice.errorTitle,
+                       message: Notice.errorInSearchMessage)
         }
         
         return cell
@@ -110,7 +114,6 @@ extension SearchViewController: UICollectionViewDelegate {
 // MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(#function)
         guard let text = searchController.searchBar.text else {
             print("No text")  // 👻 화면에 검색하라고 띄워 주기
             return

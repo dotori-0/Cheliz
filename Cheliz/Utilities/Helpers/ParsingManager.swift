@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 import SwiftyJSON
 
 struct ParsingManager {
@@ -98,11 +99,20 @@ struct ParsingManager {
             let mediaArray: [Media] = JSONMovieAndTvOnly.map { result in
                 let mediaType = result["media_type"].stringValue
                 let title = mediaType == "movie" ? result["title"].stringValue : result["name"].stringValue
+                
+                let genreIds = List<Int>()
+//                if let genreIdsArray = result["genre_ids"].arrayValue as? [Int] {
+//                    genreIds.append(objectsIn: genreIdsArray)
+//                }
+                let genreIdsArray = result["genre_ids"].arrayValue.map { $0.intValue }
+                genreIds.append(objectsIn: genreIdsArray)
+                
                 let releaseDate = mediaType == "movie" ? result["release_date"].stringValue : result["first_air_date"].stringValue
                 
                 let mediaRealmModel = Media(TMDBid: result["id"].intValue,
                                             title: title,
 //                                            title: result["title"].stringValue,
+                                            genreIds: genreIds,
                                             mediaType: mediaType,
                                             backdropPath: result["backdrop_path"].stringValue,
                                             posterPath: result["poster_path"].stringValue,

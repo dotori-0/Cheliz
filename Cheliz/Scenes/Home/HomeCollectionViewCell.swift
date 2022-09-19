@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
+//    var media: Media?
+    
     lazy var checkButton = UIButton().then {
         var configuration = UIButton.Configuration.plain()
 //        configuration.image = UIImage(systemName: "circle")
@@ -37,14 +40,21 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
 //        $0.font = .systemFont(ofSize: 20)
         $0.font = UIFont.hyemin(style: .Bold, size: 12)
 //        $0.font = UIFont.barunpen(style: .Regular, size: 14)
+        $0.textColor = .systemGray
+    }
+    
+    let mediaTypeLabel = UILabel().then {
+        $0.font = UIFont.hyemin(style: .Regular, size: 12)
+        $0.textColor = .systemGray
     }
     
     lazy var stackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [titleLabel, releaseYearLabel])
+        let view = UIStackView(arrangedSubviews: [titleLabel, releaseYearLabel, mediaTypeLabel])
         view.axis = .vertical
         view.alignment = .leading
         view.distribution = .fillEqually
 //        view.spacing = 0
+//        view.backgroundColor = .systemYellow
         return view
     }()
     
@@ -97,5 +107,32 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+    }
+    
+    // MARK: - Internal Methods
+//    func showSavedMedia() {
+//        guard let media = media else {
+//            return
+//        }
+//
+//        if let posterPath = media.posterPath {
+//            let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
+//            posterImageView.kf.setImage(with: url)
+//        }
+//
+//        titleLabel.text = media.title
+//        releaseYearLabel.text = media.releaseDate
+//        mediaTypeLabel.text = media.mediaType
+//    }
+    
+    func showSavedMedia(_ media: Media) {
+        if let posterPath = media.posterPath {
+            let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
+            posterImageView.kf.setImage(with: url)
+        }
+        
+        titleLabel.text = media.title
+        releaseYearLabel.text = media.releaseDate
+        mediaTypeLabel.text = media.mediaType
     }
 }

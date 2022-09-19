@@ -10,6 +10,7 @@ import RealmSwift
 
 fileprivate protocol RealmProtocol {
     func fetch() -> Results<Media>
+    func add(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void)
 }
 
 struct MediaRepository: RealmProtocol {
