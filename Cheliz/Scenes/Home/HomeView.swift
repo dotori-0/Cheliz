@@ -9,6 +9,7 @@ import UIKit
 
 class HomeView: BaseView {
     // MARK: - Properties
+    var deleteCompletion: ((Int) -> Void)?
 //    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
 //        $0.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.reuseIdentifier)
 //    }
@@ -45,7 +46,8 @@ class HomeView: BaseView {
         [collectionView, searchButton].forEach {
             addSubview($0)
         }
-        setCollectionViewLayout()
+//        setCollectionViewLayout()
+        setCollectionViewCompositionalLayout()
     }
     
     override func setConstraints() {
@@ -74,5 +76,24 @@ class HomeView: BaseView {
         layout.itemSize = CGSize(width: screenWidth, height: screenHeight * 0.1)
         
         collectionView.collectionViewLayout = layout
+    }
+    
+    private func setCollectionViewCompositionalLayout() {
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        configuration.showsSeparators = true
+        configuration.trailingSwipeActionsConfigurationProvider = { [unowned self] indexPath in
+            let delete = UIContextualAction(style: .normal, title: nil) { action, view, actionPerformed in
+                if let deleteCompletion = self.deleteCompletion {
+//                    deleteCompletion()
+                    deleteCompletion(indexPath.row)
+                }
+                actionPerformed(true)
+            }
+            delete.image = UIImage(systemName: "trash.fill")
+            return .init(actions: [delete])
+        }
+        
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
+        collectionView.setCollectionViewLayout(layout, animated: true)
     }
 }

@@ -59,7 +59,8 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     }()
     
     let separatorView = UIView().then {
-        $0.backgroundColor = .systemGray5  // .systemGray6?
+//        $0.backgroundColor = .systemGray5  // .systemGray6?
+        $0.backgroundColor = .clear  // .systemGray6?
     }
     
 
@@ -82,15 +83,21 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     override func setConstraints() {
         checkButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(20)
+//            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(8)
             make.height.equalToSuperview().multipliedBy(0.4)
             make.width.equalTo(checkButton.snp.height)
         }
         
         posterImageView.snp.makeConstraints { make in
-            make.leading.equalTo(checkButton.snp.trailing).offset(16)
+//            make.leading.equalTo(checkButton.snp.trailing).offset(16)
+            make.leading.equalTo(checkButton.snp.trailing).offset(8)
             make.centerY.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.7)
+//            make.height.equalToSuperview().multipliedBy(0.8)
+            
+            let screenHeight = UIScreen.main.bounds.height
+            let imageHeight = screenHeight * 0.12
+            make.height.equalTo(imageHeight)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
         }
         
@@ -98,7 +105,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             make.centerY.equalToSuperview()
             make.leading.equalTo(posterImageView.snp.trailing).offset(12)
             make.trailing.equalToSuperview().offset(-20)
-            make.height.equalToSuperview().multipliedBy(0.6)
+            make.height.equalToSuperview().multipliedBy(0.65)
         }
         
         separatorView.snp.makeConstraints { make in

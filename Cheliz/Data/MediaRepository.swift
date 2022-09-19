@@ -33,4 +33,22 @@ struct MediaRepository: RealmProtocol {
             errorHandler()
         }
     }
+    
+    func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+        do {
+            try realm.write {
+                realm.delete(media)
+//                completionHandler()  // 여기에서 해야 하는지?
+            }
+            completionHandler()
+            print(fetch())
+        } catch {
+            print(error)
+            errorHandler()
+        }
+    }
+    
+    func sort() -> Results<Media> {
+        return realm.objects(Media.self).sorted(byKeyPath: <#T##String#>, ascending: <#T##Bool#>)
+    }
 }

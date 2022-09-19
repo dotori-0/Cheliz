@@ -66,6 +66,7 @@ class HomeViewController: BaseViewController {
     // MARK: - Action Methods
     override func setActions() {
         setSearchButton()
+        setDeleteAction()
     }
     
     private func setSearchButton() {
@@ -77,10 +78,35 @@ class HomeViewController: BaseViewController {
         transit(to: searchVC, transitionStyle: .push)
     }
     
+    private func setDeleteAction() {
+        let deleteCompletionHandler = { self.homeView.makeToast(Notice.deleteSucceeded,
+                                                                duration: 1,
+                                                                position: .center) }
+        let deleteErrorHandler = { self.alert(title: Notice.errorTitle,
+                                              message: Notice.errorInDeleteMessage) }
+        
+        homeView.deleteCompletion = { row in
+            self.alert(title: Notice.deleteWarningTitle,
+                       message: Notice.deleteWarningMessage,
+                       allowsCancel: true) { _ in
+                self.repository.delete(media: self.media[row],
+                                       completionHandler: deleteCompletionHandler,
+                                       errorHandler: deleteErrorHandler)
+                self.homeView.collectionView.reloadData()
+            }
+        }
+    }
+    
     // MARK: - Realm Methods
     private func fetchRealm() {
         media = repository.fetch()
     }
+    
+//    private func deleteRealm(media: Media) {
+//        repository.delete(media: media,
+//                          completionHandler: <#T##() -> Void#>,
+//                          errorHandler: <#T##() -> Void#>)
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
