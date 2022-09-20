@@ -12,17 +12,23 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
 //    var media: Media?
     
-    lazy var checkButton = UIButton().then {
-        var configuration = UIButton.Configuration.plain()
-//        configuration.image = UIImage(systemName: "circle")
-        configuration.image = UIImage(systemName: "circle",
-                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+    let checkButton = MediaPassableButton()//.then {
+//        var configuration = UIButton.Configuration.plain()
+//        configuration.image = UIImage(systemName: "circle",
+//                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
 //        configuration.imagePadding = 0
 //        configuration.contentInsets = .zero
 //        let imgConfig = UIImage.SymbolConfiguration(pointSize: <#T##CGFloat#>)/
-        $0.configuration = configuration
+//        $0.configuration = configuration
 //        $0.backgroundColor = .systemRed
-    }
+//    }
+    
+    var buttonConfiguration: UIButton.Configuration = {
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: "circle",
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+        return configuration
+    }()
 
     let posterImageView = UIImageView().then {
         $0.backgroundColor = .systemYellow
@@ -116,6 +122,13 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+    }
+    
+    func setCheckButtonImage(watched: Bool) {
+        let imageName = watched ? "checkmark.circle.fill" : "circle"
+        buttonConfiguration.image = UIImage(systemName: imageName,
+                                      withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+        checkButton.configuration = buttonConfiguration
     }
     
     // MARK: - Internal Methods

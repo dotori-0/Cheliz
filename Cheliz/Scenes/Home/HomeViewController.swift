@@ -68,8 +68,8 @@ class HomeViewController: BaseViewController {
 //        let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(sortButtonClicked))
 //        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(filterButtonClicked))
         let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), primaryAction: nil, menu: sortMenu())
-        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), primaryAction: nil, menu: sortMenu())
-        navigationItem.rightBarButtonItems = [sortButton, filterButton]
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), primaryAction: nil, menu: filterMenu())
+        navigationItem.rightBarButtonItems = [filterButton, sortButton]
     }
     
     // MARK: - Action Methods
@@ -107,26 +107,26 @@ class HomeViewController: BaseViewController {
     }
     
     private func sortMenu() -> UIMenu {
-        let newestToOldest = UIAction(title: "최신 등록순") { _ in
+        let newestToOldest = UIAction(title: MenuTitle.newestToOldest) { _ in
             self.media = self.repository.sort(by: .newestToOldest)
         }
         
-        let oldestToNewest = UIAction(title: "오래된 등록순", state: .on) { _ in
+        let oldestToNewest = UIAction(title: MenuTitle.oldestToNewest,
+                                      state: .on) { _ in
             self.media = self.repository.sort(by: .oldestToNewest)
         }
         
-        let alphabetical = UIAction(title: "제목(오름차순)") { _ in
+        let alphabetical = UIAction(title: MenuTitle.alphabetical) { _ in
             self.media = self.repository.sort(by: .alphabetical)
         }
         
-        let reverseAlphabetical = UIAction(title: "제목(내림차순)") { _ in
+        let reverseAlphabetical = UIAction(title: MenuTitle.reverseAlphabetical) { _ in
             self.media = self.repository.sort(by: .reverseAlphabetical)
         }
 //
 //        let a = UIAction(title: <#T##String#>, image: <#T##UIImage?#>, identifier: <#T##UIAction.Identifier?#>, discoverabilityTitle: <#T##String?#>, attributes: ., state: ., handler: <#T##UIActionHandler##UIActionHandler##(UIAction) -> Void#>)
         
-        let menu = UIMenu(title: "정렬",
-                          image: UIImage(systemName: "arrow.up.arrow.down"),
+        let menu = UIMenu(title: MenuTitle.sort,
                           options: .singleSelection,
                           children: [newestToOldest, oldestToNewest, alphabetical, reverseAlphabetical])
         
@@ -171,10 +171,27 @@ extension HomeViewController: UICollectionViewDataSource {
 //        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick)"
 //        cell.releaseYearLabel.text = "\(Date.now)"
 
-//        cell.media = media[indexPath.row]
-        cell.showSavedMedia(media[indexPath.row])
+//        cell.media = media[indexPath.row]   // 👻 이렇게 한 번만 보내 주는 게 나을지?
+        let media = media[indexPath.row]
+        cell.showSavedMedia(media)
+        cell.setCheckButtonImage(watched: media.watched)
+        cell.checkButton.media = media
+        cell.checkButton.addTarget(self, action: #selector(checkButtonClicked), for: .touchUpInside)
         
         return cell
+    }
+    
+    @objc private func checkButtonClicked(sender: MediaPassableButton) {
+        print("🥶", #function)
+        guard let media = sender.media else {
+            print("Cannot find media in MediaPassableButton")
+            return
+        }
+        
+        repository.toggleWatched(of: media) {
+            self.alert(title: Notice.errorTitle, message: Notice.errorInCheckMessage)
+        }
+        homeView.collectionView.reloadData()
     }
     
 }

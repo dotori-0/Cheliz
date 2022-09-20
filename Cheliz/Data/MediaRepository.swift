@@ -11,13 +11,16 @@ import RealmSwift
 fileprivate protocol RealmProtocol {
     func fetch() -> Results<Media>
     func add(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void)
+    func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void)
+    func sort(by sortingOrder: SortingOrder) -> Results<Media>
 }
 
 struct MediaRepository: RealmProtocol {
     let realm = try! Realm()
     
     func fetch() -> Results<Media> {
-        return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
+//        return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
+        return realm.objects(Media.self)
     }
     
     func add(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
@@ -48,7 +51,7 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func sort(by sortingOrder: SortingOrder) -> Results<Media> {
+    func sort(by sortingOrder: SortingOrder) -> Results<Media> {  // 👻 SortingOrder는 UserDefaults에 저장해도 될지?
         switch sortingOrder {
             case .newestToOldest:
                 return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
