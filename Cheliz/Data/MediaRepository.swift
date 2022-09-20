@@ -48,7 +48,16 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func sort() -> Results<Media> {
-        return realm.objects(Media.self).sorted(byKeyPath: <#T##String#>, ascending: <#T##Bool#>)
+    func sort(by sortingOrder: SortingOrder) -> Results<Media> {
+        switch sortingOrder {
+            case .newestToOldest:
+                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
+            case .oldestToNewest:
+                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
+            case .alphabetical:
+                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: true)
+            case .reverseAlphabetical:
+                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: false)
+        }
     }
 }

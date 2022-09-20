@@ -78,6 +78,8 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         [checkButton, posterImageView, stackView, separatorView].forEach {
             contentView.addSubview($0)
         }
+//        contentView.backgroundColor = .systemYellow  // 동작 O
+//        backgroundColor = .systemMint  // 동작 O
     }
     
     override func setConstraints() {

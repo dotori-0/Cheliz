@@ -48,6 +48,7 @@ class HomeView: BaseView {
         }
 //        setCollectionViewLayout()
         setCollectionViewCompositionalLayout()
+//        collectionView.backgroundColor = .systemYellow  // 동작 X
     }
     
     override func setConstraints() {
@@ -79,7 +80,7 @@ class HomeView: BaseView {
     }
     
     private func setCollectionViewCompositionalLayout() {
-        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         configuration.showsSeparators = true
         configuration.trailingSwipeActionsConfigurationProvider = { [unowned self] indexPath in
             let delete = UIContextualAction(style: .normal, title: nil) { action, view, actionPerformed in
@@ -92,6 +93,7 @@ class HomeView: BaseView {
             delete.image = UIImage(systemName: "trash.fill")
             return .init(actions: [delete])
         }
+//        configuration.backgroundColor = .systemYellow
         
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: true)

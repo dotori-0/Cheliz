@@ -61,6 +61,15 @@ class HomeViewController: BaseViewController {
         
         navigationItem.title = "나의 리스트"
 //        homeView.collectionView.backgroundColor = .systemMint
+        setNavigationItem()
+    }
+    
+    private func setNavigationItem() {
+//        let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(sortButtonClicked))
+//        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(filterButtonClicked))
+        let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), primaryAction: nil, menu: sortMenu())
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), primaryAction: nil, menu: sortMenu())
+        navigationItem.rightBarButtonItems = [sortButton, filterButton]
     }
     
     // MARK: - Action Methods
@@ -96,6 +105,42 @@ class HomeViewController: BaseViewController {
             }
         }
     }
+    
+    private func sortMenu() -> UIMenu {
+        let newestToOldest = UIAction(title: "최신 등록순") { _ in
+            self.media = self.repository.sort(by: .newestToOldest)
+        }
+        
+        let oldestToNewest = UIAction(title: "오래된 등록순", state: .on) { _ in
+            self.media = self.repository.sort(by: .oldestToNewest)
+        }
+        
+        let alphabetical = UIAction(title: "제목(오름차순)") { _ in
+            self.media = self.repository.sort(by: .alphabetical)
+        }
+        
+        let reverseAlphabetical = UIAction(title: "제목(내림차순)") { _ in
+            self.media = self.repository.sort(by: .reverseAlphabetical)
+        }
+//
+//        let a = UIAction(title: <#T##String#>, image: <#T##UIImage?#>, identifier: <#T##UIAction.Identifier?#>, discoverabilityTitle: <#T##String?#>, attributes: ., state: ., handler: <#T##UIActionHandler##UIActionHandler##(UIAction) -> Void#>)
+        
+        let menu = UIMenu(title: "정렬",
+                          image: UIImage(systemName: "arrow.up.arrow.down"),
+                          options: .singleSelection,
+                          children: [newestToOldest, oldestToNewest, alphabetical, reverseAlphabetical])
+        
+        return menu
+    }
+
+    
+//    @objc private func sortButtonClicked() {
+//
+//    }
+//
+//    @objc private func filterButtonClicked() {
+//
+//    }
     
     // MARK: - Realm Methods
     private func fetchRealm() {
