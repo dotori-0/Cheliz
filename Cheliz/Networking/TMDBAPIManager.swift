@@ -15,13 +15,13 @@ class TMDBAPIManager {
     
     private init() { }
     
-    func fetchMultiSearchResults(query: String, completionHandler: @escaping (Data) -> Void) {
+    func fetchMultiSearchResults(query: String, page: Int, completionHandler: @escaping (Data) -> Void) {
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             print("검색어 인코딩에 실패하였습니다.")  // 👻 alert 띄워 주기
             return
         }
         
-        let url = Endpoint.multiSearchURL + APIKey.TMDB + "&language=ko-KR" + "&query=\(query)" + "&page=1"
+        let url = Endpoint.multiSearchURL + APIKey.TMDB + "&language=ko-KR" + "&query=\(query)" + "&page=\(page)"
         // https://api.themoviedb.org/3/search/multi?api_key={API_KEY}&language=en-US&query=lucy&page=1&include_adult=false
         // https://api.themoviedb.org/3/search/multi?api_key={API_KEY}&language=ko-KR&query=탑건&page=1&include_adult=false
         

@@ -89,7 +89,8 @@ struct ParsingManager {
         return mediaArray
     }
         
-        static func parseDataToRealmModel(_ data: Data) -> [Media] {
+//        static func parseDataToRealmModel(_ data: Data) -> [Media] {
+        static func parseDataToRealmModel(_ data: Data) -> ([Media], Int) {
             let json = JSON(data)
     //        print("🐶", json)
             
@@ -121,7 +122,10 @@ struct ParsingManager {
     //            return mediaModel
                 return mediaRealmModel
             }
+            
+            let totalPages = json["total_pages"].intValue
         
-        return mediaArray
+//        return mediaArray
+        return (mediaArray, totalPages)
     }
 }

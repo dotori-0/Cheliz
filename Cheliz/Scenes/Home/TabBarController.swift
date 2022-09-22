@@ -12,7 +12,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let homeVC = HomeViewController()
+//        let homeVC = HomeViewController()
+        let homeVC = SearchViewController()
         let homeNC = UINavigationController(rootViewController: homeVC)
         
         let filmListSymbolImage = UIImage(systemName: "list.and.film")
