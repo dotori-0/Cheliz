@@ -12,7 +12,7 @@ fileprivate protocol RealmProtocol {
     func fetch() -> Results<Media>
     func add(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void)
     func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void)
-    func sort(by sortingOrder: SortingOrder) -> Results<Media>
+//    func sort(by sortingOrder: SortingOrder) -> Results<Media>
 }
 
 struct MediaRepository: RealmProtocol {
@@ -51,16 +51,64 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func sort(by sortingOrder: SortingOrder) -> Results<Media> {  // 👻 SortingOrder는 UserDefaults에 저장해도 될지?
+//    func sort(by sortingOrder: SortingOrder) -> Results<Media> {  // 👻 SortingOrder는 UserDefaults에 저장해도 될지?
+    func sortAndFilter() -> Results<Media>? {
+        let sortingOrder: SortingOrder = SortingOrder(rawValue: UserDefaultsHelper.standard.sortingOrder) ?? .oldestToNewest
+        
+        var media: Results<Media>?
+        
         switch sortingOrder {
-            case .newestToOldest:
-                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
             case .oldestToNewest:
-                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
+//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
+                media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
+            case .newestToOldest:
+//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
+                media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
             case .alphabetical:
-                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: true)
+//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: true)
+                media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: true)
             case .reverseAlphabetical:
-                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: false)
+//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: false)
+                media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: false)
+        }
+        
+        guard let media = media else {
+            print("정렬에 실패했습니다.")  // 👻 alert 띄워 주기
+            return nil
+        }
+
+        
+        let filterOption: FilterOption = FilterOption(rawValue: UserDefaultsHelper.standard.filterOption) ?? .showWatched
+        
+        switch filterOption {
+            case .showWatched:
+                return media
+            case .hideWatched:
+                return media.where { $0.watched == false }
+        }
+    }
+    
+//    func filter(by filterOption: FilterOption) -> Results<Media> {
+//        switch filterOption {
+//            case .showWatched:
+//                print(fetch())
+//                return fetch()
+//            case .hideWatched:
+//                print(fetch())
+////                return fetch().where { !($0.watched) }  // Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: 'Unable to parse the format string "watched"'
+//                // You can use Swift comparison operators with the Realm Swift Query API (==, !=, >, >=, <, <=).
+//                return fetch().where { $0.watched == false }
+//        }
+//    }
+    
+    func toggleWatched(of media: Media, errorHandler: @escaping () -> Void) {
+        do {
+            try realm.write {
+                media.watched.toggle()
+            }
+        } catch {
+            print(error)
+            errorHandler()
         }
     }
 }

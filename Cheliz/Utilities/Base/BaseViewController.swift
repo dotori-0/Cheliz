@@ -9,6 +9,11 @@ import UIKit
 import SnapKit
 
 class BaseViewController: UIViewController {
+    // MARK: - Properties
+    let backgroundImageView = UIImageView().then {
+        $0.image = .background
+    }
+    
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +25,14 @@ class BaseViewController: UIViewController {
     
     func setUI() {
         view.backgroundColor = .systemBackground
+        view.addSubview(backgroundImageView)
     }
     
-    func setConstraints() { }
+    func setConstraints() {
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
     
     func setActions() { }
 }

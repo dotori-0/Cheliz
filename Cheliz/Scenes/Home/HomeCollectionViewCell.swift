@@ -25,7 +25,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     
     var buttonConfiguration: UIButton.Configuration = {
         var configuration = UIButton.Configuration.plain()
-        configuration.image = UIImage(systemName: "circle",
+        configuration.image = UIImage(systemName: SFSymbol.circle,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
         return configuration
     }()
@@ -86,6 +86,16 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         }
 //        contentView.backgroundColor = .systemYellow  // 동작 O
 //        backgroundColor = .systemMint  // 동작 O
+//        backgroundColor = .systemGroupedBackground.withAlphaComponent(0.5)
+//        backgroundColor = .systemGroupedBackground
+//        backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)  // 이걸로!
+//        backgroundColor = .tertiarySystemGroupedBackground
+        
+        superview?.layer.shadowColor = UIColor.black.cgColor
+        superview?.layer.shadowOffset = .zero
+        superview?.layer.shadowRadius = 10
+        superview?.layer.shadowOpacity = 0.7
+        
     }
     
     override func setConstraints() {
@@ -125,7 +135,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setCheckButtonImage(watched: Bool) {
-        let imageName = watched ? "checkmark.circle.fill" : "circle"
+        let imageName = watched ? SFSymbol.checkmark : SFSymbol.circle
         buttonConfiguration.image = UIImage(systemName: imageName,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
         checkButton.configuration = buttonConfiguration

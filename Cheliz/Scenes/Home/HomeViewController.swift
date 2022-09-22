@@ -46,7 +46,8 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchRealm()
+//        fetchRealm()
+        sortAndFilter()
     }
     
     // MARK: - Setting Methods
@@ -64,11 +65,13 @@ class HomeViewController: BaseViewController {
         setNavigationItem()
     }
     
+    override func setConstraints() {
+//        super.setConstraints()
+    }
+    
     private func setNavigationItem() {
-//        let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), style: .plain, target: self, action: #selector(sortButtonClicked))
-//        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), style: .plain, target: self, action: #selector(filterButtonClicked))
-        let sortButton = UIBarButtonItem(image: UIImage(systemName: "arrow.up.arrow.down"), primaryAction: nil, menu: sortMenu())
-        let filterButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease"), primaryAction: nil, menu: filterMenu())
+        let sortButton = UIBarButtonItem(image: UIImage(systemName: SFSymbol.sort), primaryAction: nil, menu: sortMenu())
+        let filterButton = UIBarButtonItem(image: UIImage(systemName: SFSymbol.filter), primaryAction: nil, menu: filterMenu())
         navigationItem.rightBarButtonItems = [filterButton, sortButton]
     }
     
@@ -107,21 +110,39 @@ class HomeViewController: BaseViewController {
     }
     
     private func sortMenu() -> UIMenu {
-        let newestToOldest = UIAction(title: MenuTitle.newestToOldest) { _ in
-            self.media = self.repository.sort(by: .newestToOldest)
+        print("🥢 sort")
+        
+//        func sortAndFilter() {
+//            self.media = self.repository.sortAndFilter()
+//        }
+        
+        
+        let newestToOldest = UIAction(title: MenuTitle.newestToOldest,
+                                      state: SortingOrder.newestToOldest.state) { _ in
+            UserDefaultsHelper.standard.sortingOrder = SortingOrder.newestToOldest.rawValue
+//            self.media = self.repository.sort(by: .newestToOldest)
+            self.sortAndFilter()
         }
         
         let oldestToNewest = UIAction(title: MenuTitle.oldestToNewest,
-                                      state: .on) { _ in
-            self.media = self.repository.sort(by: .oldestToNewest)
+                                      state: SortingOrder.oldestToNewest.state) { _ in
+            UserDefaultsHelper.standard.sortingOrder = SortingOrder.oldestToNewest.rawValue
+//            self.media = self.repository.sort(by: .oldestToNewest)
+            self.sortAndFilter()
         }
         
-        let alphabetical = UIAction(title: MenuTitle.alphabetical) { _ in
-            self.media = self.repository.sort(by: .alphabetical)
+        let alphabetical = UIAction(title: MenuTitle.alphabetical,
+                                    state: SortingOrder.alphabetical.state) { _ in
+            UserDefaultsHelper.standard.sortingOrder = SortingOrder.alphabetical.rawValue
+//            self.media = self.repository.sort(by: .alphabetical)
+            self.sortAndFilter()
         }
         
-        let reverseAlphabetical = UIAction(title: MenuTitle.reverseAlphabetical) { _ in
-            self.media = self.repository.sort(by: .reverseAlphabetical)
+        let reverseAlphabetical = UIAction(title: MenuTitle.reverseAlphabetical,
+                                           state: SortingOrder.reverseAlphabetical.state) { _ in
+            UserDefaultsHelper.standard.sortingOrder = SortingOrder.reverseAlphabetical.rawValue
+//            self.media = self.repository.sort(by: .reverseAlphabetical)
+            self.sortAndFilter()
         }
 //
 //        let a = UIAction(title: <#T##String#>, image: <#T##UIImage?#>, identifier: <#T##UIAction.Identifier?#>, discoverabilityTitle: <#T##String?#>, attributes: ., state: ., handler: <#T##UIActionHandler##UIActionHandler##(UIAction) -> Void#>)
@@ -132,7 +153,30 @@ class HomeViewController: BaseViewController {
         
         return menu
     }
-
+    
+    private func filterMenu() -> UIMenu {
+        let showWatched = UIAction(title: MenuTitle.showWatched,
+                                   image: UIImage(systemName: SFSymbol.eye),
+                                   state: FilterOption.showWatched.state) { _ in
+            UserDefaultsHelper.standard.filterOption = FilterOption.showWatched.rawValue
+//            self.media = self.repository.filter(by: .showWatched)
+            self.sortAndFilter()
+        }
+        
+        let hideWatched = UIAction(title: MenuTitle.hideWatched,
+                                   image: UIImage(systemName: SFSymbol.eyeSlash),
+                                   state: FilterOption.hideWatched.state) { _ in
+            UserDefaultsHelper.standard.filterOption = FilterOption.hideWatched.rawValue
+//            self.media = self.repository.filter(by: .hideWatched)
+            self.sortAndFilter()
+        }
+        
+        let menu = UIMenu(title: MenuTitle.filter,
+                          options: .singleSelection,
+                          children: [showWatched, hideWatched])
+        
+        return menu
+    }
     
 //    @objc private func sortButtonClicked() {
 //
@@ -152,6 +196,10 @@ class HomeViewController: BaseViewController {
 //                          completionHandler: <#T##() -> Void#>,
 //                          errorHandler: <#T##() -> Void#>)
 //    }
+    
+    private func sortAndFilter() {
+        media = repository.sortAndFilter()
+    }
 }
 
 // MARK: - UICollectionViewDataSource

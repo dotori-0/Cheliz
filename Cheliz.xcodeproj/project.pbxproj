@@ -51,6 +51,9 @@
 		0AB10D3B28DA3734007033E2 /* MenuTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB10D3A28DA3734007033E2 /* MenuTitle.swift */; };
 		0AB10D3D28DA39F7007033E2 /* FilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB10D3C28DA39F7007033E2 /* FilterOption.swift */; };
 		0AB10D4028DA4069007033E2 /* MediaPassableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB10D3F28DA4069007033E2 /* MediaPassableButton.swift */; };
+		0AB10D4228DB4371007033E2 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB10D4128DB4371007033E2 /* UIImage+Extension.swift */; };
+		0AB10D4428DBB65F007033E2 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB10D4328DBB65F007033E2 /* UserDefaultsHelper.swift */; };
+		0AB10D4628DC260C007033E2 /* SFSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB10D4528DC260C007033E2 /* SFSymbol.swift */; };
 		0AF8837128D33CFD008A4B51 /* ParsingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8837028D33CFD008A4B51 /* ParsingManager.swift */; };
 		0AF8837328D39DC0008A4B51 /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8837228D39DC0008A4B51 /* MediaType.swift */; };
 		0AF8837928D50077008A4B51 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0AF8837828D50077008A4B51 /* Kingfisher */; };
@@ -119,6 +122,9 @@
 		0AB10D3A28DA3734007033E2 /* MenuTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitle.swift; sourceTree = "<group>"; };
 		0AB10D3C28DA39F7007033E2 /* FilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOption.swift; sourceTree = "<group>"; };
 		0AB10D3F28DA4069007033E2 /* MediaPassableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPassableButton.swift; sourceTree = "<group>"; };
+		0AB10D4128DB4371007033E2 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		0AB10D4328DBB65F007033E2 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		0AB10D4528DC260C007033E2 /* SFSymbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbol.swift; sourceTree = "<group>"; };
 		0AF8837028D33CFD008A4B51 /* ParsingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsingManager.swift; sourceTree = "<group>"; };
 		0AF8837228D39DC0008A4B51 /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		0AF8837C28D6EE3D008A4B51 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 				0A22A81128D1FD74002D2C34 /* Notice.swift */,
 				0AB10D2F28D75BD8007033E2 /* RealmKey.swift */,
 				0AB10D3A28DA3734007033E2 /* MenuTitle.swift */,
+				0AB10D4528DC260C007033E2 /* SFSymbol.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -293,6 +300,7 @@
 				0A22A80128D0ED7F002D2C34 /* Transition+Extension.swift */,
 				0A22A82228D2CC07002D2C34 /* UIViewController+Extension.swift */,
 				0AB10D3128D76A87007033E2 /* Alert+Extension.swift */,
+				0AB10D4128DB4371007033E2 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -319,6 +327,7 @@
 				0AF8837028D33CFD008A4B51 /* ParsingManager.swift */,
 				0AB10D3728D9A309007033E2 /* SortingOrder.swift */,
 				0AB10D3C28DA39F7007033E2 /* FilterOption.swift */,
+				0AB10D4328DBB65F007033E2 /* UserDefaultsHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -449,6 +458,7 @@
 				0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */,
 				0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */,
 				0A8AA9D528CF64A400EB2AF8 /* HomeView.swift in Sources */,
+				0AB10D4628DC260C007033E2 /* SFSymbol.swift in Sources */,
 				0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */,
 				0AB10D3D28DA39F7007033E2 /* FilterOption.swift in Sources */,
 				0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */,
@@ -462,6 +472,7 @@
 				0A22A82128D24A7A002D2C34 /* MediaModel.swift in Sources */,
 				0AB10D3028D75BD8007033E2 /* RealmKey.swift in Sources */,
 				0A8AA9BD28CF24FE00EB2AF8 /* BaseView.swift in Sources */,
+				0AB10D4428DBB65F007033E2 /* UserDefaultsHelper.swift in Sources */,
 				0AF8837128D33CFD008A4B51 /* ParsingManager.swift in Sources */,
 				0AB10D3228D76A87007033E2 /* Alert+Extension.swift in Sources */,
 				0AF8837D28D6EE3D008A4B51 /* Media.swift in Sources */,
@@ -471,6 +482,7 @@
 				0A22A7FB28D0D6F1002D2C34 /* TabBarController.swift in Sources */,
 				0A22A80228D0ED80002D2C34 /* Transition+Extension.swift in Sources */,
 				0A8AA9D128CF622900EB2AF8 /* BaseCollectionViewCell.swift in Sources */,
+				0AB10D4228DB4371007033E2 /* UIImage+Extension.swift in Sources */,
 				0A22A82328D2CC07002D2C34 /* UIViewController+Extension.swift in Sources */,
 				0A22A81228D1FD74002D2C34 /* Notice.swift in Sources */,
 				0AB10D3B28DA3734007033E2 /* MenuTitle.swift in Sources */,

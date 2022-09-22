@@ -43,8 +43,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     
     let addButton = UIButton().then {
         var configuration = UIButton.Configuration.plain()
-//        configuration.image = UIImage(systemName: "text.badge.plus")
-        configuration.image = UIImage(systemName: "text.badge.plus",
+        configuration.image = UIImage(systemName: SFSymbol.addToList,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
         $0.configuration = configuration
     }
@@ -126,7 +125,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
 
         titleLabel.text = media.title
         releaseYearLabel.text = media.releaseDate
-        mediaTypeLabel.text = media.mediaType        
+        mediaTypeLabel.text = media.mediaType
     }
     
     // MARK: - Action Methods

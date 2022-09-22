@@ -25,9 +25,23 @@ class TabBarController: UITabBarController {
 //        let filmListItem = UITabBarItem(title: nil, image: filmListSymbolImage, selectedImage: filmListSymbolImage)
 //        filmListItem.imageInsets = UIEdgeInsets(top: 26, left: 0, bottom: -26, right: 0)
 //        homeNC.tabBarItem = filmListItem
+//        homeNC.title = "동영님"  // 폰트 크기 변경하기
+        
+        let homeVC2 = HomeViewController()
+        homeVC2.tabBarItem.image = UIImage(systemName: "list.and.film",
+                                           withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 50)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
+//        homeVC2.tabBarItem.image = UIImage(systemName: "list.and.film")!.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
+        
+        let homeVC3 = HomeViewController()
+        homeVC3.tabBarItem.image = UIImage(systemName: "list.and.film",
+                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 50))
+        homeVC3.tabBarItem.imageInsets = UIEdgeInsets(top: 20, left: 0, bottom: -20, right: 0)
+        
+        
         
         // 두 가지 방법 모두 O
-        setViewControllers([homeNC], animated: true)
+//        setViewControllers([homeNC], animated: true)
+        setViewControllers([homeNC, homeVC2, homeVC3], animated: true)
 //        viewControllers = [homeNC]
         
         // 클래스 자체가 UITabBarController 상속이기 때문에 tabBarController 접근 X

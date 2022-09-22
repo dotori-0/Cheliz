@@ -21,7 +21,7 @@ class HomeView: BaseView {
     
     let searchButton = UIButton().then {
         var configuration = UIButton.Configuration.filled()
-        configuration.image = UIImage(systemName: "magnifyingglass",
+        configuration.image = UIImage(systemName: SFSymbol.magnifyingGlass,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
         configuration.cornerStyle = .capsule
         $0.configuration = configuration
@@ -49,6 +49,13 @@ class HomeView: BaseView {
 //        setCollectionViewLayout()
         setCollectionViewCompositionalLayout()
 //        collectionView.backgroundColor = .systemYellow  // 동작 X
+        
+        // 아래 그림자 관련 코드 전부 동작 X
+        collectionView.layer.shadowColor = UIColor.black.cgColor
+        collectionView.layer.shadowOffset = .zero
+        collectionView.layer.shadowRadius = 10
+        collectionView.layer.shadowOpacity = 0.7
+        
     }
     
     override func setConstraints() {
@@ -90,12 +97,22 @@ class HomeView: BaseView {
                 }
                 actionPerformed(true)
             }
-            delete.image = UIImage(systemName: "trash.fill")
+            delete.image = UIImage(systemName: SFSymbol.trash)
             return .init(actions: [delete])
         }
-//        configuration.backgroundColor = .systemYellow
+//        configuration.backgroundColor = .systemBackground
         
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: true)
+        
+        
+        
+//        collectionView.backgroundColor = .systemYellow  // 동작 X
+//
+//        // 아래 그림자 관련 코드 전부 동작 X
+//        collectionView.layer.shadowColor = UIColor.black.cgColor
+//        collectionView.layer.shadowOffset = .zero
+//        collectionView.layer.shadowRadius = 10
+//        collectionView.layer.shadowOpacity = 0.7
     }
 }
