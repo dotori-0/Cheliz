@@ -37,6 +37,7 @@ class HomeViewController: BaseViewController {
 //                print(name)
 //            }
 //        }
+        
         print("🐰 Realm is located at:", repository.realm.configuration.fileURL!)
         
         setCollectionView()
@@ -66,7 +67,7 @@ class HomeViewController: BaseViewController {
     }
     
     override func setConstraints() {
-//        super.setConstraints()
+        super.setConstraints()
     }
     
     private func setNavigationItem() {
@@ -232,7 +233,7 @@ extension HomeViewController: UICollectionViewDataSource {
     @objc private func checkButtonClicked(sender: MediaPassableButton) {
         print("🥶", #function)
         guard let media = sender.media else {
-            print("Cannot find media in MediaPassableButton")
+            print("Cannot find media in MediaPassableButton")  // 👻 alert
             return
         }
         

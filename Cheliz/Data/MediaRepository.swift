@@ -113,4 +113,13 @@ struct MediaRepository: RealmProtocol {
             errorHandler()
         }
     }
+    
+    func sameMediaExists(as selectedMedia: Media) -> Bool {
+        let existingMedia = fetch().where {
+            $0.mediaType == selectedMedia.mediaType &&
+            $0.TMDBid == selectedMedia.TMDBid
+        }
+        
+        return !existingMedia.isEmpty
+    }
 }

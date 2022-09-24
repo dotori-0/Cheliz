@@ -108,25 +108,54 @@ extension SearchViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-//        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick) 탑건: 매버릭 (Top Gun: Maverick)"
-//        cell.releaseYearLabel.text = "2022-05-24"
-//        cell.mediaTypeLabel.text = "movie"
+        let media = searchResults[indexPath.row]
         
-//        cell.showResult(with: searchResults[indexPath.row])
-//        print(cell.titleLabel.text)
+//        cell.media = media
+//        cell.addCompletionHandler = { self.searchView.makeToast(Notice.addSucceeded,
+//                                                                duration: 1,
+//                                                                position: .center) }
+//        cell.addErrorHandler = { self.alert(title: Notice.errorTitle,
+//                                            message: Notice.errorInAddMessage) }
         
-        cell.media = searchResults[indexPath.row]
-        cell.addCompletionHandler = { self.searchView.makeToast(Notice.addSucceeded,
-                                                                duration: 1,
-                                                                position: .center) }
-        cell.addErrorHandler = { self.alert(title: Notice.errorTitle,
-                                            message: Notice.errorInAddMessage) }
-        cell.showResult {
-            self.alert(title: Notice.errorTitle,
-                       message: Notice.errorInSearchMessage)
-        }
+        cell.addButton.media = media
+        cell.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
+
+//        cell.showResult {
+//            self.alert(title: Notice.errorTitle,
+//                       message: Notice.errorInSearchMessage)
+//        }
+        cell.showResult(of: media)
         
         return cell
+    }
+    
+    @objc private func addButtonClicked(sender: MediaPassableButton) {
+//        if let media = media, let addErrorHandler = addErrorHandler, let addCompletionHandler = addCompletionHandler {
+//            let repository = MediaRepository()
+//            repository.add(media: media, completionHandler: addCompletionHandler, errorHandler: addErrorHandler)
+//        }
+        guard let media = sender.media else {
+            print("Cannot find media in MediaPassableButton")  // 👻 alert
+            return
+        }
+        
+        let repository = MediaRepository()
+        
+        if repository.sameMediaExists(as: media) {
+            alert(title: Notice.sameMediaAlreadyExistsTitle,
+                  message: Notice.sameMediaAlreadyExistsMessage)
+            return
+        }
+        
+        repository.add(media: media) {
+            self.searchView.makeToast(Notice.addSucceeded,
+                                      duration: 1,
+                                      position: .center)
+        } errorHandler: {
+            self.alert(title: Notice.errorTitle,
+                       message: Notice.errorInAddMessage)
+        }
+
     }
 }
 

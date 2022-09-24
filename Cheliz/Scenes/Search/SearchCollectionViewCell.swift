@@ -41,7 +41,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         $0.distribution = .fillEqually
     }
     
-    let addButton = UIButton().then {
+    let addButton = MediaPassableButton().then {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(systemName: SFSymbol.addToList,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
@@ -56,7 +56,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setAddButtonAction()
+//        setAddButtonAction()
     }
     
     required init?(coder: NSCoder) {
@@ -101,22 +101,22 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - Internal Methods
-    func showResult(with media: MediaModel) {
-        titleLabel.text = media.title
-        releaseYearLabel.text = media.releaseDate
-        mediaTypeLabel.text = media.mediaType.rawValue
-        
-        let url = URL(string: Endpoint.imageConfigurationURL + media.posterPath)
-        posterImageView.kf.setImage(with: url)
-    }
+//    func showResult(with media: MediaModel) {
+//        titleLabel.text = media.title
+//        releaseYearLabel.text = media.releaseDate
+//        mediaTypeLabel.text = media.mediaType.rawValue
+//
+//        let url = URL(string: Endpoint.imageConfigurationURL + media.posterPath)
+//        posterImageView.kf.setImage(with: url)
+//    }
     
-//    func showResult(with media: Media) {
-    func showResult(errorHandler: @escaping () -> Void) {
-        guard let media = media else {
-            errorHandler()
-            print("결과를 찾을 수 없습니다.")
-            return
-        }
+    func showResult(of media: Media) {
+//    func showResult(errorHandler: @escaping () -> Void) {
+//        guard let media = media else {
+//            errorHandler()
+//            print("결과를 찾을 수 없습니다.")
+//            return
+//        }
         
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
@@ -129,14 +129,14 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - Action Methods
-    private func setAddButtonAction() {
-        addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
-    }
-    
-    @objc private func addButtonClicked() {
-        if let media = media, let addErrorHandler = addErrorHandler, let addCompletionHandler = addCompletionHandler {
-            let repository = MediaRepository()
-            repository.add(media: media, completionHandler: addCompletionHandler, errorHandler: addErrorHandler)
-        }
-    }
+//    private func setAddButtonAction() {
+//        addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
+//    }
+//
+//    @objc private func addButtonClicked() {
+//        if let media = media, let addErrorHandler = addErrorHandler, let addCompletionHandler = addCompletionHandler {
+//            let repository = MediaRepository()
+//            repository.add(media: media, completionHandler: addCompletionHandler, errorHandler: addErrorHandler)
+//        }
+//    }
 }

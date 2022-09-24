@@ -12,37 +12,36 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let homeVC = HomeViewController()
-        let homeVC = SearchViewController()
+        let watchedVC = UIViewController()
+        watchedVC.tabBarItem.image = UIImage(systemName: "list.and.film",
+                                             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 2)
+        
+        let homeVC = HomeViewController()
+//        let homeVC = SearchViewController()
         let homeNC = UINavigationController(rootViewController: homeVC)
         
-        let filmListSymbolImage = UIImage(systemName: "list.and.film")
-        homeNC.tabBarItem.image = filmListSymbolImage
-        homeNC.tabBarItem.image = UIImage(named: "bank")
-        homeNC.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
+//        let filmListSymbolImage = UIImage(systemName: "list.and.film",
+//                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
+        homeNC.tabBarItem.image = UIImage(systemName: "checklist",
+                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 2)
+//        homeNC.tabBarItem.image = UIImage(named: "bank")
+//        homeNC.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
         
 //        let filmListItem = UITabBarItem(title: nil, image: filmListSymbolImage, tag: 0)
         
 //        let filmListItem = UITabBarItem(title: nil, image: filmListSymbolImage, selectedImage: filmListSymbolImage)
 //        filmListItem.imageInsets = UIEdgeInsets(top: 26, left: 0, bottom: -26, right: 0)
 //        homeNC.tabBarItem = filmListItem
-//        homeNC.title = "동영님"  // 폰트 크기 변경하기
         
-        let homeVC2 = HomeViewController()
-        homeVC2.tabBarItem.image = UIImage(systemName: "list.and.film",
-                                           withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 50)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
-//        homeVC2.tabBarItem.image = UIImage(systemName: "list.and.film")!.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
-        
-        let homeVC3 = HomeViewController()
-        homeVC3.tabBarItem.image = UIImage(systemName: "list.and.film",
-                                           withConfiguration: UIImage.SymbolConfiguration(pointSize: 50))
-        homeVC3.tabBarItem.imageInsets = UIEdgeInsets(top: 20, left: 0, bottom: -20, right: 0)
-        
+        let settingsVC = UIViewController()
+        settingsVC.tabBarItem.image = UIImage(systemName: "gear",
+                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 2)
         
         
         // 두 가지 방법 모두 O
 //        setViewControllers([homeNC], animated: true)
-        setViewControllers([homeNC, homeVC2, homeVC3], animated: true)
+        setViewControllers([watchedVC, homeNC, settingsVC], animated: true)
+        selectedIndex = 1
 //        viewControllers = [homeNC]
         
         // 클래스 자체가 UITabBarController 상속이기 때문에 tabBarController 접근 X

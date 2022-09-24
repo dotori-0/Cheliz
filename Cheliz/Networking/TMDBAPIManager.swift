@@ -22,6 +22,7 @@ class TMDBAPIManager {
         }
         
         let url = Endpoint.multiSearchURL + APIKey.TMDB + "&language=ko-KR" + "&query=\(query)" + "&page=\(page)"
+//        let url = Endpoint.multiSearchURL + APIKey.TMDB + "&language=en-US" + "&query=\(query)" + "&page=\(page)"
         // https://api.themoviedb.org/3/search/multi?api_key={API_KEY}&language=en-US&query=lucy&page=1&include_adult=false
         // https://api.themoviedb.org/3/search/multi?api_key={API_KEY}&language=ko-KR&query=탑건&page=1&include_adult=false
         
