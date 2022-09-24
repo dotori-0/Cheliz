@@ -37,20 +37,23 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     let titleLabel = UILabel().then {
 //        label.font = UIFont.dongle(style: .Regular, size: 30)
 //        label.font = .systemFont(ofSize: 20)
-        $0.font = UIFont.hyemin(style: .Bold, size: 16)
+//        $0.font = UIFont.hyemin(style: .Bold, size: 16)  // == meringue 19
 //        $0.font = UIFont.barunpen(style: .Bold, size: 18)
+        $0.font = UIFont.meringue(size: 19)
     }
     
     let releaseYearLabel = UILabel().then {
 //        $0.font = UIFont.dongle(style: .Regular, size: 12)
 //        $0.font = .systemFont(ofSize: 20)
-        $0.font = UIFont.hyemin(style: .Bold, size: 12)
+//        $0.font = UIFont.hyemin(style: .Bold, size: 12)  // == meringue 14
 //        $0.font = UIFont.barunpen(style: .Regular, size: 14)
+        $0.font = UIFont.meringue(size: 14)
         $0.textColor = .systemGray
     }
     
     let mediaTypeLabel = UILabel().then {
-        $0.font = UIFont.hyemin(style: .Regular, size: 12)
+//        $0.font = UIFont.hyemin(style: .Regular, size: 12)
+        $0.font = UIFont.meringue(size: 14)
         $0.textColor = .systemGray
     }
     
@@ -88,13 +91,13 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
 //        backgroundColor = .systemMint  // 동작 O
 //        backgroundColor = .systemGroupedBackground.withAlphaComponent(0.5)
 //        backgroundColor = .systemGroupedBackground
-//        backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)  // 이걸로!
+        backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)  // 이걸로!
 //        backgroundColor = .tertiarySystemGroupedBackground
         
-        superview?.layer.shadowColor = UIColor.black.cgColor
-        superview?.layer.shadowOffset = .zero
-        superview?.layer.shadowRadius = 10
-        superview?.layer.shadowOpacity = 0.7
+//        superview?.layer.shadowColor = UIColor.black.cgColor
+//        superview?.layer.shadowOffset = .zero
+//        superview?.layer.shadowRadius = 10
+//        superview?.layer.shadowOpacity = 0.7
         
     }
     

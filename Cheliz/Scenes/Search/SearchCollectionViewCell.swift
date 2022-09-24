@@ -19,19 +19,19 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     let titleLabel = UILabel().then {
-        $0.font = UIFont.hyemin(style: .Bold, size: 16)
-//        $0.backgroundColor = .systemYellow
+//        $0.font = UIFont.hyemin(style: .Bold, size: 16)
+        $0.font = UIFont.meringue(size: 19)
     }
     
     let releaseYearLabel = UILabel().then {
-        $0.font = UIFont.hyemin(style: .Bold, size: 12)
-//        $0.backgroundColor = .systemMint
+//        $0.font = UIFont.hyemin(style: .Bold, size: 12)
+        $0.font = UIFont.meringue(size: 14)
         $0.textColor = .systemGray
     }
     
     let mediaTypeLabel = UILabel().then {
-        $0.font = UIFont.hyemin(style: .Regular, size: 12)
-//        $0.backgroundColor = .systemIndigo
+//        $0.font = UIFont.hyemin(style: .Regular, size: 12)
+        $0.font = UIFont.meringue(size: 14)
         $0.textColor = .systemGray
     }
     

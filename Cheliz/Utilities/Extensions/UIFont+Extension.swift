@@ -24,6 +24,10 @@ extension UIFont {
         let fontName = style == .Regular ? "NanumBarunpen" : "NanumBarunpen-\(style)"
         return UIFont(name: fontName, size: size)!
     }
+    
+    static func meringue(size: CGFloat) -> UIFont {
+        return UIFont(name: "BaMeringue", size: size)!
+    }
 }
 
 //Dongle-Regular

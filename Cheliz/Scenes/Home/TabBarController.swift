@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
         
         let watchedVC = UIViewController()
         watchedVC.tabBarItem.image = UIImage(systemName: "list.and.film",
-                                             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 2)
+                                             withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         let homeVC = HomeViewController()
 //        let homeVC = SearchViewController()
@@ -23,7 +23,7 @@ class TabBarController: UITabBarController {
 //        let filmListSymbolImage = UIImage(systemName: "list.and.film",
 //                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
         homeNC.tabBarItem.image = UIImage(systemName: "checklist",
-                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 2)
+                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
 //        homeNC.tabBarItem.image = UIImage(named: "bank")
 //        homeNC.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
         
@@ -35,7 +35,7 @@ class TabBarController: UITabBarController {
         
         let settingsVC = UIViewController()
         settingsVC.tabBarItem.image = UIImage(systemName: "gear",
-                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 2)
+                                              withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         
         // 두 가지 방법 모두 O
