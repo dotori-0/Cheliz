@@ -10,12 +10,12 @@ import Kingfisher
 
 class SearchCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-    var media: Media?
-    var addErrorHandler: (() -> Void)?
-    var addCompletionHandler: (() -> Void)?
+//    var media: Media?
+//    var addErrorHandler: (() -> Void)?
+//    var addCompletionHandler: (() -> Void)?
     
     let posterImageView = UIImageView().then {
-        $0.backgroundColor = .systemYellow
+        $0.backgroundColor = .tintColor
     }
     
     let titleLabel = UILabel().then {
