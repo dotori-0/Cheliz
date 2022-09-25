@@ -7,7 +7,9 @@
 
 import UIKit
 import SwiftUI
+
 import RealmSwift
+//import Toast
 
 class HomeViewController: BaseViewController {
     // MARK: - Properties
@@ -19,6 +21,8 @@ class HomeViewController: BaseViewController {
             homeView.collectionView.reloadData()
         }
     }
+    
+//    var toastStyle = ToastStyle()
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -59,11 +63,12 @@ class HomeViewController: BaseViewController {
     
     // MARK: - Design Methods
     override func setUI() {
+        print("Home", #function)
         super.setUI()
         
-        navigationItem.title = "나의 리스트"
-//        homeView.collectionView.backgroundColor = .systemMint
         setNavigationItem()
+        
+//        toastStyle.messageFont = .meringue(size: 15)
     }
     
     override func setConstraints() {
@@ -71,6 +76,7 @@ class HomeViewController: BaseViewController {
     }
     
     private func setNavigationItem() {
+        navigationItem.title = "나의 리스트"
         let sortButton = UIBarButtonItem(image: UIImage(systemName: SFSymbol.sort), primaryAction: nil, menu: sortMenu())
         let filterButton = UIBarButtonItem(image: UIImage(systemName: SFSymbol.filter), primaryAction: nil, menu: filterMenu())
         navigationItem.rightBarButtonItems = [filterButton, sortButton]
@@ -94,7 +100,7 @@ class HomeViewController: BaseViewController {
     private func setDeleteAction() {
         let deleteCompletionHandler = { self.homeView.makeToast(Notice.deleteSucceeded,
                                                                 duration: 1,
-                                                                position: .center) }
+                                                                position: .center, style: self.toastStyle) }
         let deleteErrorHandler = { self.alert(title: Notice.errorTitle,
                                               message: Notice.errorInDeleteMessage) }
         

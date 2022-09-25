@@ -14,7 +14,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
 //    var addErrorHandler: (() -> Void)?
 //    var addCompletionHandler: (() -> Void)?
     
-    let posterImageView = UIImageView().then {
+    let posterImageView = PosterImageView().then {
         $0.backgroundColor = .tintColor
     }
     

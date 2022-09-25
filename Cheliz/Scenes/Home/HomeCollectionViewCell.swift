@@ -27,11 +27,13 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         var configuration = UIButton.Configuration.plain()
         configuration.image = UIImage(systemName: SFSymbol.circle,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
+//        configuration.baseBackgroundColor = UIColor.tintColor.withAlphaComponent(0.5)
+//        configuration.baseForegroundColor = UIColor.tintColor.withAlphaComponent(0.5)
         return configuration
     }()
 
-    let posterImageView = UIImageView().then {
-        $0.backgroundColor = .systemYellow
+    let posterImageView = PosterImageView().then {
+        $0.backgroundColor = .tintColor.withAlphaComponent(0.5)
     }
     
     let titleLabel = UILabel().then {
