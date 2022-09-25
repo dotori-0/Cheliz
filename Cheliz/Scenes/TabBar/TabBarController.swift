@@ -33,14 +33,15 @@ class TabBarController: UITabBarController {
 //        filmListItem.imageInsets = UIEdgeInsets(top: 26, left: 0, bottom: -26, right: 0)
 //        homeNC.tabBarItem = filmListItem
         
-        let settingsVC = UIViewController()
-        settingsVC.tabBarItem.image = UIImage(systemName: "gear",
+        let settingsVC = SettingsViewController()
+        let settingsNC = UINavigationController(rootViewController: settingsVC)
+        settingsNC.tabBarItem.image = UIImage(systemName: "gear",
                                               withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         
         // 두 가지 방법 모두 O
 //        setViewControllers([homeNC], animated: true)
-        setViewControllers([watchedVC, homeNC, settingsVC], animated: true)
+        setViewControllers([watchedVC, homeNC, settingsNC], animated: true)
         selectedIndex = 1
 //        viewControllers = [homeNC]
         

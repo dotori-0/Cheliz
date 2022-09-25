@@ -17,4 +17,11 @@ enum SFSymbol {
     static let magnifyingGlass = "magnifyingglass"
     static let trash = "trash.fill"
     static let addToList = "text.badge.plus"
+    static let cloud = "cloud"
+    static let globe = "globe.asia.australia.fill"
+//    static let globe = "globe"
+    static let font = "textformat"
+//    static let theme = "sparkles"
+//    static let theme = "paintpalette"
+    static let theme = "paintpalette.fill"
 }
