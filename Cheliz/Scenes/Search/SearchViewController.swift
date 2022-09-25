@@ -142,7 +142,9 @@ extension SearchViewController: UICollectionViewDataSource {
         let repository = MediaRepository()
         
         if repository.sameMediaExists(as: media) {
-            alert(title: Notice.sameMediaAlreadyExistsTitle,
+//            alert(title: Notice.sameMediaAlreadyExistsTitle,
+//            alert(title: nil,
+            alert(title: "",
                   message: Notice.sameMediaAlreadyExistsMessage)
             return
         }
@@ -150,7 +152,7 @@ extension SearchViewController: UICollectionViewDataSource {
         repository.add(media: media) {
             self.searchView.makeToast(Notice.addSucceeded,
                                       duration: 1,
-                                      position: .center)
+                                      position: .center, style: self.toastStyle)
         } errorHandler: {
             self.alert(title: Notice.errorTitle,
                        message: Notice.errorInAddMessage)

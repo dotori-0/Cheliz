@@ -6,13 +6,17 @@
 //
 
 import UIKit
+
 import SnapKit
+import Toast
 
 class BaseViewController: UIViewController {
     // MARK: - Properties
     let backgroundImageView = UIImageView().then {
         $0.image = .background
     }
+    
+    var toastStyle = ToastStyle()
     
     // MARK: - Functions
     override func viewDidLoad() {
@@ -24,8 +28,11 @@ class BaseViewController: UIViewController {
     }
     
     func setUI() {
+        print("Base", #function)
         view.backgroundColor = .systemBackground
         view.addSubview(backgroundImageView)
+        
+        toastStyle.messageFont = .meringue(size: 15)
     }
     
     func setConstraints() {
