@@ -106,4 +106,44 @@ extension BaseViewController {
             return nil
         }
     }
+    
+    func deleteBackupFile(named fileName: String) {
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return }
+        
+        let backupFileURL = documentDirectoryPath.appendingPathComponent(fileName)
+        
+        if FileManager.default.fileExists(atPath: backupFileURL.path) {
+            do {
+                try FileManager.default.removeItem(at: backupFileURL)
+                view.makeToast(Notice.deleteSucceeded,
+                               duration: 1,
+                               position: .center, style: toastStyle)
+            } catch {
+                alert(title: Notice.errorTitle,
+                      message: Notice.errorInDeleteMessage)
+                print(error)
+            }
+        }
+    }
+    
+    func importBackupFile(from backupFileURL: URL, completionHander: @escaping () -> Void) {
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return }
+        
+        // Sandbox-Documents에 이미 있는 파일인지 확인
+        let sandboxFileURL = documentDirectoryPath.appendingPathComponent(backupFileURL.lastPathComponent)
+        
+        // Sandbox-Documents에 이미 있는 파일인지 확인
+        if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
+            alert(title: "파일 중복 안내",
+                  message: "이미 앱 내에 존재하는 파일입니다.")
+        } else {
+            // 파일 앱의 백업 파일 -> 도큐먼트 폴더로 복사
+            do {
+                try FileManager.default.copyItem(at: backupFileURL, to: sandboxFileURL)
+                completionHander()
+            } catch {
+                print(error)
+            }
+        }
+    }
 }

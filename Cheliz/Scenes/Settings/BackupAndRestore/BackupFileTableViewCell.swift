@@ -15,11 +15,11 @@ class BackupFileTableViewCell: BaseTableViewCell {
     }
     
     let fileNameLabel = UILabel().then {
-        $0.font = .meringue(size: 14)
+        $0.font = .meringue(size: 15)
     }
     
     let fileSizeLabel = UILabel().then {
-        $0.font = .meringue(size: 13)
+        $0.font = .meringue(size: 14)
         $0.textColor = .systemGray3
     }
     

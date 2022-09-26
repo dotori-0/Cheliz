@@ -28,6 +28,7 @@ class BackupAndRestoreView: BaseView {
         $0.textAlignment = .left
         $0.textColor = .secondaryLabel
 //        $0.backgroundColor = .systemMint
+        $0.sizeToFit()
     }
     
     let backupFileLabel = UILabel().then {
@@ -55,6 +56,7 @@ class BackupAndRestoreView: BaseView {
         $0.spacing = 20
         $0.alignment = .fill
         $0.distribution = .fillEqually  // 빼도 될지?
+//        $0.backgroundColor = .systemMint
     }
     
     let tableView = UITableView(frame: .zero, style: .insetGrouped).then {
@@ -90,25 +92,30 @@ class BackupAndRestoreView: BaseView {
         }
         
         backupInfoLabel.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.85)
+            make.width.lessThanOrEqualToSuperview().multipliedBy(0.85)
             make.top.equalTo(cloudImageView.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
         }
         
         backupFileLabel.snp.makeConstraints { make in
-            make.top.equalTo(backupInfoLabel.snp.bottom).offset(24)
+            make.top.equalTo(backupInfoLabel.snp.bottom).offset(32)
             make.leading.equalTo(backupInfoLabel.snp.leading)
         }
         
         buttonsStackView.snp.makeConstraints { make in
             make.top.equalTo(backupFileLabel.snp.bottom).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.75)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            print("🥶 width: \(buttonsStackView.frame.width)")  // 0.0
+            print("🥶 bounds.width: \(buttonsStackView.bounds.size.width)")
+//            buttonsStackView.bounds.width
             make.height.equalTo(56)
+            make.height.equalTo(buttonsStackView.snp.width).multipliedBy(0.17)  // width가 0.8일 때는 0.17
+            print("🥶 height: \(buttonsStackView.frame.size.height)")
             make.centerX.equalToSuperview()
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(buttonsStackView.snp.bottom).offset(24)
+            make.top.equalTo(buttonsStackView.snp.bottom).offset(4)
 //            make.width.centerX.bottom.equalToSuperview()
             make.width.centerX.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide)

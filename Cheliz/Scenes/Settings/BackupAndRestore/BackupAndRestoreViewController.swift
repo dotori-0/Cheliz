@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UniformTypeIdentifiers
 
 class BackupAndRestoreViewController: BaseViewController {
     // MARK: - Properties
@@ -63,7 +64,12 @@ class BackupAndRestoreViewController: BaseViewController {
     }
     
     @objc private func importBackupFileButtonClicked() {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.archive], asCopy: true)
+        guard let chelizUTType = UTType("com.app.cheliz") else {
+            alert(title: Notice.errorTitle,
+                  message: Notice.errorInFileExtensionMessage)
+            return
+        }
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [chelizUTType], asCopy: true)
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         
@@ -132,8 +138,11 @@ extension BackupAndRestoreViewController: UIDocumentPickerDelegate {
             return
         }
         
-        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return }
-        
-        let sandboxFileURL = documentDirectoryPath.appendingPathComponent(selectedFileURL.lastPathComponent)
+        importBackupFile(from: selectedFileURL) {
+            self.fetchBackupFiles()
+            self.backupAndRestoreView.makeToast(Notice.importBackupFileSucceeded,
+                                                duration: 1,
+                                                position: .center, style: self.toastStyle)
+        }
     }
 }
