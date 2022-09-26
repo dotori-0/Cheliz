@@ -43,7 +43,7 @@ class TabBarController: UITabBarController {
         // 두 가지 방법 모두 O
 //        setViewControllers([homeNC], animated: true)
         setViewControllers([watchedVC, homeNC, settingsNC], animated: true)
-        selectedIndex = 2
+        selectedIndex = 1
 //        viewControllers = [homeNC]
         
         // 클래스 자체가 UITabBarController 상속이기 때문에 tabBarController 접근 X

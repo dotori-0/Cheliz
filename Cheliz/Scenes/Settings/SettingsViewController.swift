@@ -42,7 +42,7 @@ extension SettingsViewController: UITableViewDataSource {
         return 3
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let section = SettingsSection(rawValue: section)
         switch section {
             case .data:
@@ -53,7 +53,7 @@ extension SettingsViewController: UITableViewDataSource {
                 return SettingsTitle.Header.design
             default:
                 print("titleForHeaderInSection - default")
-                return ""
+                return nil
         }
     }
     
@@ -76,7 +76,6 @@ extension SettingsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-//        let section = indexPath.section
         let section = SettingsSection(rawValue: indexPath.section)
         switch section {
             case .data:
@@ -92,6 +91,10 @@ extension SettingsViewController: UITableViewDataSource {
             default:
                 print("cellForRowAt - default")
         }
+        
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .selectedBackgroundColor
+        cell.selectedBackgroundView = backgroundView
         
         return cell
     }
