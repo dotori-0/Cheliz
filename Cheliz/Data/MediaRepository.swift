@@ -15,6 +15,7 @@ fileprivate protocol RealmProtocol {
 //    func sort(by sortingOrder: SortingOrder) -> Results<Media>
     func sortAndFilter() -> Results<Media>?
     func toggleWatched(of media: Media, errorHandler: @escaping () -> Void)
+    func sameMediaExists(as selectedMedia: Media) -> Bool
 }
 
 struct MediaRepository: RealmProtocol {
@@ -107,6 +108,7 @@ struct MediaRepository: RealmProtocol {
         do {
             try realm.write {
                 media.watched.toggle()
+                media.watchCount = media.watchCount == 0 ? 1 : 0
             }
         } catch {
             print(error)
