@@ -10,6 +10,11 @@ import UIKit
 class BackupAndRestoreViewController: BaseViewController {
     // MARK: - Properties
     let backupAndRestoreView = BackupAndRestoreView()
+    var backupFileNames: [String] = [] {
+        didSet {
+            backupAndRestoreView.tableView.reloadData()
+        }
+    }
     
     // MARK: - Initializers
     override func loadView() {
@@ -20,6 +25,8 @@ class BackupAndRestoreViewController: BaseViewController {
         super.viewDidLoad()
         
         setTableView()
+        fetchBackupFiles()
+        print("🧃 \(backupFileNames.count)")
     }
     
     // MARK: - Setting Methods
@@ -38,6 +45,7 @@ class BackupAndRestoreViewController: BaseViewController {
     // MARK: - Action Methods
     override func setActions() {
         setBackupButton()
+        setImportBackupFileButton()
     }
     
     private func setBackupButton() {
@@ -47,6 +55,7 @@ class BackupAndRestoreViewController: BaseViewController {
     @objc private func backupButtonClicked() {
         createJSONBackupFile()
         saveBackupFile()
+        fetchBackupFiles()
     }
     
     private func setImportBackupFileButton() {
@@ -62,14 +71,16 @@ class BackupAndRestoreViewController: BaseViewController {
     }
     
     private func fetchBackupFiles() {
-        
+        if let backupFileNames = fetchBackupFilesFromDocuments() {
+            self.backupFileNames = backupFileNames
+        }
     }
 }
 
 // MARK: - UITableViewDataSource
 extension BackupAndRestoreViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return backupFileNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,10 +89,19 @@ extension BackupAndRestoreViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.fileNameLabel.text = "파일 이름"
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = .selectedBackgroundColor
+        cell.selectedBackgroundView = backgroundView
+        
+//        cell.fileNameLabel.text = "파일 이름"
+        cell.fileNameLabel.text = backupFileNames[indexPath.row]
         cell.fileSizeLabel.text = "파일 크기"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

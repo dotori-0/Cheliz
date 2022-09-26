@@ -8,7 +8,7 @@
 import UIKit
 import Zip
 
-extension UIViewController {
+extension BaseViewController {
     func fetchDocumentDirectoryPath() -> URL? {
         guard let documentDirectoryPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             // 👻 alert
@@ -47,9 +47,7 @@ extension UIViewController {
     func saveBackupFile() {
         var urlPaths = [URL]()  // 백업할 파일의 배열
         
-        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else {
-            return  // fetchDocumentDirectoryPath()에서 이미 alert 띄우고 있기 때문에 다시 알릴 필요 X
-        }
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return }
         
         let jsonFilePath = documentDirectoryPath.appendingPathComponent("backup.json")
         
@@ -85,5 +83,27 @@ extension UIViewController {
     func showActivityViewController(with backupFileURL: URL) {
         let activityVC = UIActivityViewController(activityItems: [backupFileURL], applicationActivities: [])
         present(activityVC, animated: true)
+    }
+    
+    func fetchBackupFilesFromDocuments() -> [String]? {
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else {
+            return nil  // fetchDocumentDirectoryPath()에서 이미 alert 띄우고 있기 때문에 다시 알릴 필요 X
+        }
+        
+        do {
+            let allFileURLs = try FileManager.default.contentsOfDirectory(at: documentDirectoryPath, includingPropertiesForKeys: nil)
+            print("allFileURLs.count: \(allFileURLs.count)")
+            
+            let allBackupFileURLs = allFileURLs.filter { $0.pathExtension == "cheliz" }  // pathExtension: 확장자
+            let allBackupFileNames = allBackupFileURLs.map { $0.lastPathComponent }
+            print("allBackupFilesNames.count: \(allBackupFileNames.count)")
+            
+            return allBackupFileNames.sorted().reversed()
+        } catch {
+            alert(title: "백업 파일 찾기 오류",
+                  message: "백업 파일 찾기에 실패했습니다.")
+            print(error)
+            return nil
+        }
     }
 }
