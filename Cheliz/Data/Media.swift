@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class Media: Object {
+final class Media: Object, Codable {
     @Persisted(primaryKey: true) var id: ObjectId  // TMDB IDs: IDs are only unique within their own namespace -> id 따로 구현
     @Persisted var registerDate: Date
     @Persisted var TMDBid: Int            // TMDB ID(필수)
@@ -33,5 +33,27 @@ final class Media: Object {
         self.posterPath = posterPath
         self.watched = false
         self.watchCount = 0
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(registerDate, forKey: .registerDate)
+        try container.encode(TMDBid, forKey: .TMDBid)
+        try container.encode(title, forKey: .title)
+        try container.encode(mediaType, forKey: .mediaType)
+        let genreIds = Array(genreIds)
+        try container.encode(genreIds, forKey: .genreIds)
+        try container.encode(releaseDate, forKey: .releaseDate)
+
+        // ParsingManager에서 .stringValue가 아니라 .string으로 디코딩하면 null(nil)이 되는데,
+        // encodeIfPresent로 인코딩하면 아예 인코딩이 안 됨
+        // encode로 하면 null로 인코딩됨
+        try container.encode(backdropPath, forKey: .backdropPath)
+//        try container.encodeIfPresent(backdropPath, forKey: .backdropPath)  // null로 처리되지 않고 ""로 처리됨
+//        try container.encodeNil(forKey: .backdropPath)  // 전부 null 처리됨
+        try container.encode(posterPath, forKey: .posterPath)
+        try container.encode(watched, forKey: .watched)
+        try container.encode(watchCount, forKey: .watchCount)
     }
 }

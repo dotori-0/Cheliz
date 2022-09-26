@@ -36,6 +36,10 @@
 		0A439CB128E18FAC0032A687 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A439CB028E18FAC0032A687 /* BaseTableViewCell.swift */; };
 		0A439CB328E19D9F0032A687 /* Shadow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A439CB228E19D9F0032A687 /* Shadow+Extension.swift */; };
 		0A439CB528E1A8410032A687 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A439CB428E1A8410032A687 /* UIColor+Extension.swift */; };
+		0A439CB828E1DC2C0032A687 /* CodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A439CB728E1DC2C0032A687 /* CodingManager.swift */; };
+		0A439CBA28E1DC940032A687 /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A439CB928E1DC940032A687 /* FileManager+Extension.swift */; };
+		0A439CBE28E1EB5C0032A687 /* DateFormatterHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A439CBD28E1EB5C0032A687 /* DateFormatterHelper.swift */; };
+		0A439CC128E1EE460032A687 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 0A439CC028E1EE460032A687 /* Zip */; };
 		0A6DB5E728DF51FE004481E4 /* BaMeringue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A6DB5E628DF51FE004481E4 /* BaMeringue.ttf */; };
 		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
 		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
@@ -121,6 +125,9 @@
 		0A439CB028E18FAC0032A687 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		0A439CB228E19D9F0032A687 /* Shadow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shadow+Extension.swift"; sourceTree = "<group>"; };
 		0A439CB428E1A8410032A687 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		0A439CB728E1DC2C0032A687 /* CodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingManager.swift; sourceTree = "<group>"; };
+		0A439CB928E1DC940032A687 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		0A439CBD28E1EB5C0032A687 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		0A6DB5E628DF51FE004481E4 /* BaMeringue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BaMeringue.ttf; sourceTree = "<group>"; };
 		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -153,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A439CC128E1EE460032A687 /* Zip in Frameworks */,
 				0AB10D3528D78A7A007033E2 /* Toast in Frameworks */,
 				0AF8838128D6EEB5008A4B51 /* Realm in Frameworks */,
 				0A8AA9B428CE1ECA00EB2AF8 /* SnapKit in Frameworks */,
@@ -349,6 +357,7 @@
 				0AB10D4128DB4371007033E2 /* UIImage+Extension.swift */,
 				0A439CB228E19D9F0032A687 /* Shadow+Extension.swift */,
 				0A439CB428E1A8410032A687 /* UIColor+Extension.swift */,
+				0A439CB928E1DC940032A687 /* FileManager+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -379,6 +388,8 @@
 				0AB10D3C28DA39F7007033E2 /* FilterOption.swift */,
 				0AB10D4328DBB65F007033E2 /* UserDefaultsHelper.swift */,
 				0A439C8428E0BDE00032A687 /* SettingsSection.swift */,
+				0A439CB728E1DC2C0032A687 /* CodingManager.swift */,
+				0A439CBD28E1EB5C0032A687 /* DateFormatterHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -408,6 +419,7 @@
 				0AF8838028D6EEB5008A4B51 /* Realm */,
 				0AF8838228D6EEB5008A4B51 /* RealmSwift */,
 				0AB10D3428D78A7A007033E2 /* Toast */,
+				0A439CC028E1EE460032A687 /* Zip */,
 			);
 			productName = Cheliz;
 			productReference = 0A3F32F228CB4B7500B51DEA /* Cheliz.app */;
@@ -445,6 +457,7 @@
 				0AF8837728D50077008A4B51 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				0AF8837F28D6EEB5008A4B51 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				0AB10D3328D78A79007033E2 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				0A439CBF28E1EE460032A687 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 0A3F32F328CB4B7500B51DEA /* Products */;
 			projectDirPath = "";
@@ -513,8 +526,10 @@
 				0A439C7E28E0610C0032A687 /* SettingsTableViewCell.swift in Sources */,
 				0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */,
 				0AB10D3828D9A309007033E2 /* SortingOrder.swift in Sources */,
+				0A439CB828E1DC2C0032A687 /* CodingManager.swift in Sources */,
 				0A439CB128E18FAC0032A687 /* BaseTableViewCell.swift in Sources */,
 				0A439CAF28E18E950032A687 /* BackupFileTableViewCell.swift in Sources */,
+				0A439CBE28E1EB5C0032A687 /* DateFormatterHelper.swift in Sources */,
 				0A439CB328E19D9F0032A687 /* Shadow+Extension.swift in Sources */,
 				0AB10D4028DA4069007033E2 /* MediaPassableButton.swift in Sources */,
 				0AF8837328D39DC0008A4B51 /* MediaType.swift in Sources */,
@@ -532,6 +547,7 @@
 				0AF8837D28D6EE3D008A4B51 /* Media.swift in Sources */,
 				0A8AA9D828D0761A00EB2AF8 /* ReusableView.swift in Sources */,
 				0A8AA9B728CF239100EB2AF8 /* HomeViewController.swift in Sources */,
+				0A439CBA28E1DC940032A687 /* FileManager+Extension.swift in Sources */,
 				0A22A80028D0DC0E002D2C34 /* SearchView.swift in Sources */,
 				0A22A7FB28D0D6F1002D2C34 /* TabBarController.swift in Sources */,
 				0A439CB528E1A8410032A687 /* UIColor+Extension.swift in Sources */,
@@ -768,6 +784,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0A439CBF28E1EE460032A687 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		0A8AA9AC28CE1EA400EB2AF8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -827,6 +851,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0A439CC028E1EE460032A687 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A439CBF28E1EE460032A687 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
 		0A8AA9AD28CE1EA400EB2AF8 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0A8AA9AC28CE1EA400EB2AF8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;

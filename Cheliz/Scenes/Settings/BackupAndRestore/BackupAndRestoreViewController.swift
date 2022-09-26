@@ -34,6 +34,36 @@ class BackupAndRestoreViewController: BaseViewController {
         
         navigationItem.title = "백업 및 복원"
     }
+    
+    // MARK: - Action Methods
+    override func setActions() {
+        setBackupButton()
+    }
+    
+    private func setBackupButton() {
+        backupAndRestoreView.backupButton.addTarget(self, action: #selector(backupButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc private func backupButtonClicked() {
+        createJSONBackupFile()
+        saveBackupFile()
+    }
+    
+    private func setImportBackupFileButton() {
+        backupAndRestoreView.importBackupFileButton.addTarget(self, action: #selector(importBackupFileButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc private func importBackupFileButtonClicked() {
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.archive], asCopy: true)
+        documentPicker.delegate = self
+        documentPicker.allowsMultipleSelection = false
+        
+        present(documentPicker, animated: true)
+    }
+    
+    private func fetchBackupFiles() {
+        
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -58,4 +88,19 @@ extension BackupAndRestoreViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension BackupAndRestoreViewController: UITableViewDelegate {
     
+}
+
+// MARK: -
+extension BackupAndRestoreViewController: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        // 선택한 파일의 URL
+        guard let selectedFileURL = urls.first else {
+            alert(message: "선택하신 파일을 찾을 수 없습니다.")
+            return
+        }
+        
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return }
+        
+        let sandboxFileURL = documentDirectoryPath.appendingPathComponent(selectedFileURL.lastPathComponent)
+    }
 }

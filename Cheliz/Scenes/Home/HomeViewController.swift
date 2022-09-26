@@ -46,6 +46,18 @@ class HomeViewController: BaseViewController {
         
         setCollectionView()
         setDeleteAction()
+        
+//        let encodedRealm = repository.encode()  // 👻 guard-let
+//        print("🥳", encodedRealm)
+//
+//        guard let encodedJson = repository.encode2() else {
+//            print("encodedJson is nil")
+//            return
+//        }
+//        print("🤯", encodedJson)
+        
+//        createJSONBackupFile()
+//        saveBackupFile()  //
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +65,7 @@ class HomeViewController: BaseViewController {
         
 //        fetchRealm()
         sortAndFilter()
+        print("🫐", media.count)
     }
     
     // MARK: - Setting Methods

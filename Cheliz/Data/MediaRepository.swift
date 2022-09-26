@@ -124,4 +124,44 @@ struct MediaRepository: RealmProtocol {
         
         return !existingMedia.isEmpty
     }
+    
+    
+//    func encode<Media: Encodable>(_ media: Media) throws -> Data {
+//        let encoder = JSONEncoder()
+//        return try encoder.encode(media)
+//    }
+    
+    func encode() -> Data? {
+        let encoder = JSONEncoder()
+        
+        do {
+            let data = try encoder.encode(fetch())
+            return data
+//            return try encoder.encode(fetch())
+        } catch {
+            print(error)
+        }
+//        return try encoder.encode(fetch())
+        
+//        let data = encoder.encode(fetch())
+//        return data
+        
+        return nil
+    }
+    
+    func encode2() -> String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        encoder.dateEncodingStrategy = .iso8601
+        
+        do {
+            let jsonString = try String(data: encoder.encode(fetch()), encoding: .utf8)
+            return jsonString
+//            return try encoder.encode(fetch())
+        } catch {
+            print(error)
+        }
+        
+        return nil
+    }
 }

@@ -115,8 +115,8 @@ struct ParsingManager {
 //                                            title: result["title"].stringValue,
                                             genreIds: genreIds,
                                             mediaType: mediaType,
-                                            backdropPath: result["backdrop_path"].stringValue,
-                                            posterPath: result["poster_path"].stringValue,
+                                            backdropPath: result["backdrop_path"].string,
+                                            posterPath: result["poster_path"].string,
                                             releaseDate: releaseDate)
                 
     //            return mediaModel

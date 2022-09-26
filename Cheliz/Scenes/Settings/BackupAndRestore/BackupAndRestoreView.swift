@@ -48,9 +48,9 @@ class BackupAndRestoreView: BaseView {
     
     let backupButton = BackupAndRestoreButton(title: Notice.backup)
     
-    let bringBackupFileButton = BackupAndRestoreButton(title: Notice.bring)
+    let importBackupFileButton = BackupAndRestoreButton(title: Notice.bring)
     
-    lazy var buttonsStackView = UIStackView(arrangedSubviews: [backupButton, bringBackupFileButton]).then {
+    lazy var buttonsStackView = UIStackView(arrangedSubviews: [backupButton, importBackupFileButton]).then {
         $0.axis = .horizontal
         $0.spacing = 20
         $0.alignment = .fill
