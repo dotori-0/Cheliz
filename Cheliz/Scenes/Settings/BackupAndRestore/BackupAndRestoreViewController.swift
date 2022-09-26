@@ -107,7 +107,20 @@ extension BackupAndRestoreViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension BackupAndRestoreViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .normal, title: nil) { action, view, completion in
+            self.alert(title: Notice.deleteWarningTitle,
+                       message: Notice.deleteBackupWarningMessage,
+                       allowsCancel: true) { _ in
+                self.deleteBackupFile(named: self.backupFileNames[indexPath.row])
+                self.fetchBackupFiles()
+            }
+        }
+        
+        delete.image = UIImage(systemName: SFSymbol.trash)
+        
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
 }
 
 // MARK: -

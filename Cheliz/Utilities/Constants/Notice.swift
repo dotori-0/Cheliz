@@ -14,6 +14,7 @@ enum Notice {
     
     static let deleteWarningTitle = "정말 삭제하시겠습니까?"
     static let deleteWarningMessage = "삭제된 항목은 복구가 불가합니다."
+    static let deleteBackupWarningMessage = "삭제된 백업 파일은 복구가 불가합니다."
     static let deleteSucceeded = "성공적으로 삭제되었습니다."
     
     static let addSucceeded = "성공적으로 추가되었습니다."
