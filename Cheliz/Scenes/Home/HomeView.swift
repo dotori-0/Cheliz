@@ -25,11 +25,12 @@ class HomeView: BaseView {
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))
         configuration.cornerStyle = .capsule
         $0.configuration = configuration
-        
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOffset = .zero
-        $0.layer.shadowRadius = 12
-        $0.layer.shadowOpacity = 0.2
+
+//        $0.layer.shadowColor = UIColor.black.cgColor
+//        $0.layer.shadowOffset = .zero
+//        $0.layer.shadowRadius = 12
+//        $0.layer.shadowOpacity = 0.2
+        $0.addShadow(radius: 20, opacity: 0.5)
     }
 
     // MARK: - Initializers

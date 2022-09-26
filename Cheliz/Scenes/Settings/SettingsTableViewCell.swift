@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsTableViewCell: UITableViewCell {
+class SettingsTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let symbolImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -20,8 +20,8 @@ class SettingsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setUI()
-        setConstraints()
+//        setUI()
+//        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -29,13 +29,13 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     // MARK: - Design Methods
-    private func setUI() {
+    override func setUI() {
         [symbolImageView, titleLabel].forEach {
             contentView.addSubview($0)
         }
     }
     
-    private func setConstraints() {
+    override func setConstraints() {
         symbolImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(20)

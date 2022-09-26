@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
                                              withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         let homeVC = HomeViewController()
-//        let homeVC = SearchViewController()
+//        let homeVC = BackupAndRestoreViewController()
         let homeNC = UINavigationController(rootViewController: homeVC)
         
 //        let filmListSymbolImage = UIImage(systemName: "list.and.film",
@@ -33,7 +33,8 @@ class TabBarController: UITabBarController {
 //        filmListItem.imageInsets = UIEdgeInsets(top: 26, left: 0, bottom: -26, right: 0)
 //        homeNC.tabBarItem = filmListItem
         
-        let settingsVC = SettingsViewController()
+//        let settingsVC = SettingsViewController()
+        let settingsVC = BackupAndRestoreViewController()
         let settingsNC = UINavigationController(rootViewController: settingsVC)
         settingsNC.tabBarItem.image = UIImage(systemName: "gear",
                                               withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
@@ -42,7 +43,7 @@ class TabBarController: UITabBarController {
         // 두 가지 방법 모두 O
 //        setViewControllers([homeNC], animated: true)
         setViewControllers([watchedVC, homeNC, settingsNC], animated: true)
-        selectedIndex = 1
+        selectedIndex = 2
 //        viewControllers = [homeNC]
         
         // 클래스 자체가 UITabBarController 상속이기 때문에 tabBarController 접근 X

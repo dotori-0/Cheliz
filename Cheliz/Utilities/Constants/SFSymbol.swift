@@ -18,6 +18,8 @@ enum SFSymbol {
     static let trash = "trash.fill"
     static let addToList = "text.badge.plus"
     static let cloud = "cloud"
+    static let cloudFill = "cloud.fill"
+    static let file = "doc.text"
     static let globe = "globe.asia.australia.fill"
 //    static let globe = "globe"
     static let font = "textformat"

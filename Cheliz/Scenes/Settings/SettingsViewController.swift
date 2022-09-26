@@ -42,7 +42,7 @@ extension SettingsViewController: UITableViewDataSource {
         return 3
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> Stringç? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String {
         let section = SettingsSection(rawValue: section)
         switch section {
             case .data:
@@ -53,7 +53,7 @@ extension SettingsViewController: UITableViewDataSource {
                 return SettingsTitle.Header.design
             default:
                 print("titleForHeaderInSection - default")
-                return nil
+                return ""
         }
     }
     

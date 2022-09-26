@@ -14,6 +14,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setUI()
         setConstraints()
     }

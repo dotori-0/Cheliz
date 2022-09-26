@@ -37,24 +37,41 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     }
     
     let titleLabel = UILabel().then {
-//        label.font = UIFont.dongle(style: .Regular, size: 30)
 //        label.font = .systemFont(ofSize: 20)
-//        $0.font = UIFont.hyemin(style: .Bold, size: 16)  // == meringue 19
-//        $0.font = UIFont.barunpen(style: .Bold, size: 18)
+//        label.font = UIFont.dongle(style: .Regular, size: 30)
+        
+//        $0.font = UIFont.hyemin(style: .Bold, size: 16)  // == meringue 19  == barunpen 18.5
+//        $0.font = UIFont.hyemin(style: .Regular, size: 16)  // == meringue 19
+        
+//        $0.font = UIFont.barunpen(style: .Bold, size: 18.5)
+//        $0.font = UIFont.barunpen(style: .Regular, size: 18.5)
+        
         $0.font = UIFont.meringue(size: 19)
     }
     
     let releaseYearLabel = UILabel().then {
+//        $0.font = .systemFont(ofSize: 20)
 //        $0.font = UIFont.dongle(style: .Regular, size: 12)
-//        $0.font = .systemFont(ofSize: 20)
+        
 //        $0.font = UIFont.hyemin(style: .Bold, size: 12)  // == meringue 14
+//        $0.font = UIFont.hyemin(style: .Regular, size: 12)  // == meringue 14
+        
+//        $0.font = UIFont.barunpen(style: .Bold, size: 14)
 //        $0.font = UIFont.barunpen(style: .Regular, size: 14)
+        
         $0.font = UIFont.meringue(size: 14)
         $0.textColor = .systemGray
     }
     
     let mediaTypeLabel = UILabel().then {
+//        $0.font = .systemFont(ofSize: 20)
+        
+//        $0.font = UIFont.hyemin(style: .Bold, size: 12)
 //        $0.font = UIFont.hyemin(style: .Regular, size: 12)
+        
+//        $0.font = UIFont.barunpen(style: .Bold, size: 14)
+//        $0.font = UIFont.barunpen(style: .Regular, size: 14)
+        
         $0.font = UIFont.meringue(size: 14)
         $0.textColor = .systemGray
     }

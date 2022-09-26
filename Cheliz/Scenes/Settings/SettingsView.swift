@@ -8,6 +8,7 @@
 import UIKit
 
 class SettingsView: BaseView {
+    // MARK: - Properties
     let tableView = UITableView(frame: .zero, style: .insetGrouped).then {
         $0.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseIdentifier)
     }
