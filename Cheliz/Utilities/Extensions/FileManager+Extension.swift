@@ -146,4 +146,66 @@ extension BaseViewController {
             }
         }
     }
+    
+    func restore(with fileName: String) {
+        decompressBackupFile(named: fileName)
+        
+        guard let mediaArray = decodeJSON() else {
+            print("디코딩 오류")  // 👻 alert
+            return
+        }
+        
+        let repository = MediaRepository()
+        repository.replaceRealm(with: mediaArray) {
+            self.view.makeToast(Notice.restoreSucceeded,
+                                duration: 1,
+                                position: .center, style: self.toastStyle)
+        }
+    }
+    
+    func decompressBackupFile(named fileName: String) {
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return }
+        let backupFilePath = documentDirectoryPath.appendingPathComponent(fileName)
+        
+//        Zip.addCustomFileExtension("cheliz")
+        let isValidExtension = Zip.isValidFileExtension("cheliz")
+        print("isValidExtension: \(isValidExtension)")
+        
+        do {
+            try Zip.unzipFile(backupFilePath,
+                              destination: documentDirectoryPath,
+                              overwrite: true,
+                              password: nil, progress: { progress in
+                print("progress: \(progress)")  // 👻 progress view 보여 주기 - stoic 참고
+            }, fileOutputHandler: { unzippedFile in
+                print("unzippedFile: \(unzippedFile)")
+                // 👻 toast?
+            })
+        } catch {
+            // 👻 alert
+            print(error)
+        }
+    }
+    
+    func decodeJSON() -> [Media]? {
+        guard let documentDirectoryPath = fetchDocumentDirectoryPath() else { return nil }
+        
+        let jsonFilePath = documentDirectoryPath.appendingPathComponent("backup.json")
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        
+        do {
+            let jsonFileData = try Data(contentsOf: jsonFilePath)
+//            let media = try decoder.decode([Media].self, from: jsonFileData)
+            let media = try decoder.decode([Media].self, from: jsonFileData)
+            print(media)
+            return media
+        } catch {
+            // 👻 alert
+            print(error)
+        }
+        
+        return nil
+    }
 }

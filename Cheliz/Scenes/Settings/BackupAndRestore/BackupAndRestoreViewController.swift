@@ -28,6 +28,7 @@ class BackupAndRestoreViewController: BaseViewController {
         setTableView()
         fetchBackupFiles()
         print("🧃 \(backupFileNames.count)")
+        decodeJSON()
     }
     
     // MARK: - Setting Methods
@@ -105,10 +106,6 @@ extension BackupAndRestoreViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }
 
 // MARK: - UITableViewDelegate
@@ -126,6 +123,18 @@ extension BackupAndRestoreViewController: UITableViewDelegate {
         delete.image = UIImage(systemName: SFSymbol.trash)
         
         return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let backupFileName = backupFileNames[indexPath.row]
+        
+        alert(title: Notice.restoreTitle,
+              message: Notice.restoreMessage,
+              allowsCancel: true) { _ in
+            self.restore(with: backupFileName)
+        }
     }
 }
 

@@ -31,6 +31,7 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("🏡", #function)
         
 //        TMDBAPIManager.shared.fetchMultiSearchResults(query: "top-gun")
         
@@ -61,6 +62,7 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("🏡", #function)
         
 //        fetchRealm()
         sortAndFilter()
@@ -249,7 +251,6 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     @objc private func checkButtonClicked(sender: MediaPassableButton) {
-        print("🥶", #function)
         guard let media = sender.media else {
             print("Cannot find media in MediaPassableButton")  // 👻 alert
             return

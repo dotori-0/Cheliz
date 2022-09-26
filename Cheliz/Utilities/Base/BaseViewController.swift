@@ -28,7 +28,6 @@ class BaseViewController: UIViewController {
     }
     
     func setUI() {
-        print("Base", #function)
         view.backgroundColor = .systemBackground
         view.addSubview(backgroundImageView)
         

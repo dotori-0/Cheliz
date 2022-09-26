@@ -164,4 +164,18 @@ struct MediaRepository: RealmProtocol {
         
         return nil
     }
+    
+    func replaceRealm(with mediaArray: [Media], completionHandler: @escaping () -> Void) {
+        do {
+            try realm.write {
+                realm.deleteAll()
+                realm.add(mediaArray)
+                // 👻 completion handler
+                completionHandler()
+            }
+        } catch {
+            // 👻 error handler
+            print(error)
+        }
+    }
 }

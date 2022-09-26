@@ -105,12 +105,12 @@ class BackupAndRestoreView: BaseView {
         buttonsStackView.snp.makeConstraints { make in
             make.top.equalTo(backupFileLabel.snp.bottom).offset(20)
             make.width.equalToSuperview().multipliedBy(0.8)
-            print("🥶 width: \(buttonsStackView.frame.width)")  // 0.0
-            print("🥶 bounds.width: \(buttonsStackView.bounds.size.width)")
+//            print("🥶 width: \(buttonsStackView.frame.width)")  // 0.0
+//            print("🥶 bounds.width: \(buttonsStackView.bounds.size.width)")
 //            buttonsStackView.bounds.width
             make.height.equalTo(56)
             make.height.equalTo(buttonsStackView.snp.width).multipliedBy(0.17)  // width가 0.8일 때는 0.17
-            print("🥶 height: \(buttonsStackView.frame.size.height)")
+//            print("🥶 height: \(buttonsStackView.frame.size.height)")
             make.centerX.equalToSuperview()
         }
         
