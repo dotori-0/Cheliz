@@ -99,6 +99,22 @@ extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let section = SettingsSection(rawValue: indexPath.section)
+        switch section {
+            case .data:
+                transit(to: BackupAndRestoreViewController(), transitionStyle: .push)
+            case .language:
+                print("language")
+            case .design:
+                print("design")
+            default:
+                print("didSelectRowAt - default")
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate

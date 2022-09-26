@@ -33,8 +33,8 @@ class TabBarController: UITabBarController {
 //        filmListItem.imageInsets = UIEdgeInsets(top: 26, left: 0, bottom: -26, right: 0)
 //        homeNC.tabBarItem = filmListItem
         
-//        let settingsVC = SettingsViewController()
-        let settingsVC = BackupAndRestoreViewController()
+        let settingsVC = SettingsViewController()
+//        let settingsVC = BackupAndRestoreViewController()
         let settingsNC = UINavigationController(rootViewController: settingsVC)
         settingsNC.tabBarItem.image = UIImage(systemName: "gear",
                                               withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
