@@ -46,7 +46,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
 //        $0.font = UIFont.barunpen(style: .Bold, size: 18.5)
 //        $0.font = UIFont.barunpen(style: .Regular, size: 18.5)
         
-        $0.font = UIFont.meringue(size: 19)
+        $0.font = UIFont.meringue(size: 18)
     }
     
     let releaseYearLabel = UILabel().then {
@@ -82,7 +82,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         view.alignment = .leading
         view.distribution = .fillEqually
 //        view.spacing = 0
-//        view.backgroundColor = .systemYellow
+//        view.backgroundColor = .systemGreen
         return view
     }()
     
@@ -128,12 +128,16 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setConstraints() {
+//        checkButton.backgroundColor = .systemMint
+
         checkButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
 //            make.leading.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(8)
-            make.height.equalToSuperview().multipliedBy(0.4)
-            make.width.equalTo(checkButton.snp.height)
+//            make.height.equalToSuperview().multipliedBy(0.4)
+//            make.width.equalTo(checkButton.snp.height)
+            make.width.equalToSuperview().multipliedBy(0.1)
+            make.height.equalTo(checkButton.snp.width)
         }
         checkButton.setContentCompressionResistancePriority(.required, for: .horizontal)
 //        checkButton.setContentHuggingPriority(.required, for: .horizontal)
@@ -143,26 +147,72 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             make.leading.equalTo(checkButton.snp.trailing).offset(8)
             make.centerY.equalToSuperview()
 //            make.height.equalToSuperview().multipliedBy(0.8)
-            
+
             let screenHeight = UIScreen.main.bounds.height
             let imageHeight = screenHeight * 0.12
             make.height.equalTo(imageHeight)
+            make.height.equalToSuperview().multipliedBy(0.9)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
+
         }
-        
+
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.leading.equalTo(posterImageView.snp.trailing).offset(12)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalToSuperview().multipliedBy(0.65)
         }
-        
+
         separatorView.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+        
+//        print("🍒", UIScreen.main.bounds.width)
+//        // SE, 8, X: 375
+//        // 13 Pro Max: 428
+//
+//        checkButton.backgroundColor = .systemMint
+//
+//        checkButton.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+////            make.leading.equalToSuperview().offset(16)
+//            make.leading.equalToSuperview().offset(8)
+//            make.height.equalToSuperview().multipliedBy(0.4)
+//            make.width.equalTo(checkButton.snp.height)
+//        }
+//        checkButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+////        checkButton.setContentHuggingPriority(.required, for: .horizontal)
+//
+//
+//        stackView.snp.makeConstraints { make in
+//            make.centerY.equalToSuperview()
+////            make.leading.equalTo(posterImageView.snp.trailing).offset(12)
+//            make.width.equalToSuperview().multipliedBy(0.55)
+//            make.trailing.equalToSuperview().offset(-20)
+//            make.height.equalToSuperview().multipliedBy(0.65)
+//        }
+//
+//        posterImageView.snp.makeConstraints { make in
+//            make.leading.equalTo(checkButton.snp.trailing).offset(8)
+//            make.trailing.equalTo(stackView.snp.leading).offset(-12)
+//            make.centerY.equalToSuperview()
+//            make.height.equalTo(posterImageView.snp.width).multipliedBy(1.414)
+//
+////            let screenHeight = UIScreen.main.bounds.height
+////            let imageHeight = screenHeight * 0.12
+////            make.height.equalTo(imageHeight)
+////            make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
+//        }
+//
+//        separatorView.snp.makeConstraints { make in
+//            make.height.equalTo(1)
+//            make.width.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//            make.centerX.equalToSuperview()
+//        }
     }
     
     func setCheckButtonImage(watched: Bool) {

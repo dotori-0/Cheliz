@@ -12,8 +12,9 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let watchedVC = UIViewController()
-        watchedVC.tabBarItem.image = UIImage(systemName: "list.and.film",
+        let searchVC = SearchViewController()
+        let searchNC = UINavigationController(rootViewController: searchVC)
+        searchNC.tabBarItem.image = UIImage(systemName: "list.and.film",
                                              withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         let homeVC = HomeViewController()
@@ -42,7 +43,7 @@ class TabBarController: UITabBarController {
         
         // 두 가지 방법 모두 O
 //        setViewControllers([homeNC], animated: true)
-        setViewControllers([watchedVC, homeNC, settingsNC], animated: true)
+        setViewControllers([searchNC, homeNC, settingsNC], animated: true)
         selectedIndex = 1
 //        viewControllers = [homeNC]
         
