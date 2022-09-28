@@ -260,6 +260,9 @@ extension HomeViewController: UICollectionViewDataSource {
         homeView.collectionView.reloadData()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        transit(to: DetailViewController(), transitionStyle: .push)
+    }
 }
 
 // MARK: - UICollectionViewDelegate
