@@ -157,6 +157,17 @@ extension SearchViewController: UICollectionViewDataSource {
             self.alert(title: Notice.errorTitle,
                        message: Notice.errorInAddMessage)
         }
+        
+//        Record(id: <#T##ObjectId#>, watchCount: 0, watchedDate: [Date.now], rate: <#T##Double#>, watchedWith: <#T##String?#>, review: <#T##String?#>)
+//
+//        repository.add(review: ) {
+//            self.searchView.makeToast(Notice.addSucceeded,
+//                                      duration: 1,
+//                                      position: .center, style: self.toastStyle)
+//        } errorHandler: {
+//            self.alert(title: Notice.errorTitle,
+//                       message: Notice.errorInAddMessage)
+//        }
 
     }
 }

@@ -12,6 +12,7 @@ import SwiftyJSON
 struct ParsingManager {
     private init() { }
     
+    /*
     // guard let
     static func parseDataGuardLet(_ data: Data) -> [MediaModel?] {
         let json = JSON(data)
@@ -88,6 +89,7 @@ struct ParsingManager {
         
         return mediaArray
     }
+    */
         
 //        static func parseDataToRealmModel(_ data: Data) -> [Media] {
         static func parseDataToRealmModel(_ data: Data) -> ([Media], Int) {
@@ -98,8 +100,10 @@ struct ParsingManager {
     //        print("🐱", JSONMovieAndTvOnly)
             
             let mediaArray: [Media] = JSONMovieAndTvOnly.map { result in
-                let mediaType = result["media_type"].stringValue
-                let title = mediaType == "movie" ? result["title"].stringValue : result["name"].stringValue
+                let mediaType = result["media_type"].stringValue == MediaType.movie.string ? MediaType.movie.rawValue : MediaType.tv.rawValue
+//                let title = mediaType == "movie" ? result["title"].stringValue : result["name"].stringValue
+//                let title = mediaType == MediaType.movie.rawValue ? result["title"].stringValue : result["name"].stringValue
+                let title = result[mediaType == MediaType.movie.rawValue ? "title" : "name"].stringValue
                 
                 let genreIds = List<Int>()
 //                if let genreIdsArray = result["genre_ids"].arrayValue as? [Int] {
@@ -108,16 +112,16 @@ struct ParsingManager {
                 let genreIdsArray = result["genre_ids"].arrayValue.map { $0.intValue }
                 genreIds.append(objectsIn: genreIdsArray)
                 
-                let releaseDate = mediaType == "movie" ? result["release_date"].stringValue : result["first_air_date"].stringValue
+//                let releaseDate = mediaType == "movie" ? result["release_date"].stringValue : result["first_air_date"].stringValue
+                let releaseDate = result[mediaType == MediaType.movie.rawValue ? "release_date" : "first_air_date"].stringValue
                 
                 let mediaRealmModel = Media(TMDBid: result["id"].intValue,
                                             title: title,
-//                                            title: result["title"].stringValue,
-                                            genreIds: genreIds,
                                             mediaType: mediaType,
+                                            genreIds: genreIds,
+                                            releaseDate: releaseDate,
                                             backdropPath: result["backdrop_path"].string,
-                                            posterPath: result["poster_path"].string,
-                                            releaseDate: releaseDate)
+                                            posterPath: result["poster_path"].string)
                 
     //            return mediaModel
                 return mediaRealmModel

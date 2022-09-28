@@ -7,6 +7,13 @@
 
 import Foundation
 
-enum MediaType: String {
-    case movie, tv
+enum MediaType: Int {
+    case movie
+    case tv
+    
+    var string: String {
+        get {
+            return "\(self)"
+        }
+    }
 }

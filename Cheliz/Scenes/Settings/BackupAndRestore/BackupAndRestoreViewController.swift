@@ -100,6 +100,7 @@ extension BackupAndRestoreViewController: UITableViewDataSource {
         backgroundView.backgroundColor = .selectedBackgroundColor
         cell.selectedBackgroundView = backgroundView
         
+        // ❔ cell 함수로 넘기기?
 //        cell.fileNameLabel.text = "파일 이름"
         cell.fileNameLabel.text = backupFileNames[indexPath.row]
         cell.fileSizeLabel.text = "파일 크기"

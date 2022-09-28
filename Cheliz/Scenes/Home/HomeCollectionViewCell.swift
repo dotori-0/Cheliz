@@ -93,6 +93,13 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     
 
     // MARK: - Initializers
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        posterImageView.image = nil
+        // 👻 다른 것들도 nil 처리를 해야 할지?
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -187,6 +194,6 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         
         titleLabel.text = media.title
         releaseYearLabel.text = media.releaseDate
-        mediaTypeLabel.text = media.mediaType
+        mediaTypeLabel.text = MediaType(rawValue: media.mediaType)?.string  // 👻 gaurd-let 처리
     }
 }

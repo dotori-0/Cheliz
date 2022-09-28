@@ -53,6 +53,12 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - Initializers
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        posterImageView.image = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -125,7 +131,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
 
         titleLabel.text = media.title
         releaseYearLabel.text = media.releaseDate
-        mediaTypeLabel.text = media.mediaType
+        mediaTypeLabel.text = MediaType(rawValue: media.mediaType)?.string  // 👻 gaurd-let 처리
     }
     
     // MARK: - Action Methods

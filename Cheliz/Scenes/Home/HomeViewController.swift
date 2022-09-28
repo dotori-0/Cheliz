@@ -269,8 +269,8 @@ extension HomeViewController: UICollectionViewDelegate {
     
 }
 
-struct HomeViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        TabBarController().toPreview()
-    }
-}
+//struct HomeViewController_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeViewController().toPreview()
+//    }
+//}

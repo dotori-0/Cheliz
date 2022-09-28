@@ -40,6 +40,19 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
+    func add(review: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+        do {
+            try realm.write {
+                realm.add(review)
+            }
+            completionHandler()
+            print(fetch())
+        } catch  {
+            print(error)
+            errorHandler()
+        }
+    }
+    
     func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
             try realm.write {

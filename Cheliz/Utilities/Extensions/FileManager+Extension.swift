@@ -197,7 +197,6 @@ extension BaseViewController {
         
         do {
             let jsonFileData = try Data(contentsOf: jsonFilePath)
-//            let media = try decoder.decode([Media].self, from: jsonFileData)
             let media = try decoder.decode([Media].self, from: jsonFileData)
             print(media)
             return media
