@@ -14,14 +14,9 @@ class BackupFileTableViewCell: BaseTableViewCell {
         $0.contentMode = .scaleAspectFit
     }
     
-    let fileNameLabel = UILabel().then {
-        $0.font = .meringue(size: 15)
-    }
+    let fileNameLabel = CustomLabel(textSize: 15)
     
-    let fileSizeLabel = UILabel().then {
-        $0.font = .meringue(size: 14)
-        $0.textColor = .systemGray3
-    }
+    let fileSizeLabel = CustomLabel(textSize: 14, textColor: .systemGray3)
     
     lazy var stackView = UIStackView(arrangedSubviews: [fileNameLabel, fileSizeLabel]).then {
         $0.axis = .vertical

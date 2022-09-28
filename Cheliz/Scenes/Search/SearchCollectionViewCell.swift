@@ -14,26 +14,16 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
 //    var addErrorHandler: (() -> Void)?
 //    var addCompletionHandler: (() -> Void)?
     
-    let posterImageView = PosterImageView().then {
-        $0.backgroundColor = .tintColor
-    }
+    let posterImageView = PosterImageView()
+//        .then {
+//        $0.backgroundColor = .tintColor
+//    }
+  
+    let titleLabel = CustomLabel(textSize: 19)
     
-    let titleLabel = UILabel().then {
-//        $0.font = UIFont.hyemin(style: .Bold, size: 16)
-        $0.font = UIFont.meringue(size: 19)
-    }
-    
-    let releaseYearLabel = UILabel().then {
-//        $0.font = UIFont.hyemin(style: .Bold, size: 12)
-        $0.font = UIFont.meringue(size: 14)
-        $0.textColor = .systemGray
-    }
-    
-    let mediaTypeLabel = UILabel().then {
-//        $0.font = UIFont.hyemin(style: .Regular, size: 12)
-        $0.font = UIFont.meringue(size: 14)
-        $0.textColor = .systemGray
-    }
+    let releaseYearLabel = CustomLabel(textSize: 14)
+  
+    let mediaTypeLabel = CustomLabel(textSize: 14, textColor: .systemGray)
     
     lazy var stackView = UIStackView(arrangedSubviews: [titleLabel, releaseYearLabel, mediaTypeLabel]).then {
         $0.axis = .vertical

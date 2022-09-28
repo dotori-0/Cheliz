@@ -12,9 +12,8 @@ class SettingsTableViewCell: BaseTableViewCell {
     let symbolImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
-    let titleLabel = UILabel().then {
-        $0.font = .meringue(size: 18)
-    }
+    
+    let titleLabel = CustomLabel(textSize: 18)
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -84,10 +84,11 @@ class SearchViewController: BaseViewController {
                 self.totalPages = data.1
             }
             
-            let titles = data.0.map { media in
-                media.title
-            }
-            print(titles)
+            // 타이틀만 출력하기
+//            let titles = data.0.map { media in
+//                media.title
+//            }
+//            print(titles)
             
             print("searchResults.count: \(self.searchResults.count)")
 //            self.totalPages = data.1

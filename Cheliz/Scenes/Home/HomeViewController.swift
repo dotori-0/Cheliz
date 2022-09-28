@@ -81,8 +81,6 @@ class HomeViewController: BaseViewController {
         super.setUI()
         
         setNavigationItem()
-        
-//        toastStyle.messageFont = .meringue(size: 15)
     }
     
     override func setConstraints() {

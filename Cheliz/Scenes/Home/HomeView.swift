@@ -10,14 +10,11 @@ import UIKit
 class HomeView: BaseView {
     // MARK: - Properties
     var deleteCompletion: ((Int) -> Void)?
-//    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init()).then {
-//        $0.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.reuseIdentifier)
-//    }
-    let collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-        view.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.reuseIdentifier)
-        return view
-    }()
+    
+    let collectionView = UICollectionView(frame: .zero,
+                                          collectionViewLayout: UICollectionViewFlowLayout.init()).then {
+        $0.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.reuseIdentifier)
+    }
     
     let searchButton = UIButton().then {
         var configuration = UIButton.Configuration.filled()
@@ -26,11 +23,7 @@ class HomeView: BaseView {
         configuration.cornerStyle = .capsule
         $0.configuration = configuration
 
-//        $0.layer.shadowColor = UIColor.black.cgColor
-//        $0.layer.shadowOffset = .zero
-//        $0.layer.shadowRadius = 12
-//        $0.layer.shadowOpacity = 0.2
-        $0.addShadow(radius: 20, opacity: 0.5)
+        $0.addShadow(radius: 20, opacity: 0.4)
     }
 
     // MARK: - Initializers

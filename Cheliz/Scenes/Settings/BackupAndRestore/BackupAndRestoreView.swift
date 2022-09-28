@@ -20,20 +20,15 @@ class BackupAndRestoreView: BaseView {
         $0.addShadow(radius: 60, opacity: 0.4)
     }
     
-    let backupInfoLabel = UILabel().then {
+    let backupInfoLabel = CustomLabel(textSize: 13, textColor: .secondaryLabel).then {
         $0.text = Notice.backupAndRestoreInfo
-        $0.font = .meringue(size: 13)
-//        $0.font = .systemFont(ofSize: 13)
         $0.numberOfLines = 0
         $0.textAlignment = .left
-        $0.textColor = .secondaryLabel
-//        $0.backgroundColor = .systemMint
         $0.sizeToFit()
     }
     
-    let backupFileLabel = UILabel().then {
+    let backupFileLabel = CustomLabel(textSize: 17).then {
         $0.text = Notice.backupFile
-        $0.font = .meringue(size: 17)
     }
     
 //    var buttonConfiguration: UIButton.Configuration = {

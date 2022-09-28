@@ -18,10 +18,6 @@ class SearchView: BaseView {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
         $0.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.reuseIdentifier)
     }
-//
-//    let testLabel = UILabel().then {
-//        $0.text = "TEST"
-//    }
 
     // MARK: - Life Cycle
     override init(frame: CGRect) {

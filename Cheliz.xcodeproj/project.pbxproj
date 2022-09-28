@@ -19,6 +19,10 @@
 		0A22A82328D2CC07002D2C34 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22A82228D2CC07002D2C34 /* UIViewController+Extension.swift */; };
 		0A31E08828E2E53C00D0C79B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E08728E2E53C00D0C79B /* Record.swift */; };
 		0A31E08C28E3463200D0C79B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E08B28E3463200D0C79B /* Person.swift */; };
+		0A31E09328E4A42100D0C79B /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E09228E4A42100D0C79B /* DetailViewController.swift */; };
+		0A31E09528E4A45100D0C79B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E09428E4A45100D0C79B /* DetailView.swift */; };
+		0A31E09728E4A53100D0C79B /* MediaInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E09628E4A53100D0C79B /* MediaInfoHeaderView.swift */; };
+		0A31E09928E4AB2900D0C79B /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E09828E4AB2900D0C79B /* CustomLabel.swift */; };
 		0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */; };
 		0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */; };
 		0A3F32FD28CB4B7500B51DEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F32FB28CB4B7500B51DEA /* Main.storyboard */; };
@@ -90,6 +94,10 @@
 		0A22A82228D2CC07002D2C34 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		0A31E08728E2E53C00D0C79B /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		0A31E08B28E3463200D0C79B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		0A31E09228E4A42100D0C79B /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		0A31E09428E4A45100D0C79B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		0A31E09628E4A53100D0C79B /* MediaInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfoHeaderView.swift; sourceTree = "<group>"; };
+		0A31E09828E4AB2900D0C79B /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		0A3F32F228CB4B7500B51DEA /* Cheliz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheliz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +212,16 @@
 				0A31E08B28E3463200D0C79B /* Person.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		0A31E09128E4A3B600D0C79B /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				0A31E09228E4A42100D0C79B /* DetailViewController.swift */,
+				0A31E09428E4A45100D0C79B /* DetailView.swift */,
+				0A31E09628E4A53100D0C79B /* MediaInfoHeaderView.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 		0A3F32E928CB4B7500B51DEA = {
@@ -321,6 +339,7 @@
 				0A8AA9B628CF239100EB2AF8 /* HomeViewController.swift */,
 				0A8AA9D228CF624B00EB2AF8 /* HomeCollectionViewCell.swift */,
 				0A8AA9D428CF64A400EB2AF8 /* HomeView.swift */,
+				0A31E09128E4A3B600D0C79B /* Details */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -354,6 +373,7 @@
 				0AB10D3F28DA4069007033E2 /* MediaPassableButton.swift */,
 				0A439C7428E05A400032A687 /* PosterImageView.swift */,
 				0A439CAC28E1899F0032A687 /* BackupAndRestoreButton.swift */,
+				0A31E09828E4AB2900D0C79B /* CustomLabel.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -487,7 +507,9 @@
 				0A439CAF28E18E950032A687 /* BackupFileTableViewCell.swift in Sources */,
 				0A439CBE28E1EB5C0032A687 /* DateFormatterHelper.swift in Sources */,
 				0A439CB328E19D9F0032A687 /* Shadow+Extension.swift in Sources */,
+				0A31E09528E4A45100D0C79B /* DetailView.swift in Sources */,
 				0AB10D4028DA4069007033E2 /* MediaPassableButton.swift in Sources */,
+				0A31E09328E4A42100D0C79B /* DetailViewController.swift in Sources */,
 				0AF8837328D39DC0008A4B51 /* MediaType.swift in Sources */,
 				0A8AA9CC28CF2D3800EB2AF8 /* UIFont+Extension.swift in Sources */,
 				0A8AA9D328CF624B00EB2AF8 /* HomeCollectionViewCell.swift in Sources */,
@@ -497,6 +519,7 @@
 				0AB10D3028D75BD8007033E2 /* RealmKey.swift in Sources */,
 				0A8AA9BD28CF24FE00EB2AF8 /* BaseView.swift in Sources */,
 				0A439C7528E05A400032A687 /* PosterImageView.swift in Sources */,
+				0A31E09928E4AB2900D0C79B /* CustomLabel.swift in Sources */,
 				0AB10D4428DBB65F007033E2 /* UserDefaultsHelper.swift in Sources */,
 				0AF8837128D33CFD008A4B51 /* ParsingManager.swift in Sources */,
 				0AB10D3228D76A87007033E2 /* Alert+Extension.swift in Sources */,
@@ -508,6 +531,7 @@
 				0A22A7FB28D0D6F1002D2C34 /* TabBarController.swift in Sources */,
 				0A439CB528E1A8410032A687 /* UIColor+Extension.swift in Sources */,
 				0A22A80228D0ED80002D2C34 /* Transition+Extension.swift in Sources */,
+				0A31E09728E4A53100D0C79B /* MediaInfoHeaderView.swift in Sources */,
 				0A439CA928E1837A0032A687 /* BackupAndRestoreViewController.swift in Sources */,
 				0A8AA9D128CF622900EB2AF8 /* BaseCollectionViewCell.swift in Sources */,
 				0AB10D4228DB4371007033E2 /* UIImage+Extension.swift in Sources */,

@@ -10,8 +10,6 @@ import Kingfisher
 
 class HomeCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-//    var media: Media?
-    
     let checkButton = MediaPassableButton()//.then {
 //        var configuration = UIButton.Configuration.plain()
 //        configuration.image = UIImage(systemName: "circle",
@@ -32,49 +30,16 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         return configuration
     }()
 
-    let posterImageView = PosterImageView().then {
-        $0.backgroundColor = .tintColor.withAlphaComponent(0.5)
-    }
+    let posterImageView = PosterImageView()
+//        .then {
+//        $0.backgroundColor = .tintColor.withAlphaComponent(0.5)
+//    }
     
-    let titleLabel = UILabel().then {
-//        label.font = .systemFont(ofSize: 20)
-//        label.font = UIFont.dongle(style: .Regular, size: 30)
-        
-//        $0.font = UIFont.hyemin(style: .Bold, size: 16)  // == meringue 19  == barunpen 18.5
-//        $0.font = UIFont.hyemin(style: .Regular, size: 16)  // == meringue 19
-        
-//        $0.font = UIFont.barunpen(style: .Bold, size: 18.5)
-//        $0.font = UIFont.barunpen(style: .Regular, size: 18.5)
-        
-        $0.font = UIFont.meringue(size: 18)
-    }
+    let titleLabel = CustomLabel(textSize: 18)
     
-    let releaseYearLabel = UILabel().then {
-//        $0.font = .systemFont(ofSize: 20)
-//        $0.font = UIFont.dongle(style: .Regular, size: 12)
-        
-//        $0.font = UIFont.hyemin(style: .Bold, size: 12)  // == meringue 14
-//        $0.font = UIFont.hyemin(style: .Regular, size: 12)  // == meringue 14
-        
-//        $0.font = UIFont.barunpen(style: .Bold, size: 14)
-//        $0.font = UIFont.barunpen(style: .Regular, size: 14)
-        
-        $0.font = UIFont.meringue(size: 14)
-        $0.textColor = .systemGray
-    }
+    let releaseYearLabel = CustomLabel(textSize: 14, textColor: .systemGray)
     
-    let mediaTypeLabel = UILabel().then {
-//        $0.font = .systemFont(ofSize: 20)
-        
-//        $0.font = UIFont.hyemin(style: .Bold, size: 12)
-//        $0.font = UIFont.hyemin(style: .Regular, size: 12)
-        
-//        $0.font = UIFont.barunpen(style: .Bold, size: 14)
-//        $0.font = UIFont.barunpen(style: .Regular, size: 14)
-        
-        $0.font = UIFont.meringue(size: 14)
-        $0.textColor = .systemGray
-    }
+    let mediaTypeLabel = CustomLabel(textSize: 14, textColor: .systemGray)
     
     lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [titleLabel, releaseYearLabel, mediaTypeLabel])
@@ -133,7 +98,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         checkButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
 //            make.leading.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(8)
+            make.leading.equalToSuperview().offset(12)
 //            make.height.equalToSuperview().multipliedBy(0.4)
 //            make.width.equalTo(checkButton.snp.height)
             make.width.equalToSuperview().multipliedBy(0.1)
@@ -151,7 +116,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             let screenHeight = UIScreen.main.bounds.height
             let imageHeight = screenHeight * 0.12
             make.height.equalTo(imageHeight)
-            make.height.equalToSuperview().multipliedBy(0.9)
+            make.height.equalToSuperview().multipliedBy(0.85)
             make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
 
         }
@@ -223,21 +188,6 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - Internal Methods
-//    func showSavedMedia() {
-//        guard let media = media else {
-//            return
-//        }
-//
-//        if let posterPath = media.posterPath {
-//            let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
-//            posterImageView.kf.setImage(with: url)
-//        }
-//
-//        titleLabel.text = media.title
-//        releaseYearLabel.text = media.releaseDate
-//        mediaTypeLabel.text = media.mediaType
-//    }
-    
     func showSavedMedia(_ media: Media) {
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
