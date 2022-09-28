@@ -16,13 +16,15 @@ final class Media: Object, Codable {
     @Persisted var mediaType: Int      // 미디어 타입(movie/tv)(필수)    // 👻 Int로 바꾸기
     @Persisted var genreIds: List<Int>    // 장르 ID 배열                 // 추후 구현
     @Persisted var releaseDate: String    // 개봉일(필수)
+    @Persisted var runtime: Int?          // 런타임(옵셔널)
     @Persisted var backdropPath: String?  // backdrop 이미지 path(옵셔널)  // 나라마다 다름
     @Persisted var posterPath: String?    // poster 이미지 path(옵셔널)    // 나라마다 다름
     @Persisted var watched: Bool          // 시청 여부(필수)
     @Persisted var watchCount: Int        // 시청 횟수(필수)               // 추후 구현
-    @Persisted var rate: Double?
-    @Persisted var records: List<Record>
-    @Persisted var notes: String?
+    @Persisted var rate: Double?          // 평점(옵셔널)
+    @Persisted var records: List<Record>  // 기록(옵셔널)
+    @Persisted var notes: String?         // 메모(옵셔널)(영화 하나에 1 개의 메모)
+    // 런타임 컬럼 만들기
     
     convenience init(TMDBid: Int,
                      title: String,
@@ -38,12 +40,13 @@ final class Media: Object, Codable {
         self.mediaType = mediaType
         self.genreIds = genreIds
         self.releaseDate = releaseDate
+//        self.runtime
         self.backdropPath = backdropPath
         self.posterPath = posterPath
         self.watched = false
         self.watchCount = 0
 //        self.rate
-        self.records = List<Record>()  // 주석처리?
+//        self.records = List<Record>()  // 주석처리? -> 주석처리해도 똑같이 들어감
 //        self.notes
     }
 
