@@ -135,7 +135,9 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             make.height.equalToSuperview().multipliedBy(0.4)
             make.width.equalTo(checkButton.snp.height)
         }
-        
+        checkButton.setContentCompressionResistancePriority(.required, for: .horizontal)
+//        checkButton.setContentHuggingPriority(.required, for: .horizontal)
+
         posterImageView.snp.makeConstraints { make in
 //            make.leading.equalTo(checkButton.snp.trailing).offset(16)
             make.leading.equalTo(checkButton.snp.trailing).offset(8)
