@@ -18,6 +18,8 @@ class DetailViewController: BaseViewController {
     lazy var headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
 //    var headerView = MediaInfoHeaderView()
     
+    private let repository = MediaRepository()
+    
     var media: Media?
     var directors: [Credit] = []
     var cast: [Credit] = []
@@ -69,6 +71,7 @@ class DetailViewController: BaseViewController {
     private func setTableView() {
         detailView.tableView.dataSource = self
         detailView.tableView.delegate = self
+        detailView.tableView.allowsSelection = false
     }
     
     private func setHeaderView() {
@@ -107,9 +110,9 @@ class DetailViewController: BaseViewController {
 //            self?.castItemHeight = self?.castHeight()
 //            self?.setTableView()
 //            self?.detailView.tableView.updateHeaderViewHeight()
-            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
-                                                               directorHeight: self?.directorItemHeight ?? 0,
-                                                               castHeight: self?.castItemHeight ?? 0)
+//            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
+//                                                               directorHeight: self?.directorItemHeight ?? 0,
+//                                                               castHeight: self?.castItemHeight ?? 0)
             self?.detailView.tableView.reloadData()
             
             self?.headerView.directorCollectionView.reloadData()
@@ -120,7 +123,13 @@ class DetailViewController: BaseViewController {
 
 // MARK: - UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section != 0 { return nil }
+        
         guard let media = media else {
             print("No media received")
             alert(message: "미디어 연결에 실패했습니다.")
@@ -152,8 +161,7 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 1000
-//        return headerView.frame.height
+        if section != 0 { return 40 }
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
         
@@ -174,33 +182,87 @@ extension DetailViewController: UITableViewDataSource {
         return headerViewHeight
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let section = RecordSection(rawValue: section)
+        switch section {
+            case .watchCount:
+                return "본 회수"
+            case .record:
+                return "기록"
+            case .notes:
+                return "메모"
+            case .none:
+                print("titleForHeaderInSection None")
+        }
+        
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        let section = RecordSection(rawValue: section)
+        switch section {
+            case .watchCount:
+                return 1
+            case .record:
+                return 2
+            case .notes:
+                return 1
+            case .none:
+                return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 56
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let headerView = tableView.tableHeaderView as? MediaInfoHeaderView else {
-//            print("못 찾아!")
-//            headerView.infoContainerView.setGradient()
-//            return UITableViewCell()
-//        }
+        let section = RecordSection(rawValue: indexPath.section)
+        switch section {
+            case .watchCount:
+                guard let watchCountCell = tableView.dequeueReusableCell(withIdentifier: WatchCountTableViewCell.reuseIdentifier,
+                                                               for: indexPath) as? WatchCountTableViewCell else {
+                    print("Cannot find WatchCountTableViewCell")
+                    return UITableViewCell()
+                }
+                
+                guard let media = media else {
+                    print("No media received")
+                    alert(message: "미디어 연결에 실패했습니다.")
+                    return UITableViewCell()
+                }
+                watchCountCell.setCountLabel(as: media.watchCount)
+                
+                watchCountCell.stepper.media = media
+                watchCountCell.stepper.value = Double(media.watchCount)
+                watchCountCell.stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
+                
+                return watchCountCell
+            case .record:
+                return UITableViewCell()
+            case .notes:
+                return UITableViewCell()
+            case .none:
+                print("cellForRowAt None")
+        }
         
+        return UITableViewCell()
+    }
+    
+    @objc private func stepperChanged(sender: MediaPassableStepper) {
+        print(sender.value)
+
+        guard let media = sender.media else {
+            print("Cannot find media in MediaPassableStepper")  // 👻 alert
+            return
+        }
         
-        let cell = UITableViewCell()
-        cell.backgroundColor = .systemMint
-        cell.backgroundColor = .systemBackground.withAlphaComponent(0.5)
-        cell.backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)
+        repository.changeWatchCount(of: media, to: Int(sender.value)) {
+            self.alert(title: Notice.errorTitle, message: Notice.errorInWatchCountChangeMessage)
+        }
         
-        //        backgroundColor = .systemMint  // 동작 O
-        //        backgroundColor = .systemGroupedBackground.withAlphaComponent(0.5)
-        //        backgroundColor = .systemGroupedBackground
-//                backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)  // 이걸로!
-        //        backgroundColor = .tertiarySystemGroupedBackground
-        
-        
-        
-        
-        return cell
+        detailView.tableView.reloadSections(IndexSet(integer: RecordSection.watchCount.rawValue), with: .fade)
+        // 👻 애니메이션 없는 게 더 나은지?
     }
 }
 
@@ -216,14 +278,11 @@ extension DetailViewController: UICollectionViewDataSource {
 //    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 100
-//        return section == 0 ? 1 : 10
-//        return 10
         return collectionView == headerView.directorCollectionView ? directors.count : cast.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("🐳")
+//        print("🐳")
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier, for: indexPath) as? CreditsCollectionViewCell else {
             print("Cannot find CreditsCollectionViewCell")
             return UICollectionViewCell()
@@ -238,11 +297,11 @@ extension DetailViewController: UICollectionViewDataSource {
         }
         
         if collectionView == headerView.directorCollectionView {
-            print("🐻‍❄️🐻‍❄️")
+//            print("🐻‍❄️🐻‍❄️")
         } else if collectionView == headerView.castCollectionView {
-            print("🐹🐹")
+//            print("🐹🐹")
         } else  {
-            print("🐰🐰")
+//            print("🐰🐰")
         }
         
         DispatchQueue.main.async {

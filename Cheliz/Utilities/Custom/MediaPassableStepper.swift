@@ -1,13 +1,13 @@
 //
-//  MediaPassableButton.swift
+//  MediaPassableStepper.swift
 //  Cheliz
 //
-//  Created by SC on 2022/09/21.
+//  Created by SC on 2022/10/02.
 //
 
 import UIKit
 
-class MediaPassableButton: UIButton {
+class MediaPassableStepper: UIStepper {
     var media: Media?
     
     // MARK: - Initializers

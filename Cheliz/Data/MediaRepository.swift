@@ -121,7 +121,18 @@ struct MediaRepository: RealmProtocol {
         do {
             try realm.write {
                 media.watched.toggle()
-                media.watchCount = media.watchCount == 0 ? 1 : 0
+//                media.watchCount = media.watchCount == 0 ? 1 : 0
+            }
+        } catch {
+            print(error)
+            errorHandler()
+        }
+    }
+    
+    func changeWatchCount(of media: Media, to count: Int, errorHandler: @escaping() -> Void) {
+        do {
+            try realm.write {
+                media.watchCount = count
             }
         } catch {
             print(error)

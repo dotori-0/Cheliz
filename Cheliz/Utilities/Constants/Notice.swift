@@ -18,6 +18,8 @@ enum Notice {
     static let deleteSucceeded = "성공적으로 삭제되었습니다."
     
     static let addSucceeded = "성공적으로 추가되었습니다."
+    
+    // MARK: - Error
     static let errorTitle = "오류 안내"
     static let tryAgain = "다시 시도해 주세요."
     static let errorInAddMessage = "추가에 오류가 발생했습니다.\n\(tryAgain)"     // addFailedMessage?
@@ -28,6 +30,8 @@ enum Notice {
     
     static let sameMediaAlreadyExistsTitle = "미디어 중복 안내"
     static let sameMediaAlreadyExistsMessage = "이미 리스트에 추가되어 있는 미디어입니다.\n다른 미디어를 선택해 주세요."
+    
+    static let errorInWatchCountChangeMessage = "본 회수 변경에 오류가 발생했습니다.\n\(tryAgain)"
     
     // MARK: - Backup & Restore
     static let backupFile = "백업 파일"

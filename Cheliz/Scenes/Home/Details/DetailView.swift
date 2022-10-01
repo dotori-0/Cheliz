@@ -10,7 +10,7 @@ import UIKit
 class DetailView: BaseView {
     // MARK: - Properties
     let tableView = UITableView(frame: .zero, style: .insetGrouped).then {
-        $0.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseIdentifier)
+        $0.register(WatchCountTableViewCell.self, forCellReuseIdentifier: WatchCountTableViewCell.reuseIdentifier)
 //        $0.backgroundColor = .systemBackground
 //        $0.backgroundColor = .systemMint
         
