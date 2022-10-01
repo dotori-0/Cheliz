@@ -112,10 +112,19 @@ extension SettingsViewController: UITableViewDataSource {
                 transit(to: BackupAndRestoreViewController(), transitionStyle: .push)
             case .language:
                 print("language")
+                self.view.makeToast("준비중입니다.",
+                                    duration: 1,
+                                    position: .center, style: self.toastStyle)
             case .design:
                 print("design")
+                self.view.makeToast("준비중입니다.",
+                                    duration: 1,
+                                    position: .center, style: self.toastStyle)
             default:
                 print("didSelectRowAt - default")
+                self.view.makeToast("준비중입니다.",
+                                    duration: 1,
+                                    position: .center, style: self.toastStyle)
         }
     }
 }

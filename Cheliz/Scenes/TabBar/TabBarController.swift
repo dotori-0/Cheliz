@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
         
         let searchVC = SearchViewController()
         let searchNC = UINavigationController(rootViewController: searchVC)
-        searchNC.tabBarItem.image = UIImage(systemName: "list.and.film",
+        searchNC.tabBarItem.image = UIImage(systemName: SFSymbol.magnifyingGlass,
                                              withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         let homeVC = HomeViewController()
@@ -23,7 +23,7 @@ class TabBarController: UITabBarController {
         
 //        let filmListSymbolImage = UIImage(systemName: "list.and.film",
 //                                          withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 24)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 3)
-        homeNC.tabBarItem.image = UIImage(systemName: "checklist",
+        homeNC.tabBarItem.image = UIImage(systemName: SFSymbol.checklist,
                                           withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
 //        homeNC.tabBarItem.image = UIImage(named: "bank")
 //        homeNC.tabBarItem.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)
@@ -37,7 +37,7 @@ class TabBarController: UITabBarController {
         let settingsVC = SettingsViewController()
 //        let settingsVC = BackupAndRestoreViewController()
         let settingsNC = UINavigationController(rootViewController: settingsVC)
-        settingsNC.tabBarItem.image = UIImage(systemName: "gear",
+        settingsNC.tabBarItem.image = UIImage(systemName: SFSymbol.settings,
                                               withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
         
         

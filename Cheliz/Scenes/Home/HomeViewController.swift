@@ -105,8 +105,8 @@ class HomeViewController: BaseViewController {
     }
     
     @objc private func searchButtonClicked() {
-        let searchVC = SearchViewController()
-        transit(to: searchVC, transitionStyle: .push)
+//        let searchVC = SearchViewController()
+//        transit(to: searchVC, transitionStyle: .push)
     }
     
     private func setDeleteAction() {
@@ -238,7 +238,7 @@ extension HomeViewController: UICollectionViewDataSource {
 //        cell.titleLabel.text = "탑건: 매버릭 (Top Gun: Maverick)"
 //        cell.releaseYearLabel.text = "\(Date.now)"
 
-//        cell.media = media[indexPath.row]   // 👻 이렇게 한 번만 보내 주는 게 나을지?
+//        cell.media = media[indexPath.row]   // ❔👻 이렇게 한 번만 보내 주는 게 나을지?
         let media = media[indexPath.row]
         cell.showSavedMedia(media)
         cell.setCheckButtonImage(watched: media.watched)
@@ -261,7 +261,10 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        transit(to: DetailViewController(), transitionStyle: .push)
+        let detailVC = DetailViewController()
+        detailVC.media = media[indexPath.row]
+        
+        transit(to: detailVC, transitionStyle: .push)
     }
 }
 

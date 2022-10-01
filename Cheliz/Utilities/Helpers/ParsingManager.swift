@@ -132,4 +132,68 @@ struct ParsingManager {
 //        return mediaArray
         return (mediaArray, totalPages)
     }
+    
+    static func parseDetails(_ data: Data) -> (Int?, String?) {
+        // runtime, overview
+        let json = JSON(data)
+        
+        let runtime = json["runtime"].int       // runtime: integer or null
+        let overview = json["overview"].string  // overview: string or null
+
+        return (runtime, overview)
+    }
+    
+    // 👻 한 언어로 한 번 장르를 받아오면 userdefaults에 저장할 수 있도록 구현하기
+    static func parseGenres(_ data: Data) -> [Int: String] {
+        let json = JSON(data)
+        
+//        let genres: [Int: String] = json["genres"].arrayValue.map {
+//            $0["id"].intValue: $0["name"].stringValue
+//            Dictionary(<#T##S#>, uniquingKeysWith: <#T##(Value, Value) -> Value#>)
+//
+//        }
+        
+//        {
+//            "id": 28,
+//            "name": "액션"
+//        },
+        
+        let genres = json["genres"].arrayValue.reduce(into: [Int: String]()) { // partialResult, <#JSON#> in
+            $0[$1["id"].intValue] =  $1["name"].stringValue
+        }
+        
+        return genres
+    }
+    
+    static func parseCredits(_ data: Data) -> [[Credit]] {
+        let json = JSON(data)
+        let crewArray = json["crew"].arrayValue
+        let castArray = json["cast"].arrayValue
+        
+        
+        // movie - "job": "Director"
+        // tv - "job": "Executive Producer"
+        
+        let directorsArray = crewArray.filter {
+            $0["job"].stringValue == "Director"
+        }  // could be [] if tv
+        
+        let directors: [Credit] = directorsArray.map {
+            let profilePath = $0["profile_path"].string
+            let name = $0["name"].stringValue
+            let job = $0["job"].stringValue
+            
+            return Credit(profilePath: profilePath, name: name, character: job)
+        }  // could be [] if tv
+        
+        let cast: [Credit] = castArray.map {
+            let profilePath = $0["profile_path"].string
+            let name = $0["name"].stringValue
+            let character = $0["character"].stringValue
+            
+            return Credit(profilePath: profilePath, name: name, character: character)
+        }
+        
+        return [directors, cast]
+    }
 }

@@ -10,6 +10,15 @@ import UIKit
 class DetailViewController: BaseViewController {
     // MARK: - Properties
     let detailView = DetailView()
+//    let headerView = MediaInfoHeaderView()
+    lazy var directorItemHeight = setDirectorItemHeight()
+    lazy var castItemHeight = setCastItemHeight()
+    lazy var headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
+    var media: Media?
+    var directors: [Credit] = []
+    var cast: [Credit] = []
+    
+    var itemHeight: CGFloat = 0
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -20,6 +29,26 @@ class DetailViewController: BaseViewController {
         super.viewDidLoad()
         
         setTableView()
+        fetchCredits()
+        setHeaderView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        headerView.infoContainerView.setGradient()  // 다크모드/라이트모드와는 상관이 없고 스와이프하다가 스와이프 취소하면 나타남
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        headerView.infoContainerView.setGradient()  // 뷰에 들어갔을 때 바로 나오지만 시간차가 조금 있음
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+//        headerView.infoContainerView.setGradient()  // 다크모드/라이트모드 전환시에만 됨
     }
     
     // MARK: - Setting Methods
@@ -27,24 +56,106 @@ class DetailViewController: BaseViewController {
         detailView.tableView.dataSource = self
         detailView.tableView.delegate = self
     }
+    
+    private func setHeaderView() {
+        headerView.directorsExist = !directors.isEmpty
+        headerView.castExists = !cast.isEmpty
+        headerView.setConstraintsOfCollectionViews()
+    }
+    
+//    private func setCreditsCollectionView() {
+//        detailView.
+//    }
+    
+    // MARK: - Design Methods
+    override func setUI() {
+        super.setUI()
+    }
+    
+    // MARK: - Networking Methods
+    private func fetchCredits() {
+        guard let media = media else {
+            print("No media received")
+            alert(message: "미디어 연결에 실패했습니다.")
+            return
+        }
+        
+        TMDBAPIManager.shared.fetchCredits(mediaType: MediaType(rawValue: media.mediaType) ?? .movie, mediaID: media.TMDBid) { [weak self] data in
+            let credits = ParsingManager.parseCredits(data)
+            self?.directors = credits[0]
+            self?.cast = credits[1]
+            self?.setHeaderView()
+            self?.headerView.directorCollectionView.reloadData()
+            self?.headerView.castCollectionView.reloadData()
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return MediaInfoHeaderView()
+        guard let media = media else {
+            print("No media received")
+            alert(message: "미디어 연결에 실패했습니다.")
+            return UIView()
+        }
+        
+//        let headerView = MediaInfoHeaderView()
+//        headerView.infoContainerView.setGradient()  // X
+        headerView.showMediaInfo(media: media)
+        
+        headerView.directorCollectionView.dataSource = self
+        headerView.directorCollectionView.delegate = self
+        headerView.castCollectionView.dataSource = self
+        headerView.castCollectionView.delegate = self
+        
+        // 동작 X
+//        DispatchQueue.main.async {
+//            self.headerView.directorCollectionView.snp.makeConstraints { make in
+//                make.height.equalTo(self.directorItemHeight)
+//            }
+//
+//            self.headerView.castCollectionView.snp.makeConstraints { make in
+//                make.height.equalTo(self.castItemHeight)
+//            }
+//        }
+        
+        
+        
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 600
+        return 1000
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+//        guard let headerView = tableView.tableHeaderView as? MediaInfoHeaderView else {
+//            print("못 찾아!")
+//            headerView.infoContainerView.setGradient()
+//            return UITableViewCell()
+//        }
+        
+        
+        let cell = UITableViewCell()
+        cell.backgroundColor = .systemMint
+        cell.backgroundColor = .systemBackground.withAlphaComponent(0.5)
+        cell.backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)
+        
+        //        backgroundColor = .systemMint  // 동작 O
+        //        backgroundColor = .systemGroupedBackground.withAlphaComponent(0.5)
+        //        backgroundColor = .systemGroupedBackground
+//                backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)  // 이걸로!
+        //        backgroundColor = .tertiarySystemGroupedBackground
+        
+        
+        
+        
+        return cell
     }
 }
 
@@ -53,3 +164,291 @@ extension DetailViewController: UITableViewDelegate {
     
 }
 
+// MARK: - UICollectionViewDataSource
+extension DetailViewController: UICollectionViewDataSource {
+//    func numberOfSections(in collectionView: UICollectionView) -> Int {
+//        return 1
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 100
+//        return section == 0 ? 1 : 10
+//        return 10
+        return collectionView == headerView.directorCollectionView ? directors.count : cast.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("🐳")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier, for: indexPath) as? CreditsCollectionViewCell else {
+            print("Cannot find CreditsCollectionViewCell")
+            return UICollectionViewCell()
+        }
+        
+        if collectionView == headerView.directorCollectionView {
+            cell.showCreditInfo(of: directors[indexPath.item])
+            itemHeight = itemHeight(collectionView: headerView.directorCollectionView)
+        } else {
+            cell.showCreditInfo(of: cast[indexPath.item])
+            itemHeight = itemHeight(collectionView: headerView.castCollectionView)
+        }
+        
+        if collectionView == headerView.directorCollectionView {
+            print("🐻‍❄️🐻‍❄️")
+        } else if collectionView == headerView.castCollectionView {
+            print("🐹🐹")
+        } else  {
+            print("🐰🐰")
+        }
+        
+        DispatchQueue.main.async {
+            cell.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+        }
+        
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension DetailViewController: UICollectionViewDelegate {
+    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // item 개수가 0이 아니어야만 호출이 되는듯?
+        print("🌊")
+
+        // 🐋 -> 🌊 -> 🐳
+        // setCollectionViewLayout() -> sizeForItemAt -> cellForItemAt
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier, for: indexPath) as? CreditsCollectionViewCell else {
+            print("Cannot find CreditsCollectionViewCell")
+            return .zero
+        }
+
+        // ❔map은 $0가 없다면 아예 뛰어 넘는 구조인지?
+        let directorNames = directors.map { $0.name }
+        let longestDirectorName = directorNames.reduce("") { $0.count > $1.count ? $0 : $1 }
+//        print("🐠", longestDirectorName)
+        let directorJob = "Director"
+
+        let castNames = cast.map { $0.name }
+        let longestCastName = castNames.reduce("") { $0.count > $1.count ? $0 : $1 }
+
+        let characterNames = cast.map { $0.character }
+        let longestCharacterName = characterNames.reduce("") { $0.count > $1.count ? $0 : $1 }
+//        print("🦭", longestCharacterName)
+        
+        // 방법 1
+        if collectionView == headerView.directorCollectionView {
+            cell.nameLabel.text = longestDirectorName
+            cell.characterLabel.text = directorJob
+        } else {
+            cell.nameLabel.text = longestCastName
+            cell.characterLabel.text = longestCharacterName
+        }
+
+        cell.nameLabel.sizeToFit()
+        cell.characterLabel.sizeToFit()
+
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth / 5
+        let profileImageViewHeight = itemWidth * 0.9
+        
+        // 셀 너비를 지정하고
+        cell.contentView.snp.makeConstraints { make in
+            make.width.equalTo(itemWidth)
+        }
+        
+        // 셀 내부 객체들 레이아웃 다시 잡아도
+        cell.setConstraints()
+
+        let itemHeight = profileImageViewHeight
+                        + cell.spacingBetweenProfileImageAndName
+                        + cell.nameLabel.frame.height
+                        + cell.spacingBetweenNameAndCharacter
+                        + cell.characterLabel.frame.height
+        
+        
+//        print("🍒", profileImageViewHeight)
+//        print("🍒", cell.spacingBetweenProfileImageAndName)
+//        print("🍒", cell.nameLabel.frame.height)  // 16.5  // 레이블 텍스트가 1 줄일 때의 높이만 계산됨
+//        print("🍒", cell.spacingBetweenNameAndCharacter)
+//        print("🍒", cell.characterLabel.frame.height)  // 16.0 항상 같은 숫자만 찍힘
+
+//        return CGSize(width: itemWidth, height: itemHeight)
+        
+        
+        // 방법 4
+        // 방법 1과 마찬가지로 레이블 텍스트가 1 줄일 때의 높이만 계산됨
+        cell.contentView.snp.makeConstraints { make in
+            make.width.equalTo(itemWidth)
+        }
+        let cellSize = cell.itemSizeFittedWithContents(name: collectionView == headerView.directorCollectionView ? longestDirectorName : longestCastName,
+                                                       character: collectionView == headerView.directorCollectionView ? directorJob : longestCharacterName)
+//        return cellSize
+        
+        // 방법 5
+//        let itemSize
+        
+        // 방법 6 - O
+        func heightForLabel(text: String, textSize: CGFloat) -> CGFloat {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: itemWidth, height: CGFloat.greatestFiniteMagnitude))
+            label.numberOfLines = 0
+            label.lineBreakMode = NSLineBreakMode.byWordWrapping
+            label.font = UIFont.meringue(size: textSize)
+            label.text = text
+            label.sizeToFit()
+            
+            return label.frame.height
+        }
+        
+        // 위 1, 4, 5 방법과 아래 커멘트는, (가장 긴 이름 + 가장 긴 배역)의 높이로 계산하는 문제 있음
+        // (이름 + 배역) 높이 중 가장 큰 값으로 지정해야 함
+//        let nameLabelHeight = heightForLabel(text: collectionView == headerView.directorCollectionView ? longestDirectorName : longestCastName,
+//                                             textSize: 14)
+//        let characterLabelHeight = heightForLabel(text: collectionView == headerView.directorCollectionView ? directorJob : longestCharacterName,
+//                                                  textSize: 13.5)
+        let directorJobs = directors.map { $0.character }
+        let directorNameHeights = directorNames.map { heightForLabel(text: $0, textSize: 14) }
+        let directorJobHeights = directorJobs.map { heightForLabel(text: $0, textSize: 13.5) }
+        let directorLabelsHeights = zip(directorNameHeights, directorJobHeights).map(+)
+        let maxDirectorLabelsHeight = directorLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+//        directorLabelsHeight.reduce(0) { partialResult, <#CGFloat#> in
+//            <#code#>
+//        }
+//
+//        directorLabelsHeight.reduce(into: <#T##Result#>) { partialResult, <#CGFloat#> in
+//            <#code#>
+//        }
+        
+        let castNameHeights = castNames.map { heightForLabel(text: $0, textSize: 14) }
+        let characterNameHeights = characterNames.map { heightForLabel(text: $0, textSize: 13.5) }
+        let castLabelsHeights = zip(castNameHeights, characterNameHeights).map(+)
+        let maxCastLabelsHeight = castLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+        
+        let itemHeight2 = profileImageViewHeight
+                        + cell.spacingBetweenProfileImageAndName
+//                        + nameLabelHeight
+                        + cell.spacingBetweenNameAndCharacter
+//                        + characterLabelHeight
+                        + (collectionView == headerView.directorCollectionView ? maxDirectorLabelsHeight : maxCastLabelsHeight)
+//                        + maxDirectorLabelsHeight
+        
+        if collectionView == headerView.directorCollectionView {
+            print("🐻‍❄️", itemHeight2)  // ❔ 절대 안 찍힘 -> 찍힘 . . .
+        } else if collectionView == headerView.castCollectionView {
+            print("🐹", itemHeight2)
+        } else  {
+            print("🐰", itemHeight2)
+        }
+        
+        DispatchQueue.main.async {
+            cell.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+        }
+        
+        return CGSize(width: itemWidth, height: itemHeight2)
+    }
+    
+    private func itemHeight(collectionView: UICollectionView) -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth / 5
+        let profileImageViewHeight = itemWidth * 0.9
+        
+        let directorNames = directors.map { $0.name }
+        let directorJobs = directors.map { $0.character }
+        let castNames = cast.map { $0.name }
+        let characterNames = cast.map { $0.character }
+ 
+        let directorNameHeights = directorNames.map { heightForLabel(text: $0, textSize: 14) }
+        let directorJobHeights = directorJobs.map { heightForLabel(text: $0, textSize: 13.5) }
+        let directorLabelsHeights = zip(directorNameHeights, directorJobHeights).map(+)
+        let maxDirectorLabelsHeight = directorLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+
+        let castNameHeights = castNames.map { heightForLabel(text: $0, textSize: 14) }
+        let characterNameHeights = characterNames.map { heightForLabel(text: $0, textSize: 13.5) }
+        let castLabelsHeights = zip(castNameHeights, characterNameHeights).map(+)
+        let maxCastLabelsHeight = castLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+        
+        let itemHeight = profileImageViewHeight
+                        + CreditsCollectionViewCell().spacingBetweenProfileImageAndName
+                        + CreditsCollectionViewCell().spacingBetweenNameAndCharacter
+                        + (collectionView == headerView.directorCollectionView ? maxDirectorLabelsHeight : maxCastLabelsHeight)
+        
+        return itemHeight
+    }
+    
+    private func setDirectorItemHeight() -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth / 5
+        let profileImageViewHeight = itemWidth * 0.9
+        
+        let directorNames = directors.map { $0.name }
+        let directorJobs = directors.map { $0.character }
+//        let castNames = cast.map { $0.name }
+//        let characterNames = cast.map { $0.character }
+ 
+        let directorNameHeights = directorNames.map { heightForLabel(text: $0, textSize: 14) }
+        let directorJobHeights = directorJobs.map { heightForLabel(text: $0, textSize: 13.5) }
+        let directorLabelsHeights = zip(directorNameHeights, directorJobHeights).map(+)
+        let maxDirectorLabelsHeight = directorLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+
+//        let castNameHeights = castNames.map { heightForLabel(text: $0, textSize: 14) }
+//        let characterNameHeights = characterNames.map { heightForLabel(text: $0, textSize: 13.5) }
+//        let castLabelsHeights = zip(castNameHeights, characterNameHeights).map(+)
+//        let maxCastLabelsHeight = castLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+        
+        let itemHeight = profileImageViewHeight
+                        + CreditsCollectionViewCell().spacingBetweenProfileImageAndName
+                        + CreditsCollectionViewCell().spacingBetweenNameAndCharacter
+                        + maxDirectorLabelsHeight
+        
+        return itemHeight
+    }
+    
+    private func setCastItemHeight() -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth / 5
+        let profileImageViewHeight = itemWidth * 0.9
+        
+//        let directorNames = directors.map { $0.name }
+//        let directorJobs = directors.map { $0.character }
+        let castNames = cast.map { $0.name }
+        let characterNames = cast.map { $0.character }
+ 
+//        let directorNameHeights = directorNames.map { heightForLabel(text: $0, textSize: 14) }
+//        let directorJobHeights = directorJobs.map { heightForLabel(text: $0, textSize: 13.5) }
+//        let directorLabelsHeights = zip(directorNameHeights, directorJobHeights).map(+)
+//        let maxDirectorLabelsHeight = directorLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+
+        let castNameHeights = castNames.map { heightForLabel(text: $0, textSize: 14) }
+        let characterNameHeights = characterNames.map { heightForLabel(text: $0, textSize: 13.5) }
+        let castLabelsHeights = zip(castNameHeights, characterNameHeights).map(+)
+        let maxCastLabelsHeight = castLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
+        
+        let itemHeight = profileImageViewHeight
+                        + CreditsCollectionViewCell().spacingBetweenProfileImageAndName
+                        + CreditsCollectionViewCell().spacingBetweenNameAndCharacter
+                        + maxCastLabelsHeight
+        
+        return itemHeight
+    }
+    
+    private func heightForLabel(text: String, textSize: CGFloat) -> CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth / 5
+//        let profileImageViewHeight = itemWidth * 0.9
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: itemWidth, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont.meringue(size: textSize)
+        label.text = text
+        label.sizeToFit()
+        
+        return label.frame.height
+    }
+}

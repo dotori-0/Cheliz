@@ -62,7 +62,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         posterImageView.image = nil
-        // 👻 다른 것들도 nil 처리를 해야 할지?
+        // ❔👻 다른 것들도 nil 처리를 해야 할지?
     }
     
     override init(frame: CGRect) {

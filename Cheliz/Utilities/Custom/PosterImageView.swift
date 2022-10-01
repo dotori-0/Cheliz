@@ -22,6 +22,7 @@ class PosterImageView: UIImageView {
         contentMode = .scaleAspectFill
         layer.cornerRadius = 10
         clipsToBounds = true
-        backgroundColor = .tintColor.withAlphaComponent(0.2)
+        backgroundColor = .tintColor.withAlphaComponent(0.1)
+        image = .paleIcon
     }
 }

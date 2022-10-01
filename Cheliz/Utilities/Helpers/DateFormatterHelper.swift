@@ -7,15 +7,15 @@
 
 import Foundation
 
-class DateFormatterHelper {
-    private init() { }
-    
-    static let standard = DateFormatter()
-    
-    static func setFormatter() {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "yyyy.MM.dd_HH:mm:ss"
-        standard.dateFormat = "yyyy.MM.dd_HH:mm:ss"
-        print(standard.string(from: Date.now))
-    }
-}
+//class DateFormatterHelper {
+//    private init() { }
+//
+//    static let standard = DateFormatter()
+//
+//    static func setFormatter() {
+////        let formatter = DateFormatter()
+////        formatter.dateFormat = "yyyy.MM.dd_HH:mm:ss"
+//        standard.dateFormat = "yyyy.MM.dd_HH:mm:ss"
+//        print(standard.string(from: Date.now))
+//    }
+//}

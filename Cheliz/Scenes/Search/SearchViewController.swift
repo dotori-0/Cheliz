@@ -13,7 +13,6 @@ class SearchViewController: BaseViewController {
     private let searchView = SearchView()
     
     private var searchText = ""
-//    private var searchResults: [MediaModel] = []
     private var searchResults: [Media] = []
     private var page = 1
     private var totalPages = 0
@@ -43,6 +42,7 @@ class SearchViewController: BaseViewController {
     
     private func setSearchController() {
         searchView.searchController.searchResultsUpdater = self
+//        searchView.searchController.searchBar.placeholder = Notice.cancel
     }
     
     // MARK: - Design Methods
@@ -60,6 +60,7 @@ class SearchViewController: BaseViewController {
         
 //        navigationController?.navigationBar.topItem?.title = ""  // nil: Back, 리터럴: 앞 화면의 타이틀까지 바뀜
 //        navigationItem.backButtonTitle = "?"
+//        searchView.searchController.hidesNavigationBarDuringPresentation = false
     }
     
     // MARK: - Action Methods
@@ -110,13 +111,6 @@ extension SearchViewController: UICollectionViewDataSource {
         }
         
         let media = searchResults[indexPath.row]
-        
-//        cell.media = media
-//        cell.addCompletionHandler = { self.searchView.makeToast(Notice.addSucceeded,
-//                                                                duration: 1,
-//                                                                position: .center) }
-//        cell.addErrorHandler = { self.alert(title: Notice.errorTitle,
-//                                            message: Notice.errorInAddMessage) }
         
         cell.addButton.media = media
         cell.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)

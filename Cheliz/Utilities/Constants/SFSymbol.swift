@@ -8,6 +8,11 @@
 import Foundation
 
 enum SFSymbol {
+    // Tab Bar
+    static let filmList = "list.and.film"
+    static let checklist = "checklist"
+    static let settings = "gear"
+    
     static let eye = "eye"
     static let eyeSlash = "eye.slash"
     static let sort = "arrow.up.arrow.down"

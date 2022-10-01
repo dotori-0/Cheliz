@@ -10,8 +10,8 @@ import UIKit
 class SearchView: BaseView {
     // MARK: - Properties
     let searchController = UISearchController(searchResultsController: nil).then {
-        $0.searchBar.placeholder = Notice.search
-        $0.searchBar.setValue(Notice.search, forKey: "cancelButtonText")
+        $0.searchBar.placeholder = Notice.searchMedia
+        $0.searchBar.setValue(Notice.cancel, forKey: "cancelButtonText")
         $0.searchBar.becomeFirstResponder()
     }
     
