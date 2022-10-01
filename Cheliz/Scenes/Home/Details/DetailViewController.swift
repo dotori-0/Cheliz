@@ -13,7 +13,11 @@ class DetailViewController: BaseViewController {
 //    let headerView = MediaInfoHeaderView()
     lazy var directorItemHeight = setDirectorItemHeight()
     lazy var castItemHeight = setCastItemHeight()
+//    var directorItemHeight: CGFloat = 0
+//    var castItemHeight: CGFloat = 0
     lazy var headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
+//    var headerView = MediaInfoHeaderView()
+    
     var media: Media?
     var directors: [Credit] = []
     var cast: [Credit] = []
@@ -27,10 +31,14 @@ class DetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setTableView()
         fetchCredits()
-        setHeaderView()
+        
+//        directorItemHeight = setDirectorItemHeight()
+//        castItemHeight = setCastItemHeight()
+        
+//        setHeaderView()
+        setTableView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +53,16 @@ class DetailViewController: BaseViewController {
 //        headerView.infoContainerView.setGradient()  // 뷰에 들어갔을 때 바로 나오지만 시간차가 조금 있음
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        detailView.tableView.updateHeaderViewHeight()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
 //        headerView.infoContainerView.setGradient()  // 다크모드/라이트모드 전환시에만 됨
+        detailView.tableView.updateHeaderViewHeight()
     }
     
     // MARK: - Setting Methods
@@ -58,14 +72,12 @@ class DetailViewController: BaseViewController {
     }
     
     private func setHeaderView() {
+//        headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
+        
         headerView.directorsExist = !directors.isEmpty
         headerView.castExists = !cast.isEmpty
         headerView.setConstraintsOfCollectionViews()
     }
-    
-//    private func setCreditsCollectionView() {
-//        detailView.
-//    }
     
     // MARK: - Design Methods
     override func setUI() {
@@ -85,6 +97,21 @@ class DetailViewController: BaseViewController {
             self?.directors = credits[0]
             self?.cast = credits[1]
             self?.setHeaderView()
+            if let directorsHeight = self?.setDirectorItemHeight() {
+                self?.directorItemHeight = directorsHeight
+            }
+//            self?.directorItemHeight = self?.setDirectorItemHeight() ?? 0
+            if let castHeight = self?.setCastItemHeight() {
+                self?.castItemHeight = castHeight
+            }
+//            self?.castItemHeight = self?.castHeight()
+//            self?.setTableView()
+//            self?.detailView.tableView.updateHeaderViewHeight()
+            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
+                                                               directorHeight: self?.directorItemHeight ?? 0,
+                                                               castHeight: self?.castItemHeight ?? 0)
+            self?.detailView.tableView.reloadData()
+            
             self?.headerView.directorCollectionView.reloadData()
             self?.headerView.castCollectionView.reloadData()
         }
@@ -121,12 +148,30 @@ extension DetailViewController: UITableViewDataSource {
 //        }
         
         
-        
         return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1000
+//        return 1000
+//        return headerView.frame.height
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        
+//        let backdropHeight = headerView.backdropImageView.frame.height
+        let backdropHeight = screenHeight * 0.25
+        let overlapHeight = 30.0
+        let posterHeight = screenWidth * 0.3 * 1.5
+        let overviewHeight = heightForOverview()
+        let space = 24.0
+        
+        let headerViewHeight = backdropHeight - overlapHeight + posterHeight + overviewHeight + directorItemHeight + castItemHeight + space * 4  // 아래에 여백을 더하기 위해 space 1 번 더 추가
+        print("backdropHeight: \(backdropHeight)")
+        print("directorItemHeight: \(directorItemHeight)")
+        print("overviewHeight: \(overviewHeight)")
+        print("castItemHeight: \(castItemHeight)")
+        print("headerViewHeight: \(headerViewHeight)")
+        
+        return headerViewHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -337,8 +382,20 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
                         + (collectionView == headerView.directorCollectionView ? maxDirectorLabelsHeight : maxCastLabelsHeight)
 //                        + maxDirectorLabelsHeight
         
+        let directorsHeight = profileImageViewHeight
+                            + cell.spacingBetweenProfileImageAndName
+                            + cell.spacingBetweenNameAndCharacter
+                            + maxDirectorLabelsHeight
+        
+        let castHeight = profileImageViewHeight
+                        + cell.spacingBetweenProfileImageAndName
+                        + cell.spacingBetweenNameAndCharacter
+                        + maxCastLabelsHeight
+        
         if collectionView == headerView.directorCollectionView {
             print("🐻‍❄️", itemHeight2)  // ❔ 절대 안 찍힘 -> 찍힘 . . .
+            print("🐻‍❄️ directorsHeight:", directorsHeight)
+            print("🐻‍❄️ castHeight:", castHeight)
         } else if collectionView == headerView.castCollectionView {
             print("🐹", itemHeight2)
         } else  {
@@ -349,6 +406,8 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             cell.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
             cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
         }
+        
+        headerView.updateConstraintsOfCollectionViews(directorsHeight: directorsHeight, castHeight: castHeight)
         
         return CGSize(width: itemWidth, height: itemHeight2)
     }
@@ -418,6 +477,9 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 //        let directorJobs = directors.map { $0.character }
         let castNames = cast.map { $0.name }
         let characterNames = cast.map { $0.character }
+        
+        print("🐱", profileImageViewHeight)
+        print("🐶", castNames)
  
 //        let directorNameHeights = directorNames.map { heightForLabel(text: $0, textSize: 14) }
 //        let directorJobHeights = directorJobs.map { heightForLabel(text: $0, textSize: 13.5) }
@@ -450,5 +512,60 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         label.sizeToFit()
         
         return label.frame.height
+    }
+    
+    private func heightForOverview() -> CGFloat {
+        guard let media = media else {
+            print("No media received")
+            alert(message: "미디어 연결에 실패했습니다.")
+            return 60
+        }
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let labelWidth = screenWidth - (32 + 24)
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: labelWidth, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = UIFont.meringue(size: 14)
+        label.text = media.overview
+        label.sizeToFit()
+        
+        return label.frame.height
+    }
+}
+
+extension UITableView {
+    func updateHeaderViewHeight() {
+        if let header = self.tableHeaderView {
+            let newSize = header.systemLayoutSizeFitting(CGSize(width: self.bounds.width, height: 0))
+            header.frame.size.height = newSize.height
+        }
+    }
+    
+    func updateHeaderViewHeight2(overviewHeight: CGFloat, directorHeight: CGFloat, castHeight: CGFloat) {
+        if let header = self.tableHeaderView {
+            let screenWidth = UIScreen.main.bounds.width
+            let screenHeight = UIScreen.main.bounds.height
+            
+    //        let backdropHeight = headerView.backdropImageView.frame.height
+            let backdropHeight = screenHeight * 0.25
+            let overlapHeight = 30.0
+            let posterHeight = screenWidth * 0.3 * 1.5
+            let overviewHeight = overviewHeight
+            let space = 24.0
+            
+            let headerViewHeight = backdropHeight + overlapHeight + posterHeight + overviewHeight + directorHeight + castHeight + space * 4
+            
+            print("✌🏻")
+            print("backdropHeight: \(backdropHeight)")
+            print("directorItemHeight: \(directorHeight)")
+            print("overviewHeight: \(overviewHeight)")
+            print("castItemHeight: \(castHeight)")
+            print("headerViewHeight: \(headerViewHeight)")
+            
+//            let newSize = header.systemLayoutSizeFitting(CGSize(width: self.bounds.width, height: 0))
+            header.frame.size.height = headerViewHeight
+        }
     }
 }

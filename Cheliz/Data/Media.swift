@@ -30,6 +30,7 @@ final class Media: Object, Codable {
                      title: String,
                      mediaType: Int,
                      genreIds: List<Int>,
+                     overview: String?,
                      releaseDate: String,
                      backdropPath: String?,
                      posterPath: String?) {
@@ -39,7 +40,7 @@ final class Media: Object, Codable {
         self.title = title
         self.mediaType = mediaType
         self.genreIds = genreIds
-//        self.overview
+        self.overview = overview
         self.releaseDate = releaseDate
 //        self.runtime
         self.backdropPath = backdropPath

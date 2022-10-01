@@ -112,6 +112,8 @@ struct ParsingManager {
                 let genreIdsArray = result["genre_ids"].arrayValue.map { $0.intValue }
                 genreIds.append(objectsIn: genreIdsArray)
                 
+                let overview = result["overview"].string
+                
 //                let releaseDate = mediaType == "movie" ? result["release_date"].stringValue : result["first_air_date"].stringValue
                 let releaseDate = result[mediaType == MediaType.movie.rawValue ? "release_date" : "first_air_date"].stringValue
                 
@@ -119,6 +121,7 @@ struct ParsingManager {
                                             title: title,
                                             mediaType: mediaType,
                                             genreIds: genreIds,
+                                            overview: overview,
                                             releaseDate: releaseDate,
                                             backdropPath: result["backdrop_path"].string,
                                             posterPath: result["poster_path"].string)
@@ -141,6 +144,15 @@ struct ParsingManager {
         let overview = json["overview"].string  // overview: string or null
 
         return (runtime, overview)
+    }
+    
+    static func parseDetails2(_ data: Data) -> Int? {
+        // runtime, overview
+        let json = JSON(data)
+        
+        let runtime = json["runtime"].int       // runtime: integer or null
+
+        return runtime
     }
     
     // 👻 한 언어로 한 번 장르를 받아오면 userdefaults에 저장할 수 있도록 구현하기

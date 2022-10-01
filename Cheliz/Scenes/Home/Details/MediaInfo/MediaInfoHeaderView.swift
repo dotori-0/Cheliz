@@ -53,19 +53,14 @@ class MediaInfoHeaderView: BaseView {
     let directorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
         $0.register(CreditsCollectionViewCell.self, forCellWithReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier)
         $0.backgroundColor = .clear
-        $0.backgroundColor = .systemGray3
+//        $0.backgroundColor = .systemGray3
     }
     
     let castCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
         $0.register(CreditsCollectionViewCell.self, forCellWithReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier)
         $0.backgroundColor = .clear
-        $0.backgroundColor = .systemGray5
+//        $0.backgroundColor = .systemGray5
     }
-    
-//    let creditsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
-//        $0.register(CreditsCollectionViewCell.self, forCellWithReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier)
-//        $0.backgroundColor = .systemMint
-//    }
     
     // 1
     let gradientLayer = CAGradientLayer()
@@ -79,16 +74,16 @@ class MediaInfoHeaderView: BaseView {
 //        setUI()
     }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        print("🍒 MediaHeaderView init")
-//
-////        infoContainerView.setGradient()
-//
-//        // 2
-//        gradientLayer.colors = [UIColor.systemPink.cgColor, UIColor.clear.cgColor]
-//        infoContainerView.layer.addSublayer(gradientLayer)
-//    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        print("🍒 MediaHeaderView init")
+
+//        infoContainerView.setGradient()
+
+        // 2
+        gradientLayer.colors = [UIColor.systemPink.cgColor, UIColor.clear.cgColor]
+        infoContainerView.layer.addSublayer(gradientLayer)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -104,11 +99,8 @@ class MediaInfoHeaderView: BaseView {
     
     // MARK: - Design Methods
     override func setUI() {
-//        titleLabel.text = "타이틀"
-//        titleLabel.backgroundColor = .systemYellow
-//        releaseDateAndRuntimeLabel.backgroundColor = .systemGreen
-//        genresLabel.backgroundColor = .systemOrange
-        overviewLabel.backgroundColor = .systemIndigo
+//        backgroundColor = .systemYellow
+//        overviewLabel.backgroundColor = .systemIndigo
         
 //        infoContainerView.layer.borderColor = UIColor.label.cgColor
 //        infoContainerView.layer.borderWidth = 0.5
@@ -235,6 +227,7 @@ class MediaInfoHeaderView: BaseView {
         overviewLabel.snp.makeConstraints { make in
             make.leading.equalTo(posterImageView.snp.leading)
             make.top.equalTo(posterImageView.snp.bottom).offset(24)
+//            make.top.equalTo(genresLabel.snp.bottom).offset(40)
             make.trailing.equalToSuperview().offset(-24)
         }
  
@@ -277,7 +270,20 @@ class MediaInfoHeaderView: BaseView {
         }
     }
     
-    
+    func updateConstraintsOfCollectionViews(directorsHeight: CGFloat, castHeight: CGFloat) {
+        if directorsExist {
+            directorCollectionView.snp.updateConstraints { make in
+                make.height.equalTo(directorsHeight)
+            }
+        }
+        
+        if castExists {
+            castCollectionView.snp.updateConstraints { make in
+                make.height.equalTo(castHeight)
+            }
+        }
+    }
+
     
     func setConstraintsOfCollectionViews2() {  // setConstraintsOfCollectionViews()랑 비교했을 때 어느 게 더 나은 코드인지?
         if directorsExist {
@@ -425,6 +431,7 @@ class MediaInfoHeaderView: BaseView {
         fetchDetails(of: media)
         genresLabel.text = ""
         
+        overviewLabel.text = media.overview  // overview 처음에 받아오는 것으로 수정 후 추가
         
         fetchGenres(of: media)
 //        media.genreIds.forEach {
@@ -447,9 +454,23 @@ class MediaInfoHeaderView: BaseView {
     private func fetchDetails(of media: Media) {
         print("🤍 MediaHeaderView fetchDetails")
         TMDBAPIManager.shared.fetchDetails(mediaType: MediaType(rawValue: media.mediaType) ?? .movie, mediaID: media.TMDBid) { data in
-            let runtimeAndOverview = ParsingManager.parseDetails(data)
+//            let runtimeAndOverview = ParsingManager.parseDetails(data)
+//
+//            if let runtime = runtimeAndOverview.0 {
+//                if self.releaseDateAndRuntimeLabel.text == "" {
+//                    self.releaseDateAndRuntimeLabel.text = "\(runtime)분"  //  ･ ⸱ •
+//                } else {
+//                    self.releaseDateAndRuntimeLabel.text = "\(self.releaseDateAndRuntimeLabel.text ?? "") ･ \(runtime)분"  //  ･ ⸱ •
+//                }
+//            }
+//
+//            if let overview = runtimeAndOverview.1 {
+//                self.overviewLabel.text = overview
+//            }
             
-            if let runtime = runtimeAndOverview.0 {
+            let runtime = ParsingManager.parseDetails2(data)
+            
+            if let runtime = runtime {
                 if self.releaseDateAndRuntimeLabel.text == "" {
                     self.releaseDateAndRuntimeLabel.text = "\(runtime)분"  //  ･ ⸱ •
                 } else {
@@ -457,9 +478,6 @@ class MediaInfoHeaderView: BaseView {
                 }
             }
             
-            if let overview = runtimeAndOverview.1 {
-                self.overviewLabel.text = overview
-            }
         }
     }
     
