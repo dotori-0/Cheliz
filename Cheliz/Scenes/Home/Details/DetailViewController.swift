@@ -347,8 +347,11 @@ extension DetailViewController: UITableViewDataSource {
                     }
 //                    recordCell.datePicker.media = media
 //                    recordCell.datePicker.record = media.records[indexPath.row]
-                    recordCell.tag = indexPath.row
-                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
+                    recordCell.tag = indexPath.row  // ?
+//                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
+                    recordCell.datePicker.tag = indexPath.row
+//                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
+                    recordCell.datePicker.date = media.records[recordCell.datePicker.tag].watchedDate  // 이것도 이렇게 태그값을 쓰는 것이 나은지?
                     recordCell.datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
                     
                     return recordCell
