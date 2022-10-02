@@ -29,6 +29,8 @@ class DetailViewController: BaseViewController {
         }
     }
     
+    var fetched = 0
+    
     var media: Media?
     var directors: [Credit] = []
     var cast: [Credit] = []
@@ -98,6 +100,8 @@ class DetailViewController: BaseViewController {
     
     // MARK: - Realm Methods
     private func fetchRecords(reloadSection: Bool = true, row: Int = 0, withAnimation: Bool = true) {
+        print("🆕🍒 fetched \(fetched)")
+        fetched += 1
 //        records = repository.fetchRecords()  // ❔repository 없이 media.records로 해도 되긴 하는데 이렇게 분리하는 것이 더 나은지?
         guard let media = media else {
             print("No media received")
@@ -108,7 +112,9 @@ class DetailViewController: BaseViewController {
         records = repository.fetchRecords(of: media)
         
         reloadSection ? detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: withAnimation ? .fade : .none) :
-        detailView.tableView.reloadRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: .fade)
+        detailView.tableView.reloadRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)
+        
+//        detailView.tableView.relo
     }
     
     // MARK: - Networking Methods
@@ -256,11 +262,11 @@ extension DetailViewController: UITableViewDataSource {
         let space = 24.0
         
         let headerViewHeight = backdropHeight - overlapHeight + posterHeight + overviewHeight + directorItemHeight + castItemHeight + space * 4  // 아래에 여백을 더하기 위해 space 1 번 더 추가
-        print("backdropHeight: \(backdropHeight)")
-        print("directorItemHeight: \(directorItemHeight)")
-        print("overviewHeight: \(overviewHeight)")
-        print("castItemHeight: \(castItemHeight)")
-        print("headerViewHeight: \(headerViewHeight)")
+//        print("backdropHeight: \(backdropHeight)")
+//        print("directorItemHeight: \(directorItemHeight)")
+//        print("overviewHeight: \(overviewHeight)")
+//        print("castItemHeight: \(castItemHeight)")
+//        print("headerViewHeight: \(headerViewHeight)")
         
         return headerViewHeight
     }
@@ -345,6 +351,7 @@ extension DetailViewController: UITableViewDataSource {
                         print("Cannot find RecordTableViewCell")
                         return UITableViewCell()
                     }
+                    // Date Picker
 //                    recordCell.datePicker.media = media
 //                    recordCell.datePicker.record = media.records[indexPath.row]
                     recordCell.tag = indexPath.row  // ?
@@ -353,6 +360,67 @@ extension DetailViewController: UITableViewDataSource {
 //                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
                     recordCell.datePicker.date = media.records[recordCell.datePicker.tag].watchedDate  // 이것도 이렇게 태그값을 쓰는 것이 나은지?
                     recordCell.datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+                    
+                    
+                    
+                    // Tags Field
+                    recordCell.tagsField.tag = indexPath.row
+//                    print("🆕")
+                    let record = records[recordCell.tagsField.tag]
+                    print("🏷 \(recordCell.tagsField.tag)")
+                    
+                    print("🐥 recordCell.tag: \(recordCell.tag)")
+                    print("🐥 tagsField.tag: \(recordCell.tagsField.tag)")
+                    print("🐥 record id: \(record.id)")  // 여기서는 row가 0일 때 0번째 record를 잘 가리킴.
+                    
+//                    let people = record.watchedWith
+                    let people = records[recordCell.tag].watchedWith
+//                    let peopleNames = people.map { $0.name }
+                    var peopleNames: [String] = []
+                    people.forEach { person in
+                        peopleNames.append(person.name)
+                    }
+//                    print("people: \(people.map { $0.name })")
+                    print("people: \(peopleNames)")  // 🟩
+                    
+                    recordCell.addTags(of: people)  // 🟩
+
+                    
+                    recordCell.tagsField.onDidAddTag = { field, tag in
+                        print("🐢 recordCell.tag: \(recordCell.tag)")
+                        print("🐢 tagsField.tag: \(recordCell.tagsField.tag)")
+                        print("🐢 record id: \(record.id)")  // row가 0인데도 record는 1을 가리키고 있었음. record를 따로 상수로 빼 놓으면 안 될 듯.
+                        print("🐢 record id by cell tag: \(self.records[recordCell.tagsField.tag].id)")
+                        
+//                        print("✏️ DidAddTag", tag.text, "➡️ \(record.id)")
+                        print("✏️ DidAddTag", tag.text, "➡️ \(self.records[recordCell.tag].id)")
+//                        self.add(personNamed: tag.text, to: self.records[recordCell.tagsField.tag])
+//                        self.add(personNamed: tag.text, to: record)  // 🟩
+                        self.add(personNamed: tag.text, to: self.records[recordCell.tag])
+//                        print("🐵 추가했음", tag.text, "➡️ \(record.id)")
+                        print("🐵 추가했음", tag.text, "➡️ \(self.records[recordCell.tag].id)")
+                    }
+                    
+                    recordCell.tagsField.onDidRemoveTag = { field, tag in
+                        print("✏️ DidRemoveTag", tag.text)
+//                        self.delete(personNamed: tag.text, from: record)
+                        self.delete(personNamed: tag.text, from: self.records[recordCell.tag])
+                    }
+                                        
+                    print("💎 after added")
+                    print("record id: \(record.id)")
+//                    let addedPeople = record.watchedWith
+                    let addedPeople = records[recordCell.tag].watchedWith
+//                    let addedPeopleNames = addedPeople.map { $0.name }
+                    var addedPeopleNames: [String] = []
+                    addedPeople.forEach { person in
+                        addedPeopleNames.append(person.name)
+                    }
+//                    print("people: \(people.map { $0.name })")
+                    print("people: \(addedPeopleNames)")  // 🟩
+                    
+//                    recordCell.addTags(of: people)
+//                    print("people: \(people.map { $0.name })")
                     
                     return recordCell
                 } else {
@@ -406,7 +474,6 @@ extension DetailViewController: UITableViewDataSource {
         
         print("🆔", record.id)
         repository.changeDate(of: record, to: sender.date)
-        
         fetchRecords(reloadSection: false, row: sender.tag)
     }
     
@@ -419,7 +486,49 @@ extension DetailViewController: UITableViewDataSource {
         let record = Record(mediaID: media.id, TMDBid: media.TMDBid, title: media.title, watchedDate: Date.now)
         repository.addRecord(of: record, to: media)
         
-        fetchRecords()
+//        fetchRecords()
+        detailView.tableView.insertRows(at: [IndexPath(row: records.count - 1, section: RecordSection.record.rawValue)], with: .fade)
+//        fetchRecords(reloadSection: false, row: records.count - 1, withAnimation: true)
+    }
+    
+    private func add(personNamed name: String, to record: Record) {
+        var person: Person?
+        
+//        if repository.samePersonExists(named: name) {
+//            if repository.samePersonExistsInRecord(named: name, in: record) { return }
+//            person = repository.fetchPerson(named: name)
+//        } else {
+//            person = Person(name: name)
+//        }
+        
+        if repository.samePersonExistsInRecord(named: name, in: record) {
+            return
+        } else if repository.samePersonExists(named: name) {
+            person = repository.fetchPerson(named: name)
+        } else {
+            person = Person(name: name)
+        }
+        
+        guard let person = person else {
+            print("No person")
+            return
+        }
+
+        repository.add(person: person, to: record)
+        
+        // ❔ 어느 것이 더 좋은 코드인지..?
+//        if repository.samePersonExists(named: name) {
+//            let person = repository.fetchPerson(named: name)
+//            repository.add(person: person, to: record)
+//        } else {
+//            let person = Person(name: name)
+//            repository.add(person: person, to: record)
+//        }
+    }
+    
+    private func delete(personNamed name: String, from record: Record) {
+        let person = repository.fetchPerson(named: name)
+        repository.delete(person: person, from: record)
     }
 }
 

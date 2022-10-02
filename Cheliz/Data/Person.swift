@@ -11,9 +11,11 @@ import RealmSwift
 final class Person: Object, Codable {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String
+    @Persisted var timesWatchedTogether: Int
     
-    convenience init(name:String) {
+    convenience init(name: String) {
         self.init()
         self.name = name
+        self.timesWatchedTogether = 0
     }
 }

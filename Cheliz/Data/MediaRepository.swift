@@ -21,6 +21,7 @@ fileprivate protocol RealmProtocol {
 struct MediaRepository: RealmProtocol {
     let realm = try! Realm()
     
+    // MARK: - Media
     func fetch() -> Results<Media> {
 //        return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
         return realm.objects(Media.self)
@@ -188,6 +189,7 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
+    // MARK: - Records
 //    func fetchRecords(of media: Media) -> List<Record> {
     func fetchRecords(of media: Media) -> Results<Record> {
 //        return realm.objects(Record.self).sorted(byKeyPath: RealmKey.watchedDate)
@@ -205,6 +207,46 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
+    func deleteRecord(of record: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+        do {
+            try realm.write {
+                realm.delete(record)  // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
+            }
+            completionHandler()
+        } catch {
+            print(error)
+            errorHandler()
+        }
+    }
+    
+    func add(person: Person, to record: Record) {
+        print("📇 repository에서 record.id: \(record.id)")
+        do {
+            try realm.write {
+                record.watchedWith.append(person)
+                incrementTimesWatchedTogether(of: person)
+            }
+        } catch  {
+            print(error)
+        }
+    }
+    
+    func delete(person: Person, from record: Record) {
+        do {
+            try realm.write {
+                guard let index = record.watchedWith.firstIndex(of: person) else {
+                    print("Error in finding index of person")
+                    return
+                }
+                record.watchedWith.remove(at: index)
+                decrementTimesWatchedTogetherByOne(of: person)
+            }
+        } catch {
+            print(error)  // 👻 error handler
+        }
+    }
+
+    
 //    func changeDate(of record: Record, to date: Date, in media: Media) {
     func changeDate(of record: Record, to date: Date) {
         do {
@@ -216,15 +258,58 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func deleteRecord(of record: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
-        do {
-            try realm.write {
-                realm.delete(record)
-            }
-            completionHandler()
-        } catch {
-            print(error)
-            errorHandler()
+    // MARK: - Person
+    func fetchPeople() -> Results<Person> {
+        return realm.objects(Person.self)
+    }
+    
+    
+    func samePersonExists(named name: String) -> Bool {
+        let existingPeople = fetchPeople().where { $0.name == name }
+        
+        return !existingPeople.isEmpty
+    }
+    
+    func samePersonExistsInRecord(named name: String, in record: Record) -> Bool {
+        let existingPeople = record.watchedWith.where { $0.name == name }
+        
+        return !existingPeople.isEmpty
+    }
+    
+    func fetchPerson(named name: String) -> Person {
+        let people = fetchPeople().where { $0.name == name }
+        
+        guard let person = people.first else {
+            print("Error in finding person with same name")
+            return Person()
         }
+        
+        return person
+    }
+    
+    func incrementTimesWatchedTogether(of person: Person) {
+        person.timesWatchedTogether += 1
+//        do {
+//            try realm.write {
+//                person.timesWatchedTogether += 1
+//            }
+//        } catch  {
+//            print(error)
+//            print("Error in increasing times watched together")
+//            // 👻 error handler
+//        }
+    }
+    
+    func decrementTimesWatchedTogetherByOne(of person: Person) {
+        if person.timesWatchedTogether != 0 { person.timesWatchedTogether -= 1 }
+//        do {
+//            try realm.write {
+//                if person.timesWatchedTogether != 0 { person.timesWatchedTogether -= 1 }  // 👻 혹시 몰라서 예외처리...?
+//            }
+//        } catch  {
+//            print(error)
+//            print("Error in decreasing times watched together")
+//            // 👻 error handler
+//        }
     }
 }

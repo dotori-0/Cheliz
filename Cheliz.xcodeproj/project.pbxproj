@@ -54,6 +54,8 @@
 		0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7328E8B5A200AB6DDF /* RecordTableViewCell.swift */; };
 		0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */; };
 		0A7FFD7828E963EC00AB6DDF /* AddRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */; };
+		0A7FFD7B28E997BB00AB6DDF /* WSTagsField in Frameworks */ = {isa = PBXBuildFile; productRef = 0A7FFD7A28E997BB00AB6DDF /* WSTagsField */; };
+		0A7FFD7D28E9A9A100AB6DDF /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */; };
 		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
 		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
 		0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */; };
@@ -137,6 +139,7 @@
 		0A7FFD7328E8B5A200AB6DDF /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAndRecordPassableDatePicker.swift; sourceTree = "<group>"; };
 		0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordTableViewCell.swift; sourceTree = "<group>"; };
+		0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
@@ -176,6 +179,7 @@
 				0A8AA9AE28CE1EA400EB2AF8 /* SwiftyJSON in Frameworks */,
 				0A8AA9B128CE1EB400EB2AF8 /* Alamofire in Frameworks */,
 				0A8AA9CF28CF5FD200EB2AF8 /* Then in Frameworks */,
+				0A7FFD7B28E997BB00AB6DDF /* WSTagsField in Frameworks */,
 				0AF8837928D50077008A4B51 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +394,7 @@
 				0A439CB428E1A8410032A687 /* UIColor+Extension.swift */,
 				0A439CB928E1DC940032A687 /* FileManager+Extension.swift */,
 				0A31E09C28E5DA5400D0C79B /* Gradient+Extension.swift */,
+				0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				0AF8838228D6EEB5008A4B51 /* RealmSwift */,
 				0AB10D3428D78A7A007033E2 /* Toast */,
 				0A439CC028E1EE460032A687 /* Zip */,
+				0A7FFD7A28E997BB00AB6DDF /* WSTagsField */,
 			);
 			productName = Cheliz;
 			productReference = 0A3F32F228CB4B7500B51DEA /* Cheliz.app */;
@@ -493,6 +499,7 @@
 				0AF8837F28D6EEB5008A4B51 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				0AB10D3328D78A79007033E2 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				0A439CBF28E1EE460032A687 /* XCRemoteSwiftPackageReference "Zip" */,
+				0A7FFD7928E997BB00AB6DDF /* XCRemoteSwiftPackageReference "WSTagsField" */,
 			);
 			productRefGroup = 0A3F32F328CB4B7500B51DEA /* Products */;
 			projectDirPath = "";
@@ -524,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A7FFD7828E963EC00AB6DDF /* AddRecordTableViewCell.swift in Sources */,
+				0A7FFD7D28E9A9A100AB6DDF /* UIScrollView+Extension.swift in Sources */,
 				0AB10D2C28D75A55007033E2 /* MediaRepository.swift in Sources */,
 				0A22A7FE28D0DBED002D2C34 /* SearchViewController.swift in Sources */,
 				0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */,
@@ -813,6 +821,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		0A7FFD7928E997BB00AB6DDF /* XCRemoteSwiftPackageReference "WSTagsField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/whitesmith/WSTagsField.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		0A8AA9AC28CE1EA400EB2AF8 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -876,6 +892,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A439CBF28E1EE460032A687 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
+		};
+		0A7FFD7A28E997BB00AB6DDF /* WSTagsField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A7FFD7928E997BB00AB6DDF /* XCRemoteSwiftPackageReference "WSTagsField" */;
+			productName = WSTagsField;
 		};
 		0A8AA9AD28CE1EA400EB2AF8 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
