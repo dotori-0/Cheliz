@@ -64,6 +64,8 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         [addButton, posterImageView, stackView, addButton, separatorView].forEach {
             contentView.addSubview($0)
         }
+        
+        backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.4)
     }
     
     override func setConstraints() {

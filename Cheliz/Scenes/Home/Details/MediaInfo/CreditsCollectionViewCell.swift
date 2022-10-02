@@ -57,11 +57,11 @@ class CreditsCollectionViewCell: BaseCollectionViewCell {
             contentView.addSubview($0)
         }
         
-        backgroundColor = .systemPink
+//        backgroundColor = .systemPink
         profileImageView.backgroundColor = .systemMint
-        nameLabel.text = "이름 이름 이름 이름 이름 이름"
+//        nameLabel.text = "이름 이름 이름 이름 이름 이름"
 //        nameLabel.backgroundColor = .systemYellow
-        characterLabel.text = "배역 배역 배역 배역 배역 배역 배역"
+//        characterLabel.text = "배역 배역 배역 배역 배역 배역 배역"
 //        characterLabel.backgroundColor = .systemGreen
         
         

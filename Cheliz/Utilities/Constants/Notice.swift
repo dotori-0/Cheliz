@@ -47,4 +47,7 @@ enum Notice {
     static let restoreTitle = "복원 안내"
     static let restoreMessage = "선택하신 백업 파일로 복원하시겠습니까?"
     static let restoreSucceeded = "복원에 성공했습니다."
+    
+    // MARK: - Record
+    static let addRecord = "기록 추가하기"
 }

@@ -10,4 +10,5 @@ import Foundation
 enum RealmKey {
     static let registerDate = "registerDate"
     static let title = "title"
+    static let watchedDate = "watchedDate"
 }

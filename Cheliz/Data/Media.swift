@@ -25,6 +25,7 @@ final class Media: Object, Codable {
     @Persisted var rate: Double?          // 평점(옵셔널)
     @Persisted var records: List<Record>  // 기록(옵셔널)
     @Persisted var notes: String?         // 메모(옵셔널)(영화 하나에 1 개의 메모)
+    @Persisted var index: Int             // 유저가 지정한 순서 (미리 구현, 업데이트 예정)
     
     convenience init(TMDBid: Int,
                      title: String,
@@ -50,6 +51,7 @@ final class Media: Object, Codable {
 //        self.rate
 //        self.records = List<Record>()  // 주석처리? -> 주석처리해도 똑같이 들어감
 //        self.notes
+//        self.index
     }
 
     func encode(to encoder: Encoder) throws {

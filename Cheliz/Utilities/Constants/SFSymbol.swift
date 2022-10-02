@@ -31,4 +31,5 @@ enum SFSymbol {
 //    static let theme = "sparkles"
 //    static let theme = "paintpalette"
     static let theme = "paintpalette.fill"
+    static let plus = "plus.circle.fill"
 }

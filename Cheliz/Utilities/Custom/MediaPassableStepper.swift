@@ -8,6 +8,7 @@
 import UIKit
 
 class MediaPassableStepper: UIStepper {
+    // MARK: - Properties
     var media: Media?
     
     // MARK: - Initializers

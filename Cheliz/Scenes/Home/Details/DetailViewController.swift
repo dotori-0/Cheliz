@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DetailViewController: BaseViewController {
     // MARK: - Properties
@@ -17,14 +18,20 @@ class DetailViewController: BaseViewController {
 //    var castItemHeight: CGFloat = 0
     lazy var headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
 //    var headerView = MediaInfoHeaderView()
+    var itemHeight: CGFloat = 0
     
     private let repository = MediaRepository()
+    private var records = List<Record>() {
+        didSet {
+            print("Records changed")
+            detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: .fade)
+        }
+    }
     
     var media: Media?
     var directors: [Credit] = []
     var cast: [Credit] = []
-    
-    var itemHeight: CGFloat = 0
+
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -47,6 +54,7 @@ class DetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
 //        headerView.infoContainerView.setGradient()  // 다크모드/라이트모드와는 상관이 없고 스와이프하다가 스와이프 취소하면 나타남
+        fetchRecords()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +95,18 @@ class DetailViewController: BaseViewController {
         super.setUI()
     }
     
+    // MARK: - Realm Methods
+    private func fetchRecords() {
+//        records = repository.fetchRecords()  // ❔repository 없이 media.records로 해도 되긴 하는데 이렇게 분리하는 것이 더 나은지?
+        guard let media = media else {
+            print("No media received")
+            alert(message: "미디어 연결에 실패했습니다.")
+            return
+        }
+        
+        records = repository.fetchRecords(of: media)
+    }
+    
     // MARK: - Networking Methods
     private func fetchCredits() {
         guard let media = media else {
@@ -95,30 +115,89 @@ class DetailViewController: BaseViewController {
             return
         }
         
-        TMDBAPIManager.shared.fetchCredits(mediaType: MediaType(rawValue: media.mediaType) ?? .movie, mediaID: media.TMDBid) { [weak self] data in
-            let credits = ParsingManager.parseCredits(data)
-            self?.directors = credits[0]
-            self?.cast = credits[1]
-            self?.setHeaderView()
-            if let directorsHeight = self?.setDirectorItemHeight() {
-                self?.directorItemHeight = directorsHeight
+        let mediaType = MediaType(rawValue: media.mediaType) ?? .movie
+        let mediaID = media.TMDBid
+        
+        DispatchQueue.global().async {
+            TMDBAPIManager.shared.fetchCredits(mediaType: mediaType, mediaID: mediaID) { [weak self] data in
+                let credits = ParsingManager.parseCredits(data)
+                self?.directors = credits[0]
+                self?.cast = credits[1]
+                
+                self?.detailView.tableView.reloadData()
+                self?.headerView.directorCollectionView.reloadData()
+                self?.headerView.castCollectionView.reloadData()
+                
+                self?.setHeaderView()
+                if let directorsHeight = self?.setDirectorItemHeight() {
+                    self?.directorItemHeight = directorsHeight
+                }
+    //            self?.directorItemHeight = self?.setDirectorItemHeight() ?? 0
+                if let castHeight = self?.setCastItemHeight() {
+                    self?.castItemHeight = castHeight
+                }
+    //            self?.castItemHeight = self?.castHeight()
+    //            self?.setTableView()
+    //            self?.detailView.tableView.updateHeaderViewHeight()
+    //            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
+    //                                                               directorHeight: self?.directorItemHeight ?? 0,
+    //                                                               castHeight: self?.castItemHeight ?? 0)
+                self?.detailView.tableView.reloadData()
+                self?.headerView.directorCollectionView.reloadData()
+                self?.headerView.castCollectionView.reloadData()
             }
-//            self?.directorItemHeight = self?.setDirectorItemHeight() ?? 0
-            if let castHeight = self?.setCastItemHeight() {
-                self?.castItemHeight = castHeight
-            }
-//            self?.castItemHeight = self?.castHeight()
-//            self?.setTableView()
-//            self?.detailView.tableView.updateHeaderViewHeight()
-//            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
-//                                                               directorHeight: self?.directorItemHeight ?? 0,
-//                                                               castHeight: self?.castItemHeight ?? 0)
-            self?.detailView.tableView.reloadData()
-            
-            self?.headerView.directorCollectionView.reloadData()
-            self?.headerView.castCollectionView.reloadData()
         }
-    }
+        
+        // DispatchGroup
+//        let group = DispatchGroup()
+//        var credits = Data()
+//
+//        group.enter()
+////        DispatchQueue.global().async {
+//            TMDBAPIManager.shared.fetchCredits(mediaType: mediaType, mediaID: mediaID) { [weak self] data in
+//                group.leave()
+//                credits = data
+//            }
+//
+//        group.notify(queue: .main) {
+//            let credits = ParsingManager.parseCredits(credits)
+//            self.directors = credits[0]
+//            self.cast = credits[1]
+//            self.setHeaderView()
+////            if let directorsHeight = self.setDirectorItemHeight() {
+//            self.directorItemHeight = self.setDirectorItemHeight()
+//
+//            self.castItemHeight = self.setCastItemHeight()
+//            self.detailView.tableView.reloadData()
+//
+//            self.headerView.directorCollectionView.reloadData()
+//            self.headerView.castCollectionView.reloadData()
+        }
+//        }
+//        TMDBAPIManager.shared.fetchCredits(mediaType: MediaType(rawValue: media.mediaType) ?? .movie, mediaID: media.TMDBid) { [weak self] data in
+//            let credits = ParsingManager.parseCredits(data)
+//            self?.directors = credits[0]
+//            self?.cast = credits[1]
+//            self?.setHeaderView()
+//            if let directorsHeight = self?.setDirectorItemHeight() {
+//                self?.directorItemHeight = directorsHeight
+//            }
+////            self?.directorItemHeight = self?.setDirectorItemHeight() ?? 0
+//            if let castHeight = self?.setCastItemHeight() {
+//                self?.castItemHeight = castHeight
+//            }
+////            self?.castItemHeight = self?.castHeight()
+////            self?.setTableView()
+////            self?.detailView.tableView.updateHeaderViewHeight()
+////            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
+////                                                               directorHeight: self?.directorItemHeight ?? 0,
+////                                                               castHeight: self?.castItemHeight ?? 0)
+//            self?.detailView.tableView.reloadData()
+//
+//            self?.headerView.directorCollectionView.reloadData()
+//            self?.headerView.castCollectionView.reloadData()
+//        }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -204,7 +283,7 @@ extension DetailViewController: UITableViewDataSource {
             case .watchCount:
                 return 1
             case .record:
-                return 2
+                return records.count + 1
             case .notes:
                 return 1
             case .none:
@@ -213,33 +292,70 @@ extension DetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = RecordSection(rawValue: indexPath.section)
+        switch section {
+            case .watchCount:
+                return 56
+            case .record:
+                if indexPath.row != records.count {
+                    return 102
+                } else {
+                    return 56
+                }
+            case .notes:
+                return 56
+            case .none:
+                return 0
+        }
+//        return indexPath.section == 1 ? 56 : (indexPath.row ==  102)
         return 56
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let media = media else {
+            print("No media received")
+            alert(message: "미디어 연결에 실패했습니다.")
+            return UITableViewCell()
+        }
+        
         let section = RecordSection(rawValue: indexPath.section)
         switch section {
             case .watchCount:
                 guard let watchCountCell = tableView.dequeueReusableCell(withIdentifier: WatchCountTableViewCell.reuseIdentifier,
-                                                               for: indexPath) as? WatchCountTableViewCell else {
+                                                                         for: indexPath) as? WatchCountTableViewCell else {
                     print("Cannot find WatchCountTableViewCell")
                     return UITableViewCell()
                 }
                 
-                guard let media = media else {
-                    print("No media received")
-                    alert(message: "미디어 연결에 실패했습니다.")
-                    return UITableViewCell()
-                }
                 watchCountCell.setCountLabel(as: media.watchCount)
-                
                 watchCountCell.stepper.media = media
                 watchCountCell.stepper.value = Double(media.watchCount)
+//                watchCountCell.stepper.value = Double(100000000000000000000000000000)
                 watchCountCell.stepper.addTarget(self, action: #selector(stepperChanged), for: .valueChanged)
                 
                 return watchCountCell
             case .record:
-                return UITableViewCell()
+                if indexPath.row != records.count {
+                    guard let recordCell = tableView.dequeueReusableCell(withIdentifier: RecordTableViewCell.reuseIdentifier,
+                                                                         for: indexPath) as? RecordTableViewCell else {
+                        print("Cannot find RecordTableViewCell")
+                        return UITableViewCell()
+                    }
+
+                    return recordCell
+                } else {
+                    guard let addRecordCell = tableView.dequeueReusableCell(withIdentifier: AddRecordTableViewCell.reuseIdentifier,
+                                                                            for: indexPath) as? AddRecordTableViewCell else {
+                        print("Cannot find AddRecordTableViewCell")
+                        return UITableViewCell()
+                    }
+                    addRecordCell.addButton.media = media
+                    addRecordCell.addButton.addTarget(self, action: #selector(addRecordButtonClicked), for: .touchUpInside)
+                    
+                    return addRecordCell
+                }
+                
+//                return indexPath.row == records.count ? addRecordCell : recordCell
             case .notes:
                 return UITableViewCell()
             case .none:
@@ -249,9 +365,8 @@ extension DetailViewController: UITableViewDataSource {
         return UITableViewCell()
     }
     
+    // MARK: - Action Methods
     @objc private func stepperChanged(sender: MediaPassableStepper) {
-        print(sender.value)
-
         guard let media = sender.media else {
             print("Cannot find media in MediaPassableStepper")  // 👻 alert
             return
@@ -261,8 +376,20 @@ extension DetailViewController: UITableViewDataSource {
             self.alert(title: Notice.errorTitle, message: Notice.errorInWatchCountChangeMessage)
         }
         
-        detailView.tableView.reloadSections(IndexSet(integer: RecordSection.watchCount.rawValue), with: .fade)
-        // 👻 애니메이션 없는 게 더 나은지?
+        detailView.tableView.reloadSections(IndexSet(integer: RecordSection.watchCount.rawValue), with: .fade)  // 👻 애니메이션 없는 게 더 나은지?
+    }
+    
+    
+    @objc private func addRecordButtonClicked(sender: MediaPassableButton) {
+        guard let media = sender.media else {
+            print("Cannot find media in MediaPassableStepper")  // 👻 alert
+            return
+        }
+        
+        let record = Record(mediaID: media.id, TMDBid: media.TMDBid, title: media.title, watchedDate: Date.now)
+        repository.addRecord(of: record, to: media)
+        
+        fetchRecords()
     }
 }
 
@@ -322,7 +449,7 @@ extension DetailViewController: UICollectionViewDelegate {
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // item 개수가 0이 아니어야만 호출이 되는듯?
-        print("🌊")
+//        print("🌊")
 
         // 🐋 -> 🌊 -> 🐳
         // setCollectionViewLayout() -> sizeForItemAt -> cellForItemAt
@@ -456,7 +583,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             print("🐻‍❄️ directorsHeight:", directorsHeight)
             print("🐻‍❄️ castHeight:", castHeight)
         } else if collectionView == headerView.castCollectionView {
-            print("🐹", itemHeight2)
+//            print("🐹", itemHeight2)
         } else  {
             print("🐰", itemHeight2)
         }

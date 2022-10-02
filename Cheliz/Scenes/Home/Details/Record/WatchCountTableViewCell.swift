@@ -27,13 +27,21 @@ class WatchCountTableViewCell: BaseTableViewCell {
         [countLabel, stepper].forEach {
             contentView.addSubview($0)
         }
+        
+        backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.5)
+        
+//        stepper.backgroundColor = .stepperColor
+//        stepper.setBackgroundImage(.stepperBackground, for: .normal)
+//        stepper.layer.cornerRadius = 10
+//        stepper.contentMode = .scaleAspectFill
+        stepper.maximumValue = 10000
     }
     
     override func setConstraints() {
         countLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalToSuperview().offset(32)
             make.centerY.equalToSuperview()
-            make.trailing.equalTo(stepper.snp.leading).offset(-20)
+            make.trailing.equalTo(stepper.snp.leading).offset(-24)
         }
         
         stepper.snp.makeConstraints { make in

@@ -32,6 +32,8 @@ class SettingsTableViewCell: BaseTableViewCell {
         [symbolImageView, titleLabel].forEach {
             contentView.addSubview($0)
         }
+        
+        backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.5)
     }
     
     override func setConstraints() {

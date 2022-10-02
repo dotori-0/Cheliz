@@ -206,9 +206,9 @@ class HomeViewController: BaseViewController {
 //    }
     
     // MARK: - Realm Methods
-    private func fetchRealm() {
-        media = repository.fetch()
-    }
+//    private func fetchRealm() {
+//        media = repository.fetch()
+//    }
     
 //    private func deleteRealm(media: Media) {
 //        repository.delete(media: media,

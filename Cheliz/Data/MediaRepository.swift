@@ -40,18 +40,18 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func add(review: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
-        do {
-            try realm.write {
-                realm.add(review)
-            }
-            completionHandler()
-            print(fetch())
-        } catch  {
-            print(error)
-            errorHandler()
-        }
-    }
+//    func add(review: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+//        do {
+//            try realm.write {
+//                realm.add(review)
+//            }
+//            completionHandler()
+//            print(fetch())
+//        } catch {
+//            print(error)
+//            errorHandler()
+//        }
+//    }
     
     func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
@@ -200,6 +200,31 @@ struct MediaRepository: RealmProtocol {
         } catch {
             // 👻 error handler
             print(error)
+        }
+    }
+    
+    func fetchRecords(of media: Media) -> List<Record> {
+//        return realm.objects(Record.self).sorted(byKeyPath: RealmKey.watchedDate)
+        return media.records
+    }
+    
+    func addRecord(of record: Record, to media: Media) {
+        do {
+            try realm.write {
+                media.records.append(record)
+            }
+        } catch {
+            print(error)  // 👻 error handler
+        }
+    }
+    
+    func changeDate(of record: Record, to date: Date, in media: Media) {
+        do {
+            try realm.write {
+                record.watchedDate = date
+            }
+        } catch {
+            print(error)  // 👻 error handler
         }
     }
 }

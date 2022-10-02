@@ -8,6 +8,7 @@
 import UIKit
 
 class MediaPassableButton: UIButton {
+    // MARK: - Properties
     var media: Media?
     
     // MARK: - Initializers

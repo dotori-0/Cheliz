@@ -51,6 +51,9 @@
 		0A7FFD6E28E8944200AB6DDF /* RecordSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */; };
 		0A7FFD7028E89BCE00AB6DDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7FFD6F28E89BCD00AB6DDF /* Main.storyboard */; };
 		0A7FFD7228E8A00C00AB6DDF /* MediaPassableStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */; };
+		0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7328E8B5A200AB6DDF /* RecordTableViewCell.swift */; };
+		0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */; };
+		0A7FFD7828E963EC00AB6DDF /* AddRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */; };
 		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
 		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
 		0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */; };
@@ -131,6 +134,9 @@
 		0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSection.swift; sourceTree = "<group>"; };
 		0A7FFD6F28E89BCD00AB6DDF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPassableStepper.swift; sourceTree = "<group>"; };
+		0A7FFD7328E8B5A200AB6DDF /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAndRecordPassableDatePicker.swift; sourceTree = "<group>"; };
+		0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordTableViewCell.swift; sourceTree = "<group>"; };
 		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
@@ -310,6 +316,8 @@
 			isa = PBXGroup;
 			children = (
 				0A7FFD6B28E8927F00AB6DDF /* WatchCountTableViewCell.swift */,
+				0A7FFD7328E8B5A200AB6DDF /* RecordTableViewCell.swift */,
+				0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -402,6 +410,7 @@
 				0A439CAC28E1899F0032A687 /* BackupAndRestoreButton.swift */,
 				0A31E09828E4AB2900D0C79B /* CustomLabel.swift */,
 				0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */,
+				0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -514,8 +523,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7FFD7828E963EC00AB6DDF /* AddRecordTableViewCell.swift in Sources */,
 				0AB10D2C28D75A55007033E2 /* MediaRepository.swift in Sources */,
 				0A22A7FE28D0DBED002D2C34 /* SearchViewController.swift in Sources */,
+				0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */,
 				0A439C8228E0BA8F0032A687 /* SettingsTitle.swift in Sources */,
 				0A7FFD7228E8A00C00AB6DDF /* MediaPassableStepper.swift in Sources */,
 				0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */,
@@ -544,6 +555,7 @@
 				0A8AA9CC28CF2D3800EB2AF8 /* UIFont+Extension.swift in Sources */,
 				0A8AA9D328CF624B00EB2AF8 /* HomeCollectionViewCell.swift in Sources */,
 				0A22A80428D1CC85002D2C34 /* SearchCollectionViewCell.swift in Sources */,
+				0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */,
 				0A8AA9BB28CF24A900EB2AF8 /* BaseViewController.swift in Sources */,
 				0A22A82128D24A7A002D2C34 /* MediaModel.swift in Sources */,
 				0AB10D3028D75BD8007033E2 /* RealmKey.swift in Sources */,
