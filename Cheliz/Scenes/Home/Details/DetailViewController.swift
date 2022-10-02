@@ -341,7 +341,12 @@ extension DetailViewController: UITableViewDataSource {
                         print("Cannot find RecordTableViewCell")
                         return UITableViewCell()
                     }
-
+                    recordCell.datePicker.media = media
+//                    recordCell.datePicker.record = media.records[indexPath.row]
+                    recordCell.tag = indexPath.row
+                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
+                    recordCell.datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+                    
                     return recordCell
                 } else {
                     guard let addRecordCell = tableView.dequeueReusableCell(withIdentifier: AddRecordTableViewCell.reuseIdentifier,
@@ -379,6 +384,23 @@ extension DetailViewController: UITableViewDataSource {
         detailView.tableView.reloadSections(IndexSet(integer: RecordSection.watchCount.rawValue), with: .fade)  // 👻 애니메이션 없는 게 더 나은지?
     }
     
+    @objc private func dateChanged(sender: MediaAndRecordPassableDatePicker)  {
+//        guard let media = sender.media, let record = sender.record else {
+//            print("Cannot find media or record in MediaAndRecordPassableDatePicker")  // 👻 alert
+//            return
+//        }
+        
+        guard let media = sender.media else {
+            print("Cannot find media or record in MediaAndRecordPassableDatePicker")  // 👻 alert
+            return
+        }
+        let record = records[sender.tag]
+        
+        print("🆔", record.id)
+        repository.changeDate(of: record, to: sender.date, in: media)
+        
+        fetchRecords()
+    }
     
     @objc private func addRecordButtonClicked(sender: MediaPassableButton) {
         guard let media = sender.media else {
