@@ -10,7 +10,7 @@ import RealmSwift
 
 final class Media: Object, Codable {
     @Persisted(primaryKey: true) var id: ObjectId  // TMDB IDs: IDs are only unique within their own namespace -> id 따로 구현
-    @Persisted var registerDate: Date
+    @Persisted var registerDate: Date     // 등록일(필수)
     @Persisted var TMDBid: Int            // TMDB ID(필수)
     @Persisted var title: String          // 제목(필수)
     @Persisted var mediaType: Int      // 미디어 타입(movie/tv)(필수)    // 👻 Int로 바꾸기

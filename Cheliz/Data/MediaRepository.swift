@@ -188,9 +188,11 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func fetchRecords(of media: Media) -> List<Record> {
+//    func fetchRecords(of media: Media) -> List<Record> {
+    func fetchRecords(of media: Media) -> Results<Record> {
 //        return realm.objects(Record.self).sorted(byKeyPath: RealmKey.watchedDate)
-        return media.records//.sorted(by: <#T##KeyPath<Record, _HasPersistedType>#>)
+//        return media.records//.sorted(by: <#T##KeyPath<Record, _HasPersistedType>#>)
+        return media.records.sorted(byKeyPath: RealmKey.registerDate, ascending: true)
     }
     
     func addRecord(of record: Record, to media: Media) {

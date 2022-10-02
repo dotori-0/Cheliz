@@ -10,6 +10,7 @@ import RealmSwift
 
 final class Record: Object, Codable {
     @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var registerDate: Date     // 등록일(필수)
     @Persisted var mediaID: ObjectId
     @Persisted var TMDBid: Int  //  추가?
     @Persisted var title: String
@@ -24,6 +25,7 @@ final class Record: Object, Codable {
                      watchedDate: Date) {
 //                     watchedWith: List<Person> = List<Person>()) {
         self.init()
+        self.registerDate = Date.now
         self.mediaID = mediaID
         self.TMDBid = TMDBid
         self.title = title

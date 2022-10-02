@@ -21,7 +21,8 @@ class DetailViewController: BaseViewController {
     var itemHeight: CGFloat = 0
     
     private let repository = MediaRepository()
-    private var records = List<Record>() {
+//    private var records = List<Record>() {
+    private var records: Results<Record>! {
         didSet {
             print("Records changed")
 //            detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: .fade)
