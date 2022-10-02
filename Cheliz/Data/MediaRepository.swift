@@ -44,6 +44,7 @@ struct MediaRepository: RealmProtocol {
     func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
             try realm.write {
+                deleteRecords(of: media)
                 realm.delete(media)
             }
             completionHandler()
@@ -218,6 +219,13 @@ struct MediaRepository: RealmProtocol {
         } catch {
             print(error)
             errorHandler()
+        }
+    }
+    
+    func deleteRecords(of media: Media) {
+        media.records.forEach { record in
+            deletePeople(from: record)  // Person의 같이 본 회수 - 1
+            realm.delete(record)        // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
         }
     }
     
