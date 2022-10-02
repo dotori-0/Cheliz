@@ -139,7 +139,8 @@ extension SearchViewController: UICollectionViewDataSource {
         if repository.sameMediaExists(as: media) {
 //            alert(title: nil,
 //            alert(title: Notice.sameMediaAlreadyExistsTitle,
-            alert(title: "",
+//            alert(title: "",
+            alert(title: Notice.sameMediaAlreadyExistsTitle,
                   message: Notice.sameMediaAlreadyExistsMessage)
             return
         }

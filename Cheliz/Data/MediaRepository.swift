@@ -210,7 +210,9 @@ struct MediaRepository: RealmProtocol {
     func deleteRecord(of record: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
             try realm.write {
-                realm.delete(record)  // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
+                print("⛔️ \(record.id)")
+                deletePeople(from: record)  // Person의 같이 본 회수 - 1
+                realm.delete(record)        // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
             }
             completionHandler()
         } catch {
@@ -311,5 +313,12 @@ struct MediaRepository: RealmProtocol {
 //            print("Error in decreasing times watched together")
 //            // 👻 error handler
 //        }
+    }
+    
+    func deletePeople(from record: Record) {
+        record.watchedWith.forEach { person in
+            print(person.name)
+            decrementTimesWatchedTogetherByOne(of: person)
+        }
     }
 }

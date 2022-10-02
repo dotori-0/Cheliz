@@ -99,7 +99,8 @@ class DetailViewController: BaseViewController {
     }
     
     // MARK: - Realm Methods
-    private func fetchRecords(reloadSection: Bool = true, row: Int = 0, withAnimation: Bool = true) {
+//    private func fetchRecords(reloadSection: Bool = true, row: Int = 0, withAnimation: Bool = true) {
+    private func fetchRecords(reload: Bool = true, reloadSection: Bool = true, row: Int = 0, withAnimation: Bool = true) {
         print("🆕🍒 fetched \(fetched)")
         fetched += 1
 //        records = repository.fetchRecords()  // ❔repository 없이 media.records로 해도 되긴 하는데 이렇게 분리하는 것이 더 나은지?
@@ -111,8 +112,12 @@ class DetailViewController: BaseViewController {
         
         records = repository.fetchRecords(of: media)
         
-        reloadSection ? detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: withAnimation ? .fade : .none) :
-        detailView.tableView.reloadRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)
+        if reload {
+            reloadSection ? detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: withAnimation ? .fade : .none) :
+            detailView.tableView.reloadRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)
+        } else {
+            detailView.tableView.deleteRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)
+        }
         
 //        detailView.tableView.relo
     }
@@ -389,7 +394,7 @@ extension DetailViewController: UITableViewDataSource {
                     recordCell.tagsField.onDidAddTag = { field, tag in
                         print("🐢 recordCell.tag: \(recordCell.tag)")
                         print("🐢 tagsField.tag: \(recordCell.tagsField.tag)")
-                        print("🐢 record id: \(record.id)")  // row가 0인데도 record는 1을 가리키고 있었음. record를 따로 상수로 빼 놓으면 안 될 듯.
+                        print("🐢 record id: \(record.id)")  // row가 0인데도 record는 1을 가리키고 있었음,, record를 따로 상수로 빼 놓으면 안 될 듯
                         print("🐢 record id by cell tag: \(self.records[recordCell.tagsField.tag].id)")
                         
 //                        print("✏️ DidAddTag", tag.text, "➡️ \(record.id)")
@@ -536,21 +541,20 @@ extension DetailViewController: UITableViewDataSource {
 extension DetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if indexPath.section != RecordSection.record.rawValue { return nil }
+        print("🗑 \(records[indexPath.row].id)")
         let delete = UIContextualAction(style: .normal, title: nil) { action, view, completion in
             self.alert(title: Notice.deleteWarningTitle,
                        message: Notice.deleteRecordWarningMessage,
                        allowsCancel: true) { _ in
-//                self.deleteBackupFile(named: self.backupFileNames[indexPath.row])
-//                self.fetchBackupFiles()
                 self.repository.deleteRecord(of: self.records[indexPath.row]) {
                     self.detailView.makeToast(Notice.deleteSucceeded,
                                               duration: 1,
                                               position: .center, style: self.toastStyle)
-                    self.fetchRecords(withAnimation: false)
-//                    self.fetchRecords()
+//                    self.fetchRecords(withAnimation: false)
+                    self.fetchRecords(reload: false, row: indexPath.row, withAnimation: true)
                 } errorHandler: {
                     self.alert(title: Notice.errorTitle,
-                          message: Notice.errorInDeleteMessage)
+                               message: Notice.errorInDeleteMessage)
                 }
 
             }
