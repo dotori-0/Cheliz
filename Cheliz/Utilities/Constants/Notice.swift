@@ -50,4 +50,5 @@ enum Notice {
     
     // MARK: - Record
     static let addRecord = "기록 추가하기"
+    static let deleteRecordWarningMessage = "삭제된 기록은 복구가 불가합니다."
 }

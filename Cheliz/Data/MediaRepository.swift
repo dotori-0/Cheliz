@@ -30,7 +30,7 @@ struct MediaRepository: RealmProtocol {
         do {
             try realm.write {
                 realm.add(media)
-//                completionHandler()  // 여기에서 해야 하는지?
+//                completionHandler()  // 여기에서 해야 하는지? -> 어디서 하든 상관은 없지만 명확히 구분하기 위해 realm.write 구문 밖에서 실행
             }
             completionHandler()
             print(fetch())
@@ -40,24 +40,10 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-//    func add(review: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
-//        do {
-//            try realm.write {
-//                realm.add(review)
-//            }
-//            completionHandler()
-//            print(fetch())
-//        } catch {
-//            print(error)
-//            errorHandler()
-//        }
-//    }
-    
     func delete(media: Media, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
             try realm.write {
                 realm.delete(media)
-//                completionHandler()  // 여기에서 해야 하는지?
             }
             completionHandler()
             print(fetch())
@@ -194,9 +180,8 @@ struct MediaRepository: RealmProtocol {
             try realm.write {
                 realm.deleteAll()
                 realm.add(mediaArray)
-                // 👻 completion handler
-                completionHandler()
             }
+            completionHandler()
         } catch {
             // 👻 error handler
             print(error)
@@ -205,7 +190,7 @@ struct MediaRepository: RealmProtocol {
     
     func fetchRecords(of media: Media) -> List<Record> {
 //        return realm.objects(Record.self).sorted(byKeyPath: RealmKey.watchedDate)
-        return media.records
+        return media.records//.sorted(by: <#T##KeyPath<Record, _HasPersistedType>#>)
     }
     
     func addRecord(of record: Record, to media: Media) {
@@ -218,13 +203,26 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-    func changeDate(of record: Record, to date: Date, in media: Media) {
+//    func changeDate(of record: Record, to date: Date, in media: Media) {
+    func changeDate(of record: Record, to date: Date) {
         do {
             try realm.write {
                 record.watchedDate = date
             }
         } catch {
             print(error)  // 👻 error handler
+        }
+    }
+    
+    func deleteRecord(of record: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
+        do {
+            try realm.write {
+                realm.delete(record)
+            }
+            completionHandler()
+        } catch {
+            print(error)
+            errorHandler()
         }
     }
 }

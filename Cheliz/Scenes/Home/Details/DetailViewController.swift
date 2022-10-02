@@ -24,7 +24,7 @@ class DetailViewController: BaseViewController {
     private var records = List<Record>() {
         didSet {
             print("Records changed")
-            detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: .fade)
+//            detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: .fade)
         }
     }
     
@@ -96,7 +96,7 @@ class DetailViewController: BaseViewController {
     }
     
     // MARK: - Realm Methods
-    private func fetchRecords() {
+    private func fetchRecords(reloadSection: Bool = true, row: Int = 0, withAnimation: Bool = true) {
 //        records = repository.fetchRecords()  // ❔repository 없이 media.records로 해도 되긴 하는데 이렇게 분리하는 것이 더 나은지?
         guard let media = media else {
             print("No media received")
@@ -105,6 +105,9 @@ class DetailViewController: BaseViewController {
         }
         
         records = repository.fetchRecords(of: media)
+        
+        reloadSection ? detailView.tableView.reloadSections(IndexSet(integer: RecordSection.record.rawValue), with: withAnimation ? .fade : .none) :
+        detailView.tableView.reloadRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: .fade)
     }
     
     // MARK: - Networking Methods
@@ -341,7 +344,7 @@ extension DetailViewController: UITableViewDataSource {
                         print("Cannot find RecordTableViewCell")
                         return UITableViewCell()
                     }
-                    recordCell.datePicker.media = media
+//                    recordCell.datePicker.media = media
 //                    recordCell.datePicker.record = media.records[indexPath.row]
                     recordCell.tag = indexPath.row
                     recordCell.datePicker.date = media.records[indexPath.row].watchedDate
@@ -384,22 +387,23 @@ extension DetailViewController: UITableViewDataSource {
         detailView.tableView.reloadSections(IndexSet(integer: RecordSection.watchCount.rawValue), with: .fade)  // 👻 애니메이션 없는 게 더 나은지?
     }
     
-    @objc private func dateChanged(sender: MediaAndRecordPassableDatePicker)  {
+//    @objc private func dateChanged(sender: MediaAndRecordPassableDatePicker)  {
+    @objc private func dateChanged(sender: UIDatePicker)  {
 //        guard let media = sender.media, let record = sender.record else {
 //            print("Cannot find media or record in MediaAndRecordPassableDatePicker")  // 👻 alert
 //            return
 //        }
         
-        guard let media = sender.media else {
-            print("Cannot find media or record in MediaAndRecordPassableDatePicker")  // 👻 alert
-            return
-        }
+//        guard let media = sender.media else {
+//            print("Cannot find media or record in MediaAndRecordPassableDatePicker")  // 👻 alert
+//            return
+//        }
         let record = records[sender.tag]
         
         print("🆔", record.id)
-        repository.changeDate(of: record, to: sender.date, in: media)
+        repository.changeDate(of: record, to: sender.date)
         
-        fetchRecords()
+        fetchRecords(reloadSection: false, row: sender.tag)
     }
     
     @objc private func addRecordButtonClicked(sender: MediaPassableButton) {
@@ -417,7 +421,32 @@ extension DetailViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension DetailViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section != RecordSection.record.rawValue { return nil }
+        let delete = UIContextualAction(style: .normal, title: nil) { action, view, completion in
+            self.alert(title: Notice.deleteWarningTitle,
+                       message: Notice.deleteRecordWarningMessage,
+                       allowsCancel: true) { _ in
+//                self.deleteBackupFile(named: self.backupFileNames[indexPath.row])
+//                self.fetchBackupFiles()
+                self.repository.deleteRecord(of: self.records[indexPath.row]) {
+                    self.detailView.makeToast(Notice.deleteSucceeded,
+                                              duration: 1,
+                                              position: .center, style: self.toastStyle)
+                    self.fetchRecords(withAnimation: false)
+//                    self.fetchRecords()
+                } errorHandler: {
+                    self.alert(title: Notice.errorTitle,
+                          message: Notice.errorInDeleteMessage)
+                }
+
+            }
+        }
+        
+        delete.image = UIImage(systemName: SFSymbol.trash)
+        
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
 }
 
 // MARK: - UICollectionViewDataSource

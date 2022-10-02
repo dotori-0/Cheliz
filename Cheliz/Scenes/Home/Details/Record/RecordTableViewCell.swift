@@ -9,7 +9,8 @@ import UIKit
 
 class RecordTableViewCell: BaseTableViewCell {
     // MARK: - Properties
-    let datePicker = MediaAndRecordPassableDatePicker()
+//    let datePicker = MediaAndRecordPassableDatePicker()
+    let datePicker = UIDatePicker()
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -24,7 +25,7 @@ class RecordTableViewCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        datePicker.record = nil
+//        datePicker.record = nil
     }
     
     // MARK: - Design Methods
