@@ -13,8 +13,9 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
 //    var media: Media?
 //    var addErrorHandler: (() -> Void)?
 //    var addCompletionHandler: (() -> Void)?
-    
-    let posterImageView = PosterImageView()
+
+        let posterView = PosterView()
+//    let posterImageView = PosterImageView()
 //        .then {
 //        $0.backgroundColor = .tintColor
 //    }
@@ -46,7 +47,8 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        posterImageView.image = nil
+        posterView.posterImageView.image = nil
+//        posterImageView.image = nil
     }
     
     override init(frame: CGRect) {
@@ -61,7 +63,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Design Methods
     override func setUI() {
-        [addButton, posterImageView, stackView, addButton, separatorView].forEach {
+        [addButton, posterView, stackView, addButton, separatorView].forEach {
             contentView.addSubview($0)
         }
         
@@ -69,11 +71,11 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func setConstraints() {
-        posterImageView.snp.makeConstraints { make in
+        posterView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.8)
-            make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
+            make.width.equalTo(posterView.snp.height).multipliedBy(0.67)
         }
         
         addButton.snp.makeConstraints { make in
@@ -85,7 +87,7 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(posterImageView.snp.trailing).offset(12)
+            make.leading.equalTo(posterView.snp.trailing).offset(12)
             make.trailing.equalTo(addButton.snp.leading).offset(-20)
             make.height.equalToSuperview().multipliedBy(0.6)
         }
@@ -118,7 +120,8 @@ class SearchCollectionViewCell: BaseCollectionViewCell {
         
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
-            posterImageView.kf.setImage(with: url)
+            posterView.posterImageView.kf.setImage(with: url)
+//            posterImageView.kf.setImage(with: url)
         }
 
         titleLabel.text = media.title

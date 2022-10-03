@@ -33,7 +33,8 @@ class MediaInfoHeaderView: BaseView {
     }
     
     let shadowView = UIView()
-    let posterImageView = PosterImageView()
+    let posterView = PosterView()
+//    let posterImageView = PosterImageView()
     
     let titleLabel = CustomLabel(textSize: 18)
     
@@ -160,7 +161,7 @@ class MediaInfoHeaderView: BaseView {
 //            infoContainerView.addSubview($0)
 //        }
         
-        [gradientImageView, shadowView, posterImageView, titleLabel, releaseDateAndRuntimeLabel, genresLabel, overviewLabel].forEach {
+        [gradientImageView, shadowView, posterView, titleLabel, releaseDateAndRuntimeLabel, genresLabel, overviewLabel].forEach {
             infoContainerView.addSubview($0)
         }
         
@@ -185,19 +186,19 @@ class MediaInfoHeaderView: BaseView {
         
         let screenWidth = UIScreen.main.bounds.width
         
-        posterImageView.snp.makeConstraints { make in
+        posterView.snp.makeConstraints { make in
             make.centerY.equalTo(infoContainerView.snp.top).offset(screenWidth * 0.07)
             make.leading.equalToSuperview().offset(32)
             make.width.equalToSuperview().multipliedBy(0.3)
-            make.height.equalTo(posterImageView.snp.width).multipliedBy(1.5)
+            make.height.equalTo(posterView.snp.width).multipliedBy(1.5)
         }
         
         shadowView.snp.makeConstraints { make in
-            make.edges.equalTo(posterImageView)
+            make.edges.equalTo(posterView)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(posterImageView.snp.trailing).offset(24)
+            make.leading.equalTo(posterView.snp.trailing).offset(24)
             make.top.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-20)
         }
@@ -225,8 +226,8 @@ class MediaInfoHeaderView: BaseView {
         }
         
         overviewLabel.snp.makeConstraints { make in
-            make.leading.equalTo(posterImageView.snp.leading)
-            make.top.equalTo(posterImageView.snp.bottom).offset(24)
+            make.leading.equalTo(posterView.snp.leading)
+            make.top.equalTo(posterView.snp.bottom).offset(24)
 //            make.top.equalTo(genresLabel.snp.bottom).offset(40)
             make.trailing.equalToSuperview().offset(-24)
         }
@@ -420,7 +421,8 @@ class MediaInfoHeaderView: BaseView {
         
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
-            posterImageView.kf.setImage(with: url)
+            posterView.posterImageView.kf.setImage(with: url)
+//            posterImageView.kf.setImage(with: url)
         }
         
         titleLabel.text = media.title

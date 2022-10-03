@@ -30,7 +30,8 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         return configuration
     }()
 
-    let posterImageView = PosterImageView()
+    let posterView = PosterView()
+//    let posterImageView = PosterImageView()
 //        .then {
 //        $0.backgroundColor = .tintColor.withAlphaComponent(0.5)
 //    }
@@ -61,7 +62,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        posterImageView.image = nil
+        posterView.posterImageView.image = nil
         // ❔👻 다른 것들도 nil 처리를 해야 할지?
     }
     
@@ -75,7 +76,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     
     // MARK: - Design Methods
     override func setUI() {
-        [checkButton, posterImageView, stackView, separatorView].forEach {
+        [checkButton, posterView, stackView, separatorView].forEach {
             contentView.addSubview($0)
         }
 //        contentView.backgroundColor = .systemYellow  // 동작 O
@@ -107,7 +108,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
         checkButton.setContentCompressionResistancePriority(.required, for: .horizontal)
 //        checkButton.setContentHuggingPriority(.required, for: .horizontal)
 
-        posterImageView.snp.makeConstraints { make in
+        posterView.snp.makeConstraints { make in
 //            make.leading.equalTo(checkButton.snp.trailing).offset(16)
             make.leading.equalTo(checkButton.snp.trailing).offset(8)
             make.centerY.equalToSuperview()
@@ -117,13 +118,13 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             let imageHeight = screenHeight * 0.12
             make.height.equalTo(imageHeight)
             make.height.equalToSuperview().multipliedBy(0.85)
-            make.width.equalTo(posterImageView.snp.height).multipliedBy(0.67)
+            make.width.equalTo(posterView.snp.height).multipliedBy(0.67)
 
         }
 
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(posterImageView.snp.trailing).offset(12)
+            make.leading.equalTo(posterView.snp.trailing).offset(12)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalToSuperview().multipliedBy(0.65)
         }
@@ -191,7 +192,8 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     func showSavedMedia(_ media: Media) {
         if let posterPath = media.posterPath {
             let url = URL(string: Endpoint.imageConfigurationURL + posterPath)
-            posterImageView.kf.setImage(with: url)
+            posterView.posterImageView.kf.setImage(with: url)
+//            posterImageView.kf.setImage(with: url)
         }
         
         titleLabel.text = media.title

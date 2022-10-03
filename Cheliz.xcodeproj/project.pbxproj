@@ -62,6 +62,8 @@
 		0A7FFD9028EAF1FD00AB6DDF /* FontsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD8F28EAF1FD00AB6DDF /* FontsViewController.swift */; };
 		0A7FFD9228EAF20D00AB6DDF /* FontsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD9128EAF20D00AB6DDF /* FontsView.swift */; };
 		0A7FFD9428EAF5B300AB6DDF /* SingleSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */; };
+		0A7FFD9628EB572300AB6DDF /* PosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD9528EB572300AB6DDF /* PosterView.swift */; };
+		0A7FFD9828EB57D400AB6DDF /* Round+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD9728EB57D400AB6DDF /* Round+Extension.swift */; };
 		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
 		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
 		0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */; };
@@ -150,7 +152,9 @@
 		0A7FFD8D28EAF1E900AB6DDF /* FontTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTableViewCell.swift; sourceTree = "<group>"; };
 		0A7FFD8F28EAF1FD00AB6DDF /* FontsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsViewController.swift; sourceTree = "<group>"; };
 		0A7FFD9128EAF20D00AB6DDF /* FontsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsView.swift; sourceTree = "<group>"; };
-		0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleSelectionButton.swift; path = Custom/SingleSelectionButton.swift; sourceTree = "<group>"; };
+		0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectionButton.swift; sourceTree = "<group>"; };
+		0A7FFD9528EB572300AB6DDF /* PosterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterView.swift; sourceTree = "<group>"; };
+		0A7FFD9728EB57D400AB6DDF /* Round+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Round+Extension.swift"; sourceTree = "<group>"; };
 		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
@@ -380,7 +384,6 @@
 				0A8AA9D628D0761100EB2AF8 /* Protocols */,
 				0A8AA9CA28CF2D1300EB2AF8 /* Extensions */,
 				0A8AA9B928CF249F00EB2AF8 /* Base */,
-				0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				0A439CB928E1DC940032A687 /* FileManager+Extension.swift */,
 				0A31E09C28E5DA5400D0C79B /* Gradient+Extension.swift */,
 				0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */,
+				0A7FFD9728EB57D400AB6DDF /* Round+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -441,6 +445,8 @@
 				0A31E09828E4AB2900D0C79B /* CustomLabel.swift */,
 				0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */,
 				0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */,
+				0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */,
+				0A7FFD9528EB572300AB6DDF /* PosterView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				0A31E09328E4A42100D0C79B /* DetailViewController.swift in Sources */,
 				0AF8837328D39DC0008A4B51 /* MediaType.swift in Sources */,
 				0A8AA9CC28CF2D3800EB2AF8 /* UIFont+Extension.swift in Sources */,
+				0A7FFD9628EB572300AB6DDF /* PosterView.swift in Sources */,
 				0A8AA9D328CF624B00EB2AF8 /* HomeCollectionViewCell.swift in Sources */,
 				0A22A80428D1CC85002D2C34 /* SearchCollectionViewCell.swift in Sources */,
 				0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */,
@@ -609,6 +616,7 @@
 				0AF8837D28D6EE3D008A4B51 /* Media.swift in Sources */,
 				0A8AA9D828D0761A00EB2AF8 /* ReusableView.swift in Sources */,
 				0A8AA9B728CF239100EB2AF8 /* HomeViewController.swift in Sources */,
+				0A7FFD9828EB57D400AB6DDF /* Round+Extension.swift in Sources */,
 				0A439CBA28E1DC940032A687 /* FileManager+Extension.swift in Sources */,
 				0A22A80028D0DC0E002D2C34 /* SearchView.swift in Sources */,
 				0A22A7FB28D0D6F1002D2C34 /* TabBarController.swift in Sources */,
@@ -769,7 +777,7 @@
 				DEVELOPMENT_TEAM = D92DSFPJZF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cheliz/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "체리즈";
+				INFOPLIST_KEY_CFBundleDisplayName = "체리즈13";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -800,7 +808,7 @@
 				DEVELOPMENT_TEAM = D92DSFPJZF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cheliz/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "체리즈";
+				INFOPLIST_KEY_CFBundleDisplayName = "체리즈13";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -8,8 +8,15 @@
 import UIKit
 
 class PosterImageView: UIImageView {
-    override init(frame: CGRect = .zero) {
-        super.init(frame: frame)
+    // MARK: - Properties
+    var customBackgroundColor: UIColor?
+    
+    // MARK: - Initializers
+//    override init(frame: CGRect = .zero) {  // 👻 초기값 없어도?
+//        super.init(frame: frame)
+    init(backgroundColor: UIColor) {
+        self.customBackgroundColor = backgroundColor
+        super.init(frame: .zero)
         
         setUI()
     }
@@ -18,11 +25,20 @@ class PosterImageView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Design Methods
     func setUI() {
-        contentMode = .scaleAspectFill
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        backgroundColor = .tintColor.withAlphaComponent(0.1)
-        image = .paleIcon
+//        contentMode = .scaleAspectFill
+//        layer.cornerRadius = 10
+//        clipsToBounds = true
+        round(clipsToBounds: true)
+         
+        guard let customBackgroundColor = customBackgroundColor else {
+            return
+        }
+
+        backgroundColor = customBackgroundColor
+        
+//        backgroundColor = .tintColor.withAlphaComponent(0.1)
+//        image = .paleIcon
     }
 }

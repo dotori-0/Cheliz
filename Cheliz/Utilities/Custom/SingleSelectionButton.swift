@@ -34,7 +34,7 @@ class SingleSelectionButton: UIButton {
     }
     
     // MARK: - Setting Methods
-    func setButtonImage(isSelected: Bool) {
+    private func setButtonImage(isSelected: Bool) {
         let imageName = isSelected ? SFSymbol.circleInsetFilled : SFSymbol.circle
         buttonConfiguration.image = UIImage(systemName: imageName,
                                       withConfiguration: UIImage.SymbolConfiguration(pointSize: 18))
