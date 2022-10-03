@@ -13,6 +13,7 @@ class DetailView: BaseView {
         $0.register(WatchCountTableViewCell.self, forCellReuseIdentifier: WatchCountTableViewCell.reuseIdentifier)
         $0.register(RecordTableViewCell.self, forCellReuseIdentifier: RecordTableViewCell.reuseIdentifier)
         $0.register(AddRecordTableViewCell.self, forCellReuseIdentifier: AddRecordTableViewCell.reuseIdentifier)
+        $0.register(NotesTableViewCell.self, forCellReuseIdentifier: NotesTableViewCell.reuseIdentifier)
 //        $0.backgroundColor = .systemBackground
 //        $0.backgroundColor = .systemMint
         

@@ -41,7 +41,8 @@ class BackupAndRestoreViewController: BaseViewController {
     override func setUI() {
         super.setUI()
         
-        navigationItem.title = "백업 및 복원"
+//        navigationItem.title = Notice.backupAndRestore
+        navigationItem.title = SettingsTitle.Cell.backupAndRestore
     }
     
     // MARK: - Action Methods
@@ -65,7 +66,7 @@ class BackupAndRestoreViewController: BaseViewController {
     }
     
     @objc private func importBackupFileButtonClicked() {
-        guard let chelizUTType = UTType("com.app.cheliz") else {
+        guard let chelizUTType = UTType(Notice.chelizUTType) else {
             alert(title: Notice.errorTitle,
                   message: Notice.errorInFileExtensionMessage)
             return
@@ -144,7 +145,7 @@ extension BackupAndRestoreViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         // 선택한 파일의 URL
         guard let selectedFileURL = urls.first else {
-            alert(message: "선택하신 파일을 찾을 수 없습니다.")
+            alert(message: Notice.cannotFindSelectedFile)
             return
         }
         

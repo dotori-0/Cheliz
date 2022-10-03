@@ -66,7 +66,7 @@ class HomeViewController: BaseViewController {
         
 //        fetchRealm()
         sortAndFilter()
-        print("🫐", media.count)
+//        print("🫐", media.count)
     }
     
     // MARK: - Setting Methods
@@ -77,7 +77,7 @@ class HomeViewController: BaseViewController {
     
     // MARK: - Design Methods
     override func setUI() {
-        print("Home", #function)
+//        print("Home", #function)
         super.setUI()
         
         setNavigationItem()

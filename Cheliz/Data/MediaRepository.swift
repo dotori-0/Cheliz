@@ -212,7 +212,7 @@ struct MediaRepository: RealmProtocol {
         do {
             try realm.write {
                 print("⛔️ \(record.id)")
-                deletePeople(from: record)  // Person의 같이 본 회수 - 1
+                deletePeople(from: record)  // Person의 같이 본 횟수 - 1
                 realm.delete(record)        // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
             }
             completionHandler()
@@ -224,7 +224,7 @@ struct MediaRepository: RealmProtocol {
     
     func deleteRecords(of media: Media) {
         media.records.forEach { record in
-            deletePeople(from: record)  // Person의 같이 본 회수 - 1
+            deletePeople(from: record)  // Person의 같이 본 횟수 - 1
             realm.delete(record)        // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
         }
     }
@@ -262,6 +262,16 @@ struct MediaRepository: RealmProtocol {
         do {
             try realm.write {
                 record.watchedDate = date
+            }
+        } catch {
+            print(error)  // 👻 error handler
+        }
+    }
+    
+    func editNotes(of media: Media, to notes: String?) {
+        do {
+            try realm.write {
+                media.notes = notes
             }
         } catch {
             print(error)  // 👻 error handler

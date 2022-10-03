@@ -34,6 +34,8 @@ class DetailViewController: BaseViewController {
     var media: Media?
     var directors: [Credit] = []
     var cast: [Credit] = []
+    
+    var notes: String?
 
     
     // MARK: - Life Cycle
@@ -56,8 +58,15 @@ class DetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        headerView.infoContainerView.setGradient()  // 다크모드/라이트모드와는 상관이 없고 스와이프하다가 스와이프 취소하면 나타남
+//        headerView.infoContainerView.setGradient()  // 다크모드/라이트 모드와는 상관이 없고 스와이프하다가 스와이프 취소하면 나타남
         fetchRecords()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        print("🐝", #function)
+        
+//        editNotes()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -106,7 +115,7 @@ class DetailViewController: BaseViewController {
 //        records = repository.fetchRecords()  // ❔repository 없이 media.records로 해도 되긴 하는데 이렇게 분리하는 것이 더 나은지?
         guard let media = media else {
             print("No media received")
-            alert(message: "미디어 연결에 실패했습니다.")
+            alert(message: Notice.noMediaReceivedMessage)
             return
         }
         
@@ -122,11 +131,21 @@ class DetailViewController: BaseViewController {
 //        detailView.tableView.relo
     }
     
+    private func editNotes() {
+        guard let media = media else {
+            print("No media received")
+            alert(message: Notice.noMediaReceivedMessage)
+            return
+        }
+        
+        repository.editNotes(of: media, to: notes)
+    }
+    
     // MARK: - Networking Methods
     private func fetchCredits() {
         guard let media = media else {
             print("No media received")
-            alert(message: "미디어 연결에 실패했습니다.")
+            alert(message: Notice.noMediaReceivedMessage)
             return
         }
         
@@ -226,7 +245,7 @@ extension DetailViewController: UITableViewDataSource {
         
         guard let media = media else {
             print("No media received")
-            alert(message: "미디어 연결에 실패했습니다.")
+            alert(message: Notice.noMediaReceivedMessage)
             return UIView()
         }
         
@@ -280,11 +299,11 @@ extension DetailViewController: UITableViewDataSource {
         let section = RecordSection(rawValue: section)
         switch section {
             case .watchCount:
-                return "본 회수"
+                return Notice.watchCount
             case .record:
-                return "기록"
+                return Notice.record
             case .notes:
-                return "메모"
+                return Notice.notes
             case .none:
                 print("titleForHeaderInSection None")
         }
@@ -318,7 +337,7 @@ extension DetailViewController: UITableViewDataSource {
                     return 56
                 }
             case .notes:
-                return 56
+                return UIScreen.main.bounds.height / 4
             case .none:
                 return 0
         }
@@ -329,7 +348,7 @@ extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let media = media else {
             print("No media received")
-            alert(message: "미디어 연결에 실패했습니다.")
+            alert(message: Notice.noMediaReceivedMessage)
             return UITableViewCell()
         }
         
@@ -365,11 +384,13 @@ extension DetailViewController: UITableViewDataSource {
 //                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
                     recordCell.datePicker.date = media.records[recordCell.datePicker.tag].watchedDate  // 이것도 이렇게 태그값을 쓰는 것이 나은지?
                     recordCell.datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-                    
-                    
+
                     
                     // Tags Field
                     recordCell.tagsField.tag = indexPath.row
+                    
+                    if recordCell.tagsField.tag == records.count - 1 { recordCell.tagsField.becomeFirstResponder() }
+                    
 //                    print("🆕")
                     let record = records[recordCell.tagsField.tag]
                     print("🏷 \(recordCell.tagsField.tag)")
@@ -442,7 +463,25 @@ extension DetailViewController: UITableViewDataSource {
                 
 //                return indexPath.row == records.count ? addRecordCell : recordCell
             case .notes:
-                return UITableViewCell()
+                guard let notesCell = tableView.dequeueReusableCell(withIdentifier: NotesTableViewCell.reuseIdentifier,
+                                                                    for: indexPath) as? NotesTableViewCell else {
+                    print("Cannot find NotesTableViewCell")
+                    return UITableViewCell()
+                }
+                notesCell.notesTextView.delegate = self
+                
+//                if media.notes != nil {
+//                    notesCell.notesTextView.textColor = .label
+//                    notesCell.notesTextView.text = media.notes
+//                }
+                
+                if let notes = media.notes {
+                    print("📗", notes)
+                    notesCell.notesTextView.textColor = .label
+                    notesCell.notesTextView.text = notes
+                }
+                
+                return notesCell
             case .none:
                 print("cellForRowAt None")
         }
@@ -631,7 +670,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         let directorNames = directors.map { $0.name }
         let longestDirectorName = directorNames.reduce("") { $0.count > $1.count ? $0 : $1 }
 //        print("🐠", longestDirectorName)
-        let directorJob = "Director"
+        let directorJob = Notice.director
 
         let castNames = cast.map { $0.name }
         let longestCastName = castNames.reduce("") { $0.count > $1.count ? $0 : $1 }
@@ -871,7 +910,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     private func heightForOverview() -> CGFloat {
         guard let media = media else {
             print("No media received")
-            alert(message: "미디어 연결에 실패했습니다.")
+            alert(message: Notice.noMediaReceivedMessage)
             return 60
         }
         
@@ -920,6 +959,31 @@ extension UITableView {
             
 //            let newSize = header.systemLayoutSizeFitting(CGSize(width: self.bounds.width, height: 0))
             header.frame.size.height = headerViewHeight
+        }
+    }
+}
+
+
+extension DetailViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .secondaryLabel {
+            textView.text = nil
+            textView.textColor = .label
+        }
+        
+//        notes = textView.text
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("📗", textView.text)
+        notes = textView.text.isEmpty ? nil : textView.text
+        print("📒", notes)
+        
+        editNotes()
+        
+        if textView.text.isEmpty {
+            textView.text = Notice.addNotes
+            textView.textColor = .secondaryLabel
         }
     }
 }

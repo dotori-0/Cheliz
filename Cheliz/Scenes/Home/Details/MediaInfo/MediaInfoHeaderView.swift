@@ -472,9 +472,9 @@ class MediaInfoHeaderView: BaseView {
             
             if let runtime = runtime {
                 if self.releaseDateAndRuntimeLabel.text == "" {
-                    self.releaseDateAndRuntimeLabel.text = "\(runtime)분"  //  ･ ⸱ •
+                    self.releaseDateAndRuntimeLabel.text = "\(runtime)\(Notice.minute)"  //  ･ ⸱ •
                 } else {
-                    self.releaseDateAndRuntimeLabel.text = "\(self.releaseDateAndRuntimeLabel.text ?? "") ･ \(runtime)분"  //  ･ ⸱ •
+                    self.releaseDateAndRuntimeLabel.text = "\(self.releaseDateAndRuntimeLabel.text ?? "") ･ \(runtime)\(Notice.minute)"  //  ･ ⸱ •
                 }
             }
             
@@ -489,7 +489,7 @@ class MediaInfoHeaderView: BaseView {
     //            genresLabel.text! += "\($0)"
                 
                 
-                self.genresLabel.text = "\(self.genresLabel.text ?? "")\(genresDict[$0] ?? "")  "
+                self.genresLabel.text = "\(self.genresLabel.text ?? "")\(genresDict[$0] ?? "")  "  // 👻 joined 써 보기
             }
         }
     }

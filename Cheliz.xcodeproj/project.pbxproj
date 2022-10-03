@@ -57,6 +57,7 @@
 		0A7FFD7B28E997BB00AB6DDF /* WSTagsField in Frameworks */ = {isa = PBXBuildFile; productRef = 0A7FFD7A28E997BB00AB6DDF /* WSTagsField */; };
 		0A7FFD7D28E9A9A100AB6DDF /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */; };
 		0A7FFD8928E9EAB800AB6DDF /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A7FFD8828E9EAB800AB6DDF /* IQKeyboardManagerSwift */; };
+		0A7FFD8B28EAD1AC00AB6DDF /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD8A28EAD1AC00AB6DDF /* NotesTableViewCell.swift */; };
 		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
 		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
 		0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */; };
@@ -141,6 +142,7 @@
 		0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAndRecordPassableDatePicker.swift; sourceTree = "<group>"; };
 		0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordTableViewCell.swift; sourceTree = "<group>"; };
 		0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
+		0A7FFD8A28EAD1AC00AB6DDF /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
 		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				0A7FFD6B28E8927F00AB6DDF /* WatchCountTableViewCell.swift */,
 				0A7FFD7328E8B5A200AB6DDF /* RecordTableViewCell.swift */,
 				0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */,
+				0A7FFD8A28EAD1AC00AB6DDF /* NotesTableViewCell.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */,
 				0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */,
 				0A8AA9D528CF64A400EB2AF8 /* HomeView.swift in Sources */,
+				0A7FFD8B28EAD1AC00AB6DDF /* NotesTableViewCell.swift in Sources */,
 				0A439CAD28E1899F0032A687 /* BackupAndRestoreButton.swift in Sources */,
 				0AB10D4628DC260C007033E2 /* SFSymbol.swift in Sources */,
 				0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */,

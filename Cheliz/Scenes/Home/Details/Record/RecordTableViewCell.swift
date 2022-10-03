@@ -17,13 +17,13 @@ class RecordTableViewCell: BaseTableViewCell {
     let tagsField = WSTagsField().then {
         $0.spaceBetweenTags  = 5
         $0.spaceBetweenLines = 13
-        $0.font = .meringue(size: 15)
+        $0.font = .meringue(size: 14)
 //        $0.textColor = .secondaryLabel
         $0.tintColor = .tintColor.withAlphaComponent(0.3)
         $0.selectedColor = .tintColor.withAlphaComponent(0.5)
         $0.delimiter = " "
 //        $0.isDelimiterVisible = true
-        $0.placeholder = "  같이 본 사람을 입력해 보세요"
+        $0.placeholder = Notice.addPeopleWatchedWith
 //        $0.placeholderColor = .tintColor.withAlphaComponent(0.5)
         $0.placeholderColor = .secondaryLabel
         $0.placeholderAlwaysVisible = false
@@ -90,7 +90,7 @@ class RecordTableViewCell: BaseTableViewCell {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .compact
 //        datePicker.calendar = Calendar(identifier: .gregorian)
-        datePicker.locale = Locale(identifier: "ko")  // 👻 다국어 대응 시 수정하기
+        datePicker.locale = Locale(identifier: Notice.korean)  // 👻 다국어 대응 시 수정하기
 //        datePicker.maximumDate
     }
     
