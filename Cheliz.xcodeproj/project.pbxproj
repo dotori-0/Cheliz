@@ -58,6 +58,10 @@
 		0A7FFD7D28E9A9A100AB6DDF /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */; };
 		0A7FFD8928E9EAB800AB6DDF /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A7FFD8828E9EAB800AB6DDF /* IQKeyboardManagerSwift */; };
 		0A7FFD8B28EAD1AC00AB6DDF /* NotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD8A28EAD1AC00AB6DDF /* NotesTableViewCell.swift */; };
+		0A7FFD8E28EAF1E900AB6DDF /* FontTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD8D28EAF1E900AB6DDF /* FontTableViewCell.swift */; };
+		0A7FFD9028EAF1FD00AB6DDF /* FontsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD8F28EAF1FD00AB6DDF /* FontsViewController.swift */; };
+		0A7FFD9228EAF20D00AB6DDF /* FontsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD9128EAF20D00AB6DDF /* FontsView.swift */; };
+		0A7FFD9428EAF5B300AB6DDF /* SingleSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */; };
 		0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */; };
 		0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */; };
 		0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */; };
@@ -143,6 +147,10 @@
 		0A7FFD7728E963EC00AB6DDF /* AddRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordTableViewCell.swift; sourceTree = "<group>"; };
 		0A7FFD7C28E9A9A000AB6DDF /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		0A7FFD8A28EAD1AC00AB6DDF /* NotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewCell.swift; sourceTree = "<group>"; };
+		0A7FFD8D28EAF1E900AB6DDF /* FontTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTableViewCell.swift; sourceTree = "<group>"; };
+		0A7FFD8F28EAF1FD00AB6DDF /* FontsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsViewController.swift; sourceTree = "<group>"; };
+		0A7FFD9128EAF20D00AB6DDF /* FontsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsView.swift; sourceTree = "<group>"; };
+		0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleSelectionButton.swift; path = Custom/SingleSelectionButton.swift; sourceTree = "<group>"; };
 		0A8AA9A628CE1B1000EB2AF8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		0A8AA9A828CE1C7A00EB2AF8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		0A8AA9AA28CE1E9600EB2AF8 /* TMDBAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBAPIManager.swift; sourceTree = "<group>"; };
@@ -298,6 +306,7 @@
 				0A439C7D28E0610C0032A687 /* SettingsTableViewCell.swift */,
 				0A439C7F28E06CB30032A687 /* SettingsView.swift */,
 				0A439CA728E183410032A687 /* BackupAndRestore */,
+				0A7FFD8C28EAF1BE00AB6DDF /* Fonts */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -331,6 +340,16 @@
 			path = Record;
 			sourceTree = "<group>";
 		};
+		0A7FFD8C28EAF1BE00AB6DDF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0A7FFD8D28EAF1E900AB6DDF /* FontTableViewCell.swift */,
+				0A7FFD8F28EAF1FD00AB6DDF /* FontsViewController.swift */,
+				0A7FFD9128EAF20D00AB6DDF /* FontsView.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		0A8AA9A328CE1B0700EB2AF8 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +380,7 @@
 				0A8AA9D628D0761100EB2AF8 /* Protocols */,
 				0A8AA9CA28CF2D1300EB2AF8 /* Extensions */,
 				0A8AA9B928CF249F00EB2AF8 /* Base */,
+				0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -537,10 +557,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7FFD8E28EAF1E900AB6DDF /* FontTableViewCell.swift in Sources */,
 				0A7FFD7828E963EC00AB6DDF /* AddRecordTableViewCell.swift in Sources */,
 				0A7FFD7D28E9A9A100AB6DDF /* UIScrollView+Extension.swift in Sources */,
 				0AB10D2C28D75A55007033E2 /* MediaRepository.swift in Sources */,
 				0A22A7FE28D0DBED002D2C34 /* SearchViewController.swift in Sources */,
+				0A7FFD9428EAF5B300AB6DDF /* SingleSelectionButton.swift in Sources */,
 				0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */,
 				0A439C8228E0BA8F0032A687 /* SettingsTitle.swift in Sources */,
 				0A7FFD7228E8A00C00AB6DDF /* MediaPassableStepper.swift in Sources */,
@@ -553,6 +575,7 @@
 				0A8AA9A728CE1B1000EB2AF8 /* APIKey.swift in Sources */,
 				0A31E09B28E5610700D0C79B /* Genres.swift in Sources */,
 				0AB10D3D28DA39F7007033E2 /* FilterOption.swift in Sources */,
+				0A7FFD9228EAF20D00AB6DDF /* FontsView.swift in Sources */,
 				0A31E08C28E3463200D0C79B /* Person.swift in Sources */,
 				0A31E0A328E6E77500D0C79B /* Credit.swift in Sources */,
 				0A439C7E28E0610C0032A687 /* SettingsTableViewCell.swift in Sources */,
@@ -573,6 +596,7 @@
 				0A22A80428D1CC85002D2C34 /* SearchCollectionViewCell.swift in Sources */,
 				0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */,
 				0A8AA9BB28CF24A900EB2AF8 /* BaseViewController.swift in Sources */,
+				0A7FFD9028EAF1FD00AB6DDF /* FontsViewController.swift in Sources */,
 				0A22A82128D24A7A002D2C34 /* MediaModel.swift in Sources */,
 				0AB10D3028D75BD8007033E2 /* RealmKey.swift in Sources */,
 				0A8AA9BD28CF24FE00EB2AF8 /* BaseView.swift in Sources */,

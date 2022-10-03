@@ -71,6 +71,9 @@ enum Notice {
     
     // MARK: - Settings
     static let settings = "설정"
+    static let fontSettings = "폰트 설정"
+    static let systemFont = "시스템 폰트"
+    static let baMeringue = "Ba머랭머랭"
     static let updatePlanned = "업데이트 예정입니다."
     static let chelizUTType = "com.app.cheliz"
 }

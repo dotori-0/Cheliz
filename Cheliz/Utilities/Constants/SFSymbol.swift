@@ -18,6 +18,7 @@ enum SFSymbol {
     static let sort = "arrow.up.arrow.down"
     static let filter = "line.3.horizontal.decrease"
     static let circle = "circle"
+    static let circleInsetFilled = "circle.inset.filled"
     static let checkmark = "checkmark.circle.fill"
     static let magnifyingGlass = "magnifyingglass"
     static let trash = "trash.fill"

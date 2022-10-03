@@ -17,7 +17,7 @@ class AddRecordTableViewCell: BaseTableViewCell {
 //        configuration.baseBackgroundColor = UIColor.tintColor.withAlphaComponent(0.5)
 //        configuration.baseBackgroundColor = .systemYellow
         configuration.baseBackgroundColor = .clear
-        configuration.baseForegroundColor = UIColor.tintColor.withAlphaComponent(0.5)
+        configuration.baseForegroundColor = .tintColor.withAlphaComponent(0.5)
 //        configuration.baseForegroundColor = UIColor.tintColor
 //        configuration.baseForegroundColor = .systemPink
         

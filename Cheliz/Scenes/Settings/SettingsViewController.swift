@@ -98,7 +98,10 @@ extension SettingsViewController: UITableViewDataSource {
         
         return cell
     }
-    
+}
+
+// MARK: - UITableViewDelegate
+extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56
     }
@@ -112,24 +115,23 @@ extension SettingsViewController: UITableViewDataSource {
                 transit(to: BackupAndRestoreViewController(), transitionStyle: .push)
             case .language:
                 print("language")
-                self.view.makeToast(Notice.updatePlanned,
-                                    duration: 1,
-                                    position: .center, style: self.toastStyle)
+                view.makeToast(Notice.updatePlanned,
+                               duration: 1,
+                               position: .center, style: self.toastStyle)
             case .design:
                 print("design")
-                self.view.makeToast(Notice.updatePlanned,
-                                    duration: 1,
-                                    position: .center, style: self.toastStyle)
+                if indexPath.row == 0 {
+                    transit(to: FontsViewController(), transitionStyle: .push)
+                } else {
+                    view.makeToast(Notice.updatePlanned,
+                                   duration: 1,
+                                   position: .center, style: self.toastStyle)
+                }
             default:
                 print("didSelectRowAt - default")
-                self.view.makeToast(Notice.updatePlanned,
-                                    duration: 1,
-                                    position: .center, style: self.toastStyle)
+                view.makeToast(Notice.updatePlanned,
+                               duration: 1,
+                               position: .center, style: self.toastStyle)
         }
     }
-}
-
-// MARK: - UITableViewDelegate
-extension SettingsViewController: UITableViewDelegate {
-    
 }
