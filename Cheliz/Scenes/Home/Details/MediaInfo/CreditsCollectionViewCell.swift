@@ -9,13 +9,14 @@ import UIKit
 
 class CreditsCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-    let profileImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-//        $0.layer.cornerRadius = $0.bounds.width / 2
-//        $0.layer.cornerRadius = $0.frame.width / 2
-//        $0.layer.cornerRadius = 10
-        $0.clipsToBounds = true
-    }
+    let profileView = ProfileView()
+//    let profileImageView = UIImageView().then {
+//        $0.contentMode = .scaleAspectFill
+////        $0.layer.cornerRadius = $0.bounds.width / 2
+////        $0.layer.cornerRadius = $0.frame.width / 2
+////        $0.layer.cornerRadius = 10
+//        $0.clipsToBounds = true
+//    }
     
     let nameLabel = CustomLabel(textSize: 14).then {
         $0.numberOfLines = 0
@@ -41,24 +42,31 @@ class CreditsCollectionViewCell: BaseCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        profileImageView.image = nil  // nil 처리를 할 경우 스크롤을 빨리 하면 이미지가 아예 안 나오는 건가.. . . .?
+        profileView.profileImageView.image = nil  // nil 처리를 할 경우 스크롤을 빨리 하면 이미지가 아예 안 나오는 건가.. . . .?
         nameLabel.text = nil
         characterLabel.text = nil
+        
+        // 이미지 뷰 크기를 잡은 후 깎아야 하므로 async 처리
+        DispatchQueue.main.async {
+            self.profileView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+            self.profileView.layer.cornerRadius = self.profileView.frame.width / 2
+        }
     }
     
     // MARK: - Design Methods
     override func setUI() {
 //        print("🏝")
         
-        [profileImageView, nameLabel, characterLabel].forEach {
+        [profileView, nameLabel, characterLabel].forEach {
             contentView.addSubview($0)
         }
         
 //        backgroundColor = .systemPink
-        profileImageView.backgroundColor = .systemMint
+//        profileView.backgroundColor = .systemMint
 //        nameLabel.text = "이름 이름 이름 이름 이름 이름"
 //        nameLabel.backgroundColor = .systemYellow
 //        characterLabel.text = "배역 배역 배역 배역 배역 배역 배역"
@@ -66,22 +74,22 @@ class CreditsCollectionViewCell: BaseCollectionViewCell {
         
         
         // 이미지 뷰 크기를 잡은 후 깎아야 하므로 async 처리
-        DispatchQueue.main.async {
-            self.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
-            self.profileImageView.layer.cornerRadius = self.profileImageView.frame.width / 2
-        }
+//        DispatchQueue.main.async {
+//            self.profileView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+//            self.profileView.layer.cornerRadius = self.profileView.frame.width / 2
+//        }
     }
     
     override func setConstraints() {
-        profileImageView.snp.makeConstraints { make in
+        profileView.snp.makeConstraints { make in
             make.top.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.9)
-            make.height.equalTo(profileImageView.snp.width)
+            make.height.equalTo(profileView.snp.width)
         }
         
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(profileImageView.snp.bottom).offset(spacingBetweenProfileImageAndName)
+            make.top.equalTo(profileView.snp.bottom).offset(spacingBetweenProfileImageAndName)
             make.leading.trailing.equalToSuperview()
         }
         
@@ -96,7 +104,7 @@ class CreditsCollectionViewCell: BaseCollectionViewCell {
     func showCreditInfo(of credit: Credit) {
         if let profilePath = credit.profilePath {
             let url = URL(string: Endpoint.imageConfigurationURL + profilePath)
-            profileImageView.kf.setImage(with: url)
+            profileView.profileImageView.kf.setImage(with: url)
         }
         
         nameLabel.text = credit.name

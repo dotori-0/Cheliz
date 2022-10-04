@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A21FD2128EBF4200001D0B1 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21FD2028EBF4200001D0B1 /* ProfileImageView.swift */; };
+		0A21FD2328EBF4560001D0B1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21FD2228EBF4560001D0B1 /* ProfileView.swift */; };
 		0A22A7FB28D0D6F1002D2C34 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22A7FA28D0D6F1002D2C34 /* TabBarController.swift */; };
 		0A22A7FE28D0DBED002D2C34 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22A7FD28D0DBED002D2C34 /* SearchViewController.swift */; };
 		0A22A80028D0DC0E002D2C34 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22A7FF28D0DC0E002D2C34 /* SearchView.swift */; };
@@ -99,6 +101,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A21FD2028EBF4200001D0B1 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		0A21FD2228EBF4560001D0B1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0A22A7FA28D0D6F1002D2C34 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0A22A7FD28D0DBED002D2C34 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0A22A7FF28D0DC0E002D2C34 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -440,13 +444,15 @@
 			isa = PBXGroup;
 			children = (
 				0AB10D3F28DA4069007033E2 /* MediaPassableButton.swift */,
-				0A439C7428E05A400032A687 /* PosterImageView.swift */,
 				0A439CAC28E1899F0032A687 /* BackupAndRestoreButton.swift */,
 				0A31E09828E4AB2900D0C79B /* CustomLabel.swift */,
 				0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */,
 				0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */,
 				0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */,
+				0A439C7428E05A400032A687 /* PosterImageView.swift */,
 				0A7FFD9528EB572300AB6DDF /* PosterView.swift */,
+				0A21FD2028EBF4200001D0B1 /* ProfileImageView.swift */,
+				0A21FD2228EBF4560001D0B1 /* ProfileView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				0A22A7FE28D0DBED002D2C34 /* SearchViewController.swift in Sources */,
 				0A7FFD9428EAF5B300AB6DDF /* SingleSelectionButton.swift in Sources */,
 				0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */,
+				0A21FD2328EBF4560001D0B1 /* ProfileView.swift in Sources */,
 				0A439C8228E0BA8F0032A687 /* SettingsTitle.swift in Sources */,
 				0A7FFD7228E8A00C00AB6DDF /* MediaPassableStepper.swift in Sources */,
 				0A8AA9AB28CE1E9600EB2AF8 /* TMDBAPIManager.swift in Sources */,
@@ -593,6 +600,7 @@
 				0A439CAF28E18E950032A687 /* BackupFileTableViewCell.swift in Sources */,
 				0A439CBE28E1EB5C0032A687 /* DateFormatterHelper.swift in Sources */,
 				0A439CB328E19D9F0032A687 /* Shadow+Extension.swift in Sources */,
+				0A21FD2128EBF4200001D0B1 /* ProfileImageView.swift in Sources */,
 				0A31E09528E4A45100D0C79B /* DetailView.swift in Sources */,
 				0AB10D4028DA4069007033E2 /* MediaPassableButton.swift in Sources */,
 				0A31E09328E4A42100D0C79B /* DetailViewController.swift in Sources */,

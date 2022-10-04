@@ -123,7 +123,9 @@ class HomeViewController: BaseViewController {
                 self.repository.delete(media: self.media[row],
                                        completionHandler: deleteCompletionHandler,
                                        errorHandler: deleteErrorHandler)
-                self.homeView.collectionView.reloadData()
+//                self.homeView.collectionView.reloadData()  // 👻 deleteRows 해야 하는 건지?
+                self.homeView.collectionView.deleteItems(at: [IndexPath(item: row, section: 0)])
+//                detailView.tableView.deleteRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)  // tableView 예시
             }
         }
     }

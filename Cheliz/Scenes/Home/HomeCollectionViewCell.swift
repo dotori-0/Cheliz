@@ -59,19 +59,20 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     
 
     // MARK: - Initializers
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        posterView.posterImageView.image = nil
-        // ❔👻 다른 것들도 nil 처리를 해야 할지?
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Life Cycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        posterView.posterImageView.image = nil
+        // ❔👻 다른 것들도 nil 처리를 해야 할지?
     }
     
     // MARK: - Design Methods

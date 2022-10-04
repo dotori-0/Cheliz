@@ -639,8 +639,11 @@ extension DetailViewController: UICollectionViewDataSource {
         }
         
         DispatchQueue.main.async {
-            cell.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+//            cell.profileView.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+//            cell.profileView.profileImageView.layer.cornerRadius = cell.profileView.profileImageView.frame.width / 2
+            
+            cell.profileView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+            cell.profileView.layer.cornerRadius = cell.profileView.frame.width / 2
         }
         
         return cell
@@ -796,8 +799,8 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         }
         
         DispatchQueue.main.async {
-            cell.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
-            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width / 2
+            cell.profileView.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+            cell.profileView.profileImageView.layer.cornerRadius = cell.profileView.profileImageView.frame.width / 2
         }
         
         headerView.updateConstraintsOfCollectionViews(directorsHeight: directorsHeight, castHeight: castHeight)
