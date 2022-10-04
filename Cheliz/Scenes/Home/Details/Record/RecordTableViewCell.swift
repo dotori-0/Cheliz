@@ -72,8 +72,12 @@ class RecordTableViewCell: BaseTableViewCell {
         // MARK: - Life Cycle
     override func prepareForReuse() {
         super.prepareForReuse()
+        print("♻️", #function)
         
 //        datePicker.record = nil
+        
+        datePicker.date = Date.now
+        
         tagsField.onDidRemoveTag = nil
         tagsField.removeTags()  // 앞에서 realm에서 없어져 버림..
 //        tagsField.rem
@@ -98,7 +102,7 @@ class RecordTableViewCell: BaseTableViewCell {
         datePicker.snp.makeConstraints { make in
             make.bottom.equalTo(contentView.snp.centerY).offset(-2)
             make.leading.equalToSuperview().offset(24)
-            make.width.equalToSuperview().multipliedBy(0.29)  // 0.28 숫자 짤림 2022.10.28  |  0.29는 10000년 되어야 짤림
+//            make.width.equalToSuperview().multipliedBy(0.29)  // 0.28 숫자 짤림 2022.10.28  |  0.29는 10000년 되어야 짤림
         }
         
         tagsField.snp.makeConstraints { make in

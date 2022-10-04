@@ -8,6 +8,7 @@
 import Foundation
 
 enum Notice {
+    static let home = "홈"
     static let cancel = "취소"
     static let search = "검색"
     static let searchMedia = "타이틀을 입력해 보세요"

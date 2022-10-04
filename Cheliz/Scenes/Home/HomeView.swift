@@ -25,6 +25,17 @@ class HomeView: BaseView {
 
         $0.addShadow(radius: 20, opacity: 0.4)
     }
+    
+    let searchAndAddLabel = CustomLabel(textSize: 15, textColor: .secondaryLabel).then {
+//        $0.text = "왼쪽 하단의 돋보기 아이콘을 눌러\n\n보고 싶은 미디어를 검색하고\n리스트에 추가해 보세요!"
+        $0.text = "왼쪽 하단의 돋보기 아이콘을 눌러\n보고 싶은 미디어를 검색해 보세요"
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+    }
+//    let searchAndAddLabel = UILabel().then { label in
+//        label.text = "추가ㅐㅎ"
+//        label.textColor = .label
+//    }
 
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -37,7 +48,7 @@ class HomeView: BaseView {
     
     // MARK: - Design Methods
     override func setUI() {
-        [collectionView, searchButton].forEach {
+        [collectionView, searchButton, searchAndAddLabel].forEach {
             addSubview($0)
         }
 //        setCollectionViewLayout()
@@ -62,6 +73,12 @@ class HomeView: BaseView {
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-24)
             make.width.equalToSuperview().multipliedBy(0.15)
             make.height.equalTo(searchButton.snp.width)
+        }
+        
+        searchButton.isHidden = true
+        
+        searchAndAddLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     

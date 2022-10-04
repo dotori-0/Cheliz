@@ -112,7 +112,10 @@ extension SettingsViewController: UITableViewDelegate {
         let section = SettingsSection(rawValue: indexPath.section)
         switch section {
             case .data:
-                transit(to: BackupAndRestoreViewController(), transitionStyle: .push)
+                view.makeToast(Notice.updatePlanned,
+                               duration: 1,
+                               position: .center, style: self.toastStyle)
+//                transit(to: BackupAndRestoreViewController(), transitionStyle: .push)
             case .language:
                 print("language")
                 view.makeToast(Notice.updatePlanned,

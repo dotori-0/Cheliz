@@ -88,7 +88,7 @@ class HomeViewController: BaseViewController {
     }
     
     private func setNavigationItem() {
-        navigationItem.title = "나의 리스트"
+        navigationItem.title = Notice.home
         let sortButton = UIBarButtonItem(image: UIImage(systemName: SFSymbol.sort), primaryAction: nil, menu: sortMenu())
         let filterButton = UIBarButtonItem(image: UIImage(systemName: SFSymbol.filter), primaryAction: nil, menu: filterMenu())
         navigationItem.rightBarButtonItems = [filterButton, sortButton]
@@ -105,6 +105,7 @@ class HomeViewController: BaseViewController {
     }
     
     @objc private func searchButtonClicked() {
+        print(#function)
 //        let searchVC = SearchViewController()
 //        transit(to: searchVC, transitionStyle: .push)
     }
@@ -123,8 +124,9 @@ class HomeViewController: BaseViewController {
                 self.repository.delete(media: self.media[row],
                                        completionHandler: deleteCompletionHandler,
                                        errorHandler: deleteErrorHandler)
+                self.sortAndFilter()
 //                self.homeView.collectionView.reloadData()  // 👻 deleteRows 해야 하는 건지?
-                self.homeView.collectionView.deleteItems(at: [IndexPath(item: row, section: 0)])
+//                self.homeView.collectionView.deleteItems(at: [IndexPath(item: row, section: 0)])
 //                detailView.tableView.deleteRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)  // tableView 예시
             }
         }
@@ -220,6 +222,17 @@ class HomeViewController: BaseViewController {
     
     private func sortAndFilter() {
         media = repository.sortAndFilter()
+        
+        print(media)
+        print(media.count)
+        print("Is media empty? \(media.isEmpty)")
+        
+        if !media.isEmpty {
+            print("media is not empty")
+            homeView.searchAndAddLabel.isHidden = true
+        } else {
+            homeView.searchAndAddLabel.isHidden = false
+        }
     }
 }
 
