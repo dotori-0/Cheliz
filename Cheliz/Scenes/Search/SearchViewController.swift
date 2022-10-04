@@ -232,7 +232,7 @@ extension SearchViewController: UISearchBarDelegate {
         
 //        searchBar.text = nil  // nil로 지정해도 updateSearchResults에서 Optional("")로 잡힘
         searchResults = []
-//        searchView.collectionView.reloadData()
+        searchView.collectionView.reloadData()
         isCancelClicked = true
     }
 }
