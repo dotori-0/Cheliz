@@ -10,6 +10,7 @@ import RealmSwift
 
 class DetailViewController: BaseViewController {
     // MARK: - Properties
+    var isFromSearchView = false
     let detailView = DetailView()
 //    let headerView = MediaInfoHeaderView()
     lazy var directorItemHeight = setDirectorItemHeight()
@@ -52,13 +53,13 @@ class DetailViewController: BaseViewController {
         
 //        setHeaderView()
         setTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
 //        headerView.infoContainerView.setGradient()  // 다크모드/라이트 모드와는 상관이 없고 스와이프하다가 스와이프 취소하면 나타남
+        if isFromSearchView { return }
         fetchRecords()
     }
     
@@ -237,6 +238,7 @@ class DetailViewController: BaseViewController {
 // MARK: - UITableViewDataSource
 extension DetailViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        if isFromSearchView { return 1 }
         return 4
     }
     

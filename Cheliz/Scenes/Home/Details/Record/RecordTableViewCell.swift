@@ -76,7 +76,7 @@ class RecordTableViewCell: BaseTableViewCell {
         
 //        datePicker.record = nil
         
-        datePicker.date = Date.now
+//        datePicker.date = Date.now
         
         tagsField.onDidRemoveTag = nil
         tagsField.removeTags()  // 앞에서 realm에서 없어져 버림..
@@ -96,6 +96,7 @@ class RecordTableViewCell: BaseTableViewCell {
 //        datePicker.calendar = Calendar(identifier: .gregorian)
         datePicker.locale = Locale(identifier: Notice.korean)  // 👻 다국어 대응 시 수정하기
 //        datePicker.maximumDate
+//        datePicker.backgroundColor = .systemYellow
     }
     
     override func setConstraints() {

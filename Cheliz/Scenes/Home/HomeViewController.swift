@@ -113,7 +113,8 @@ class HomeViewController: BaseViewController {
     private func setDeleteAction() {
         let deleteCompletionHandler = { self.homeView.makeToast(Notice.deleteSucceeded,
                                                                 duration: 1,
-                                                                position: .center, style: self.toastStyle) }
+                                                                position: .center, style: self.toastStyle)
+                                        self.sortAndFilter() }
         let deleteErrorHandler = { self.alert(title: Notice.errorTitle,
                                               message: Notice.errorInDeleteMessage) }
         
@@ -124,7 +125,7 @@ class HomeViewController: BaseViewController {
                 self.repository.delete(media: self.media[row],
                                        completionHandler: deleteCompletionHandler,
                                        errorHandler: deleteErrorHandler)
-                self.sortAndFilter()
+//                self.sortAndFilter()
 //                self.homeView.collectionView.reloadData()  // 👻 deleteRows 해야 하는 건지?
 //                self.homeView.collectionView.deleteItems(at: [IndexPath(item: row, section: 0)])
 //                detailView.tableView.deleteRows(at: [IndexPath(row: row, section: RecordSection.record.rawValue)], with: withAnimation ? .fade : .none)  // tableView 예시

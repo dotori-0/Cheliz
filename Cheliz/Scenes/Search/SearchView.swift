@@ -18,6 +18,12 @@ class SearchView: BaseView {
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout.init()).then {
         $0.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: SearchCollectionViewCell.reuseIdentifier)
     }
+    
+    let searchAndAddLabel = CustomLabel(textSize: 15, textColor: .secondaryLabel).then {
+        $0.text = "타이틀로 검색 후 리스트에 추가해 보세요"
+        $0.numberOfLines = 0
+        $0.textAlignment = .center
+    }
 
     // MARK: - Life Cycle
     override init(frame: CGRect) {
@@ -31,7 +37,7 @@ class SearchView: BaseView {
     
     // MARK: - Design Methods
     override func setUI() {
-        [collectionView].forEach {
+        [collectionView, searchAndAddLabel].forEach {
             addSubview($0)
         }
         setCollectionViewLayout()
@@ -44,6 +50,10 @@ class SearchView: BaseView {
         
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        searchAndAddLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
     }
     

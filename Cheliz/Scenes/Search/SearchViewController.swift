@@ -17,6 +17,7 @@ class SearchViewController: BaseViewController {
     private var page = 1
     private var totalPages = 0
     private var isPaginating = false
+    private var isCancelClicked = false
     
     
     // MARK: - Life Cycle
@@ -29,6 +30,7 @@ class SearchViewController: BaseViewController {
         
         setCollectionView()
         setSearchController()
+        setSearchBar()
     }
     
     // MARK: - Setting Methods
@@ -43,6 +45,10 @@ class SearchViewController: BaseViewController {
     private func setSearchController() {
         searchView.searchController.searchResultsUpdater = self
 //        searchView.searchController.searchBar.placeholder = Notice.cancel
+    }
+    
+    private func setSearchBar() {
+        searchView.searchController.searchBar.delegate = self
     }
     
     // MARK: - Design Methods
@@ -68,6 +74,27 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Search Methods
     private func search() {
+        print("🔍")
+        searchView.searchAndAddLabel.isHidden = true
+//        if !searchResults.isEmpty {
+//            print("searchResults is not empty")
+//            searchView.searchAndAddLabel.isHidden = true
+//        } else {
+//            searchView.searchAndAddLabel.isHidden = false
+//        }
+        
+        if isCancelClicked {
+            searchView.searchAndAddLabel.isHidden = false
+            isCancelClicked = false
+            return
+        } else {
+            searchView.searchAndAddLabel.isHidden = true
+        }
+        
+//        isCancelClicked = false
+        
+        print("searchText: \(searchText)")
+        if searchText.isEmpty { return }
         print("isPaginating: \(isPaginating)")
         TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText, page: page) { data in
             print("fetched page \(self.page)")
@@ -170,13 +197,20 @@ extension SearchViewController: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        detailVC.isFromSearchView = true
+        detailVC.media = searchResults[indexPath.row]  // 👻 item?
+        
+        transit(to: detailVC, transitionStyle: .push)
+    }
 }
 
 // MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         print(#function)
+        print(searchController.searchBar.text)
         guard let text = searchController.searchBar.text else {
             print("No text")  // 👻 화면에 검색하라고 띄워 주기
             return
@@ -186,7 +220,20 @@ extension SearchViewController: UISearchResultsUpdating {
         page = 1
         searchText = text.lowercased()
         if !searchResults.isEmpty { searchView.collectionView.scrollToItem(at: [0, 0], at: .top, animated: true) }
+//        isCancelClicked = false
         search()
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print(#function)
+        
+//        searchBar.text = nil  // nil로 지정해도 updateSearchResults에서 Optional("")로 잡힘
+        searchResults = []
+//        searchView.collectionView.reloadData()
+        isCancelClicked = true
     }
 }
 
