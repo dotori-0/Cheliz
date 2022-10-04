@@ -58,11 +58,15 @@ class HomeViewController: BaseViewController {
 //        print("🤯", encodedJson)
 //        createJSONBackupFile()
 //        saveBackupFile()  //
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("🏡", #function)
+        
+        tabBarController?.tabBar.isHidden = false
         
 //        fetchRealm()
         sortAndFilter()

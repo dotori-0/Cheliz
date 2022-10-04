@@ -33,6 +33,12 @@ class SearchViewController: BaseViewController {
         setSearchBar()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        print("🚫", #function)
+    }
+    
     // MARK: - Setting Methods
     private func setCollectionView() {
         searchView.collectionView.dataSource = self

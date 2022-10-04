@@ -46,6 +46,9 @@ class DetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if !isFromSearchView { tabBarController?.tabBar.isHidden = true }
+        
         fetchCredits()
         
 //        directorItemHeight = setDirectorItemHeight()

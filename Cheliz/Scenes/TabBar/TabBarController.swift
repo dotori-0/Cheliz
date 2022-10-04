@@ -11,6 +11,7 @@ class TabBarController: UITabBarController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegate = self
         
         let searchVC = SearchViewController()
         let searchNC = UINavigationController(rootViewController: searchVC)
@@ -39,7 +40,6 @@ class TabBarController: UITabBarController {
         let settingsNC = UINavigationController(rootViewController: settingsVC)
         settingsNC.tabBarItem.image = UIImage(systemName: SFSymbol.settings,
                                               withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
-        
         
         // 두 가지 방법 모두 O
 //        setViewControllers([homeNC], animated: true)
@@ -81,4 +81,17 @@ class TabBarController: UITabBarController {
 extension TabBarController: UITabBarControllerDelegate {
 //    tabbar
 //    tabb
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        print("🥯")
+        let index = tabBarController.selectedIndex
+        if index != 0 {
+            let searchVC = SearchViewController()
+            let searchNC = UINavigationController(rootViewController: searchVC)
+            searchNC.tabBarItem.image = UIImage(systemName: SFSymbol.magnifyingGlass,
+                                                 withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
+            
+            tabBarController.viewControllers?[0] = searchNC
+        }
+    }
 }
