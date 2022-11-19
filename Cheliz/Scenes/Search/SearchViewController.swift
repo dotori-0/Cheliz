@@ -80,7 +80,7 @@ class SearchViewController: BaseViewController {
     
     // MARK: - Search Methods
     private func search() {
-        print("🔍")
+//        print("🔍")
         searchView.searchAndAddLabel.isHidden = true
 //        if !searchResults.isEmpty {
 //            print("searchResults is not empty")
@@ -99,11 +99,11 @@ class SearchViewController: BaseViewController {
         
 //        isCancelClicked = false
         
-        print("searchText: \(searchText)")
+//        print("searchText: \(searchText)")
         if searchText.isEmpty { return }
-        print("isPaginating: \(isPaginating)")
+//        print("isPaginating: \(isPaginating)")
         TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText, page: page) { data in
-            print("fetched page \(self.page)")
+//            print("fetched page \(self.page)")
 //            self.searchResults = ParsingManager.parseData(data)
 //            self.searchResults = ParsingManager.parseDataToRealmModel(data)
             let data = ParsingManager.parseDataToRealmModel(data)
@@ -215,7 +215,7 @@ extension SearchViewController: UICollectionViewDelegate {
 // MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(#function)
+//        print(#function)
         print(searchController.searchBar.text)
         guard let text = searchController.searchBar.text else {
             print("No text")  // 👻 화면에 검색하라고 띄워 주기

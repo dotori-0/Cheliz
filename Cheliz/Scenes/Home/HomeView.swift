@@ -103,7 +103,6 @@ class HomeView: BaseView {
         configuration.trailingSwipeActionsConfigurationProvider = { [unowned self] indexPath in
             let delete = UIContextualAction(style: .normal, title: nil) { action, view, actionPerformed in
                 if let deleteCompletion = self.deleteCompletion {
-//                    deleteCompletion()
                     deleteCompletion(indexPath.row)
                 }
                 actionPerformed(true)
@@ -111,10 +110,10 @@ class HomeView: BaseView {
             delete.image = UIImage(systemName: SFSymbol.trash)
             return .init(actions: [delete])
         }
-//        configuration.backgroundColor = .systemBackground
         
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: true)
+        
         
         
         

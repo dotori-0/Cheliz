@@ -8,7 +8,7 @@
 import UIKit
 
 class BaseView: UIView {
-    // MARK: - Functions
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -20,6 +20,7 @@ class BaseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setting Methods
     func setUI() { }
     
     func setConstraints() { }

@@ -228,7 +228,7 @@ class HomeViewController: BaseViewController {
     private func sortAndFilter() {
         media = repository.sortAndFilter()
         
-        print(media)
+//        print(media)
         print(media.count)
         print("Is media empty? \(media.isEmpty)")
         

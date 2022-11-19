@@ -17,8 +17,8 @@ class DetailViewController: BaseViewController {
     lazy var castItemHeight = setCastItemHeight()
 //    var directorItemHeight: CGFloat = 0
 //    var castItemHeight: CGFloat = 0
-    lazy var headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
-//    var headerView = MediaInfoHeaderView()
+//    lazy var headerView = MediaInfoHeaderView(directorItemHeight: directorItemHeight, castItemHeight: castItemHeight)
+    var headerView = MediaInfoHeaderView()
     var itemHeight: CGFloat = 0
     
     private let repository = MediaRepository()
@@ -81,14 +81,14 @@ class DetailViewController: BaseViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        detailView.tableView.updateHeaderViewHeight()
+//        detailView.tableView.updateHeaderViewHeight()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
 //        headerView.infoContainerView.setGradient()  // 다크모드/라이트모드 전환시에만 됨
-        detailView.tableView.updateHeaderViewHeight()
+//        detailView.tableView.updateHeaderViewHeight()
     }
     
     // MARK: - Setting Methods
@@ -156,6 +156,9 @@ class DetailViewController: BaseViewController {
         let mediaType = MediaType(rawValue: media.mediaType) ?? .movie
         let mediaID = media.TMDBid
         
+        // viewForHeader에서 옮겨옴
+        headerView.showMediaInfo(media: media)
+        
         DispatchQueue.global().async {
             TMDBAPIManager.shared.fetchCredits(mediaType: mediaType, mediaID: mediaID) { [weak self] data in
                 let credits = ParsingManager.parseCredits(data)
@@ -180,9 +183,10 @@ class DetailViewController: BaseViewController {
     //            self?.detailView.tableView.updateHeaderViewHeight2(overviewHeight: self?.heightForOverview() ?? 0,
     //                                                               directorHeight: self?.directorItemHeight ?? 0,
     //                                                               castHeight: self?.castItemHeight ?? 0)
-                self?.detailView.tableView.reloadData()
-                self?.headerView.directorCollectionView.reloadData()
-                self?.headerView.castCollectionView.reloadData()
+//                self?.detailView.tableView.reloadData()
+//                self?.detailView.tableView.layoutSubviews()
+//                self?.headerView.directorCollectionView.reloadData()
+//                self?.headerView.castCollectionView.reloadData()
             }
         }
         
@@ -248,15 +252,15 @@ extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section != 0 { return nil }
         
-        guard let media = media else {
-            print("No media received")
-            alert(message: Notice.noMediaReceivedMessage)
-            return UIView()
-        }
-        
-//        let headerView = MediaInfoHeaderView()
-//        headerView.infoContainerView.setGradient()  // X
-        headerView.showMediaInfo(media: media)
+//        guard let media = media else {
+//            print("No media received")
+//            alert(message: Notice.noMediaReceivedMessage)
+//            return UIView()
+//        }
+
+////        let headerView = MediaInfoHeaderView()
+////        headerView.infoContainerView.setGradient()  // X
+//        headerView.showMediaInfo(media: media)
         
         headerView.directorCollectionView.dataSource = self
         headerView.directorCollectionView.delegate = self
@@ -388,7 +392,7 @@ extension DetailViewController: UITableViewDataSource {
                     recordCell.datePicker.tag = indexPath.row
 //                    recordCell.datePicker.date = media.records[indexPath.row].watchedDate
                     recordCell.datePicker.date = media.records[recordCell.datePicker.tag].watchedDate  // 이것도 이렇게 태그값을 쓰는 것이 나은지?
-                    print("📆 \(recordCell.datePicker.date)")
+//                    print("📆 \(recordCell.datePicker.date)")
                     recordCell.datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
 
                     
@@ -399,11 +403,11 @@ extension DetailViewController: UITableViewDataSource {
                     
 //                    print("🆕")
                     let record = records[recordCell.tagsField.tag]
-                    print("🏷 \(recordCell.tagsField.tag)")
+//                    print("🏷 \(recordCell.tagsField.tag)")
                     
-                    print("🐥 recordCell.tag: \(recordCell.tag)")
-                    print("🐥 tagsField.tag: \(recordCell.tagsField.tag)")
-                    print("🐥 record id: \(record.id)")  // 여기서는 row가 0일 때 0번째 record를 잘 가리킴.
+//                    print("🐥 recordCell.tag: \(recordCell.tag)")
+//                    print("🐥 tagsField.tag: \(recordCell.tagsField.tag)")
+//                    print("🐥 record id: \(record.id)")  // 여기서는 row가 0일 때 0번째 record를 잘 가리킴.
                     
 //                    let people = record.watchedWith
                     let people = records[recordCell.tag].watchedWith
@@ -413,7 +417,7 @@ extension DetailViewController: UITableViewDataSource {
                         peopleNames.append(person.name)
                     }
 //                    print("people: \(people.map { $0.name })")
-                    print("people: \(peopleNames)")  // 🟩
+//                    print("people: \(peopleNames)")  // 🟩
                     
                     recordCell.addTags(of: people)  // 🟩
 
@@ -439,8 +443,8 @@ extension DetailViewController: UITableViewDataSource {
                         self.delete(personNamed: tag.text, from: self.records[recordCell.tag])
                     }
                                         
-                    print("💎 after added")
-                    print("record id: \(record.id)")
+//                    print("💎 after added")
+//                    print("record id: \(record.id)")
 //                    let addedPeople = record.watchedWith
                     let addedPeople = records[recordCell.tag].watchedWith
 //                    let addedPeopleNames = addedPeople.map { $0.name }
@@ -449,7 +453,7 @@ extension DetailViewController: UITableViewDataSource {
                         addedPeopleNames.append(person.name)
                     }
 //                    print("people: \(people.map { $0.name })")
-                    print("people: \(addedPeopleNames)")  // 🟩
+//                    print("people: \(addedPeopleNames)")  // 🟩
                     
 //                    recordCell.addTags(of: people)
 //                    print("people: \(people.map { $0.name })")
@@ -687,7 +691,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         let characterNames = cast.map { $0.character }
         let longestCharacterName = characterNames.reduce("") { $0.count > $1.count ? $0 : $1 }
 //        print("🦭", longestCharacterName)
-        
+
         // 방법 1
         if collectionView == headerView.directorCollectionView {
             cell.nameLabel.text = longestDirectorName
@@ -703,12 +707,12 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = screenWidth / 5
         let profileImageViewHeight = itemWidth * 0.9
-        
+
         // 셀 너비를 지정하고
         cell.contentView.snp.makeConstraints { make in
             make.width.equalTo(itemWidth)
         }
-        
+
         // 셀 내부 객체들 레이아웃 다시 잡아도
         cell.setConstraints()
 
@@ -717,8 +721,8 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
                         + cell.nameLabel.frame.height
                         + cell.spacingBetweenNameAndCharacter
                         + cell.characterLabel.frame.height
-        
-        
+
+
 //        print("🍒", profileImageViewHeight)
 //        print("🍒", cell.spacingBetweenProfileImageAndName)
 //        print("🍒", cell.nameLabel.frame.height)  // 16.5  // 레이블 텍스트가 1 줄일 때의 높이만 계산됨
@@ -726,8 +730,8 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 //        print("🍒", cell.characterLabel.frame.height)  // 16.0 항상 같은 숫자만 찍힘
 
 //        return CGSize(width: itemWidth, height: itemHeight)
-        
-        
+
+
         // 방법 4
         // 방법 1과 마찬가지로 레이블 텍스트가 1 줄일 때의 높이만 계산됨
         cell.contentView.snp.makeConstraints { make in
@@ -736,10 +740,10 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         let cellSize = cell.itemSizeFittedWithContents(name: collectionView == headerView.directorCollectionView ? longestDirectorName : longestCastName,
                                                        character: collectionView == headerView.directorCollectionView ? directorJob : longestCharacterName)
 //        return cellSize
-        
+
         // 방법 5
 //        let itemSize
-        
+
         // 방법 6 - O
         func heightForLabel(text: String, textSize: CGFloat) -> CGFloat {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: itemWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -748,10 +752,10 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             label.font = UIFont.meringue(size: textSize)
             label.text = text
             label.sizeToFit()
-            
+
             return label.frame.height
         }
-        
+
         // 위 1, 4, 5 방법과 아래 커멘트는, (가장 긴 이름 + 가장 긴 배역)의 높이로 계산하는 문제 있음
         // (이름 + 배역) 높이 중 가장 큰 값으로 지정해야 함
 //        let nameLabelHeight = heightForLabel(text: collectionView == headerView.directorCollectionView ? longestDirectorName : longestCastName,
@@ -770,12 +774,12 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 //        directorLabelsHeight.reduce(into: <#T##Result#>) { partialResult, <#CGFloat#> in
 //            <#code#>
 //        }
-        
+
         let castNameHeights = castNames.map { heightForLabel(text: $0, textSize: 14) }
         let characterNameHeights = characterNames.map { heightForLabel(text: $0, textSize: 13.5) }
         let castLabelsHeights = zip(castNameHeights, characterNameHeights).map(+)
         let maxCastLabelsHeight = castLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
-        
+
         let itemHeight2 = profileImageViewHeight
                         + cell.spacingBetweenProfileImageAndName
 //                        + nameLabelHeight
@@ -783,27 +787,27 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 //                        + characterLabelHeight
                         + (collectionView == headerView.directorCollectionView ? maxDirectorLabelsHeight : maxCastLabelsHeight)
 //                        + maxDirectorLabelsHeight
-        
+
         let directorsHeight = profileImageViewHeight
                             + cell.spacingBetweenProfileImageAndName
                             + cell.spacingBetweenNameAndCharacter
                             + maxDirectorLabelsHeight
-        
+
         let castHeight = profileImageViewHeight
                         + cell.spacingBetweenProfileImageAndName
                         + cell.spacingBetweenNameAndCharacter
                         + maxCastLabelsHeight
-        
+
         if collectionView == headerView.directorCollectionView {
-            print("🐻‍❄️", itemHeight2)  // ❔ 절대 안 찍힘 -> 찍힘 . . .
-            print("🐻‍❄️ directorsHeight:", directorsHeight)
-            print("🐻‍❄️ castHeight:", castHeight)
+//            print("🐻‍❄️", itemHeight2)  // ❔ 절대 안 찍힘 -> 찍힘 . . .
+//            print("🐻‍❄️ directorsHeight:", directorsHeight)
+//            print("🐻‍❄️ castHeight:", castHeight)
         } else if collectionView == headerView.castCollectionView {
 //            print("🐹", itemHeight2)
         } else  {
             print("🐰", itemHeight2)
         }
-        
+
         DispatchQueue.main.async {
             cell.profileView.profileImageView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
             cell.profileView.profileImageView.layer.cornerRadius = cell.profileView.profileImageView.frame.width / 2
@@ -813,7 +817,13 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: itemWidth, height: itemHeight2)
     }
-    
+
+
+
+}
+
+// MARK: - Height Methods
+extension DetailViewController {
     private func itemHeight(collectionView: UICollectionView) -> CGFloat {
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = screenWidth / 5
@@ -874,19 +884,9 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = screenWidth / 5
         let profileImageViewHeight = itemWidth * 0.9
-        
-//        let directorNames = directors.map { $0.name }
-//        let directorJobs = directors.map { $0.character }
+
         let castNames = cast.map { $0.name }
         let characterNames = cast.map { $0.character }
-        
-        print("🐱", profileImageViewHeight)
-        print("🐶", castNames)
- 
-//        let directorNameHeights = directorNames.map { heightForLabel(text: $0, textSize: 14) }
-//        let directorJobHeights = directorJobs.map { heightForLabel(text: $0, textSize: 13.5) }
-//        let directorLabelsHeights = zip(directorNameHeights, directorJobHeights).map(+)
-//        let maxDirectorLabelsHeight = directorLabelsHeights.reduce(0) { $0 > $1 ? $0 : $1 }
 
         let castNameHeights = castNames.map { heightForLabel(text: $0, textSize: 14) }
         let characterNameHeights = characterNames.map { heightForLabel(text: $0, textSize: 13.5) }
@@ -904,8 +904,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     private func heightForLabel(text: String, textSize: CGFloat) -> CGFloat {
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = screenWidth / 5
-//        let profileImageViewHeight = itemWidth * 0.9
-        
+
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: itemWidth, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -937,6 +936,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UITableView Extension
 extension UITableView {
     func updateHeaderViewHeight() {
         if let header = self.tableHeaderView {
@@ -972,7 +972,7 @@ extension UITableView {
     }
 }
 
-
+// MARK: - UITextViewDelegate
 extension DetailViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .secondaryLabel {

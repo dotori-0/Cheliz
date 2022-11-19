@@ -120,7 +120,6 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             make.height.equalTo(imageHeight)
             make.height.equalToSuperview().multipliedBy(0.85)
             make.width.equalTo(posterView.snp.height).multipliedBy(0.67)
-
         }
 
         stackView.snp.makeConstraints { make in

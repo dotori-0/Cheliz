@@ -34,7 +34,7 @@ struct MediaRepository: RealmProtocol {
 //                completionHandler()  // 여기에서 해야 하는지? -> 어디서 하든 상관은 없지만 명확히 구분하기 위해 realm.write 구문 밖에서 실행
             }
             completionHandler()
-            print(fetch())
+//            print(fetch())
         } catch  {
             print(error)
             errorHandler()
@@ -211,7 +211,6 @@ struct MediaRepository: RealmProtocol {
     func deleteRecord(of record: Record, completionHandler: @escaping () -> Void, errorHandler: @escaping () -> Void) {
         do {
             try realm.write {
-                print("⛔️ \(record.id)")
                 deletePeople(from: record)  // Person의 같이 본 횟수 - 1
                 realm.delete(record)        // record를 지우면 media의 records 리스트에서도 자동으로 사라짐
             }

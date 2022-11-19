@@ -184,7 +184,7 @@ struct ParsingManager {
         
         
         // movie - "job": "Director"
-        // tv - "job": "Executive Producer"
+        // tv - "job": "Executive Producer" -> X
         
         let directorsArray = crewArray.filter {
             $0["job"].stringValue == "Director"

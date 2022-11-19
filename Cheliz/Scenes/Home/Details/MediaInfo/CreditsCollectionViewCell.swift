@@ -74,10 +74,10 @@ class CreditsCollectionViewCell: BaseCollectionViewCell {
         
         
         // 이미지 뷰 크기를 잡은 후 깎아야 하므로 async 처리
-//        DispatchQueue.main.async {
-//            self.profileView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
-//            self.profileView.layer.cornerRadius = self.profileView.frame.width / 2
-//        }
+        DispatchQueue.main.async {
+            self.profileView.layoutIfNeeded()  // 스크롤을 빨리 하면 이미지 모서리가 깎이지 않는 이슈 해결 코드
+            self.profileView.layer.cornerRadius = self.profileView.frame.width / 2
+        }
     }
     
     override func setConstraints() {

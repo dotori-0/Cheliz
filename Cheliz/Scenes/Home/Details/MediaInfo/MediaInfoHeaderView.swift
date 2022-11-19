@@ -67,13 +67,13 @@ class MediaInfoHeaderView: BaseView {
     let gradientLayer = CAGradientLayer()
     
     // MARK: - Initializers
-    init(directorItemHeight: CGFloat, castItemHeight: CGFloat) {
-        self.directorItemHeight = directorItemHeight
-        self.castItemHeight = castItemHeight
-        super.init(frame: .zero)
-        
-//        setUI()
-    }
+//    init(directorItemHeight: CGFloat, castItemHeight: CGFloat) {
+//        self.directorItemHeight = directorItemHeight
+//        self.castItemHeight = castItemHeight
+//        super.init(frame: .zero)
+//
+////        setUI()
+//    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -88,6 +88,10 @@ class MediaInfoHeaderView: BaseView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("MediaInfoHeaderVC deinit")
     }
     
     // MARK: - Life Cycle
@@ -356,6 +360,7 @@ class MediaInfoHeaderView: BaseView {
         castCollectionView.collectionViewLayout = layout
 
         directorCollectionView.isScrollEnabled = false
+        castCollectionView.showsHorizontalScrollIndicator = false
     }
     
     func setDirectorCollectionViewLayout() {
@@ -414,6 +419,7 @@ class MediaInfoHeaderView: BaseView {
     
     // MARK: - Internal Methods
     func showMediaInfo(media: Media) {
+        print("💛", #function)
         if let backdropPath = media.backdropPath {
             let url = URL(string: Endpoint.higerResImageConfigurationURL + backdropPath)
             backdropImageView.kf.setImage(with: url)
@@ -473,10 +479,14 @@ class MediaInfoHeaderView: BaseView {
             let runtime = ParsingManager.parseDetails2(data)
             
             if let runtime = runtime {
+                print("🚑 if let runtime = runtime")
+                print("🚑 runtime: \(runtime)")
                 if self.releaseDateAndRuntimeLabel.text == "" {
                     self.releaseDateAndRuntimeLabel.text = "\(runtime)\(Notice.minute)"  //  ･ ⸱ •
                 } else {
+                    print("🚒 else \(self.releaseDateAndRuntimeLabel.text)")
                     self.releaseDateAndRuntimeLabel.text = "\(self.releaseDateAndRuntimeLabel.text ?? "") ･ \(runtime)\(Notice.minute)"  //  ･ ⸱ •
+                    print("🚓 else \(self.releaseDateAndRuntimeLabel.text)")
                 }
             }
             

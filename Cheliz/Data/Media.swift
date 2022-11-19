@@ -13,7 +13,7 @@ final class Media: Object, Codable {
     @Persisted var registerDate: Date     // 등록일(필수)
     @Persisted var TMDBid: Int            // TMDB ID(필수)
     @Persisted var title: String          // 제목(필수)
-    @Persisted var mediaType: Int      // 미디어 타입(movie/tv)(필수)    // 👻 Int로 바꾸기
+    @Persisted var mediaType: Int         // 미디어 타입(movie/tv)(필수)
     @Persisted var genreIds: List<Int>    // 장르 ID 배열                 // 추후 구현
     @Persisted var overview: String?      // 줄거리(옵셔널)  // 👻 없을 때 UI 처리
     @Persisted var releaseDate: String    // 개봉일(필수)

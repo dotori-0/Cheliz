@@ -18,7 +18,7 @@ class BaseViewController: UIViewController {
     
     var toastStyle = ToastStyle()
     
-    // MARK: - Functions
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +27,7 @@ class BaseViewController: UIViewController {
         setActions()
     }
     
+    // MARK: - Design Methods
     func setUI() {
         view.backgroundColor = .systemBackground
         view.addSubview(backgroundImageView)
@@ -40,5 +41,6 @@ class BaseViewController: UIViewController {
         }
     }
     
+    // MARK: - Action Methods
     func setActions() { }
 }
