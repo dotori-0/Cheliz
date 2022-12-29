@@ -82,8 +82,8 @@ class MediaInfoHeaderView: BaseView {
 //        infoContainerView.setGradient()
 
         // 2
-        gradientLayer.colors = [UIColor.systemPink.cgColor, UIColor.clear.cgColor]
-        infoContainerView.layer.addSublayer(gradientLayer)
+//        gradientLayer.colors = [UIColor.systemPink.cgColor, UIColor.clear.cgColor]
+//        infoContainerView.layer.addSublayer(gradientLayer)
     }
     
     required init?(coder: NSCoder) {
@@ -99,7 +99,7 @@ class MediaInfoHeaderView: BaseView {
         super.layoutIfNeeded()
         
         // 3
-        gradientLayer.frame = infoContainerView.bounds
+//        gradientLayer.frame = infoContainerView.bounds
     }
     
     // MARK: - Design Methods

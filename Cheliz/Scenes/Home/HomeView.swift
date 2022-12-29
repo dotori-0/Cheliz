@@ -82,20 +82,20 @@ class HomeView: BaseView {
         }
     }
     
-    private func setCollectionViewLayout() {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 0
-        layout.sectionInset = .zero
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
-        
-        layout.itemSize = CGSize(width: screenWidth, height: screenHeight * 0.1)
-        
-        collectionView.collectionViewLayout = layout
-    }
+//    private func setCollectionViewLayout() {
+//        let layout = UICollectionViewFlowLayout()
+//        let spacing: CGFloat = 0
+//        layout.sectionInset = .zero
+//        layout.minimumLineSpacing = spacing
+//        layout.minimumInteritemSpacing = spacing
+//
+//        let screenWidth = UIScreen.main.bounds.width
+//        let screenHeight = UIScreen.main.bounds.height
+//
+//        layout.itemSize = CGSize(width: screenWidth, height: screenHeight * 0.1)
+//
+//        collectionView.collectionViewLayout = layout
+//    }
     
     private func setCollectionViewCompositionalLayout() {
         var configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
