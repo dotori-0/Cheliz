@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 
+import FirebaseAnalytics
 import RealmSwift
 //import Toast
 
@@ -45,6 +46,7 @@ class HomeViewController: BaseViewController {
         
         print("🐰 Realm is located at:", repository.realm.configuration.fileURL!)
         
+        setDefaultAnalyticsEventParameters()
         setCollectionView()
         setDeleteAction()
         
@@ -74,6 +76,12 @@ class HomeViewController: BaseViewController {
     }
     
     // MARK: - Setting Methods
+    private func setDefaultAnalyticsEventParameters() {
+        Analytics.setDefaultEventParameters([
+          "content_type": "default",
+        ])
+    }
+    
     private func setCollectionView() {
         homeView.collectionView.dataSource = self
         homeView.collectionView.delegate = self
