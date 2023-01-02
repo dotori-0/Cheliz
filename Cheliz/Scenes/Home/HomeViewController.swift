@@ -73,12 +73,20 @@ class HomeViewController: BaseViewController {
 //        fetchRealm()
         sortAndFilter()
 //        print("🫐", media.count)
+        
+        logEvent()
     }
     
     // MARK: - Setting Methods
     private func setDefaultAnalyticsEventParameters() {
         Analytics.setDefaultEventParameters([
           "content_type": "default",
+        ])
+    }
+    
+    private func logEvent() {
+        Analytics.logEvent("HomeVC", parameters: [
+          "home": "Home VC Opened"
         ])
     }
     

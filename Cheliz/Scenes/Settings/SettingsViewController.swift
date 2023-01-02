@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class SettingsViewController: BaseViewController {
     // MARK: - Properties
@@ -22,7 +23,16 @@ class SettingsViewController: BaseViewController {
         setTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        logEvent()
+    }
+    
     // MARK: - Setting Methods
+    private func logEvent() {
+        Analytics.logEvent("SettingsVC", parameters: nil)
+    }
+    
     private func setTableView() {
         settingsView.tableView.dataSource = self
         settingsView.tableView.delegate = self
@@ -116,19 +126,23 @@ extension SettingsViewController: UITableViewDelegate {
                                duration: 1,
                                position: .center, style: self.toastStyle)
 //                transit(to: BackupAndRestoreViewController(), transitionStyle: .push)
+                Analytics.logEvent("Backup_Tapped", parameters: nil)
             case .language:
                 print("language")
                 view.makeToast(Notice.updatePlanned,
                                duration: 1,
                                position: .center, style: self.toastStyle)
+                Analytics.logEvent("Language_Tapped", parameters: nil)
             case .design:
                 print("design")
                 if indexPath.row == 0 {
+                    Analytics.logEvent("Fonts_Tapped", parameters: nil)
                     transit(to: FontsViewController(), transitionStyle: .push)
                 } else {
                     view.makeToast(Notice.updatePlanned,
                                    duration: 1,
                                    position: .center, style: self.toastStyle)
+                    Analytics.logEvent("Theme_Tapped", parameters: nil)
                 }
             default:
                 print("didSelectRowAt - default")

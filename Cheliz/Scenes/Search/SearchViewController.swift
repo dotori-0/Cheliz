@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+import FirebaseAnalytics
 import Toast
 
 class SearchViewController: BaseViewController {
@@ -33,6 +35,11 @@ class SearchViewController: BaseViewController {
         setSearchBar()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        logEvent()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -40,6 +47,12 @@ class SearchViewController: BaseViewController {
     }
     
     // MARK: - Setting Methods
+    private func logEvent() {
+        Analytics.logEvent("SearchVC", parameters: [
+          "search": "Search VC Opened"
+        ])
+    }
+    
     private func setCollectionView() {
         searchView.collectionView.dataSource = self
         searchView.collectionView.delegate = self

@@ -50,6 +50,7 @@
 		0A439CC128E1EE460032A687 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 0A439CC028E1EE460032A687 /* Zip */; };
 		0A4737AA2961F1BF00A9ED8E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 0A4737A92961F1BF00A9ED8E /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		0A4737AC2961F1BF00A9ED8E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0A4737AB2961F1BF00A9ED8E /* FirebaseCrashlytics */; };
+		0A4737AE2961F4A400A9ED8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A4737AD2961F4A400A9ED8E /* GoogleService-Info.plist */; };
 		0A6DB5E728DF51FE004481E4 /* BaMeringue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A6DB5E628DF51FE004481E4 /* BaMeringue.ttf */; };
 		0A7FFD6C28E8927F00AB6DDF /* WatchCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD6B28E8927F00AB6DDF /* WatchCountTableViewCell.swift */; };
 		0A7FFD6E28E8944200AB6DDF /* RecordSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */; };
@@ -145,6 +146,7 @@
 		0A439CB428E1A8410032A687 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		0A439CB928E1DC940032A687 /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
 		0A439CBD28E1EB5C0032A687 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
+		0A4737AD2961F4A400A9ED8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A6DB5E628DF51FE004481E4 /* BaMeringue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BaMeringue.ttf; sourceTree = "<group>"; };
 		0A7FFD6B28E8927F00AB6DDF /* WatchCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCountTableViewCell.swift; sourceTree = "<group>"; };
 		0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSection.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				0A3F32FE28CB4B7600B51DEA /* Assets.xcassets */,
 				0A3F330028CB4B7600B51DEA /* LaunchScreen.storyboard */,
 				0A3F330328CB4B7600B51DEA /* Info.plist */,
+				0A4737AD2961F4A400A9ED8E /* GoogleService-Info.plist */,
 			);
 			path = Cheliz;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				0A3F330228CB4B7600B51DEA /* LaunchScreen.storyboard in Resources */,
 				0A3F32FF28CB4B7600B51DEA /* Assets.xcassets in Resources */,
 				0A6DB5E728DF51FE004481E4 /* BaMeringue.ttf in Resources */,
+				0A4737AE2961F4A400A9ED8E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +705,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
