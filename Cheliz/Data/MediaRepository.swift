@@ -62,10 +62,10 @@ struct MediaRepository: RealmProtocol {
         var media: Results<Media>?
         
         switch sortingOrder {
-            case .oldestToNewest:
+            case .oldestToNewest:  // 오래된 등록순
 //                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
                 media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
-            case .newestToOldest:
+            case .newestToOldest:  // 최신 등록순
 //                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
                 media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
             case .alphabetical:

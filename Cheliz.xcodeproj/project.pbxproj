@@ -344,6 +344,58 @@
 			path = BackupAndRestore;
 			sourceTree = "<group>";
 		};
+		0A76BA9F2997CF63004E16C4 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				0AB10D3F28DA4069007033E2 /* MediaPassableButton.swift */,
+				0A439CAC28E1899F0032A687 /* BackupAndRestoreButton.swift */,
+				0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		0A76BAA02997CF86004E16C4 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				0A31E09828E4AB2900D0C79B /* CustomLabel.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		0A76BAA12997CFED004E16C4 /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0A439C7428E05A400032A687 /* PosterImageView.swift */,
+				0A21FD2028EBF4200001D0B1 /* ProfileImageView.swift */,
+			);
+			path = ImageView;
+			sourceTree = "<group>";
+		};
+		0A76BAA22997CFF9004E16C4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A7FFD9528EB572300AB6DDF /* PosterView.swift */,
+				0A21FD2228EBF4560001D0B1 /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A76BAA32997D00E004E16C4 /* Stepper */ = {
+			isa = PBXGroup;
+			children = (
+				0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */,
+			);
+			path = Stepper;
+			sourceTree = "<group>";
+		};
+		0A76BAA42997D016004E16C4 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		0A7FFD6A28E8907700AB6DDF /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,16 +502,12 @@
 		0AB10D3E28DA3E64007033E2 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
-				0AB10D3F28DA4069007033E2 /* MediaPassableButton.swift */,
-				0A439CAC28E1899F0032A687 /* BackupAndRestoreButton.swift */,
-				0A31E09828E4AB2900D0C79B /* CustomLabel.swift */,
-				0A7FFD7128E8A00C00AB6DDF /* MediaPassableStepper.swift */,
-				0A7FFD7528E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift */,
-				0A7FFD9328EAF5B300AB6DDF /* SingleSelectionButton.swift */,
-				0A439C7428E05A400032A687 /* PosterImageView.swift */,
-				0A7FFD9528EB572300AB6DDF /* PosterView.swift */,
-				0A21FD2028EBF4200001D0B1 /* ProfileImageView.swift */,
-				0A21FD2228EBF4560001D0B1 /* ProfileView.swift */,
+				0A76BA9F2997CF63004E16C4 /* Button */,
+				0A76BAA02997CF86004E16C4 /* Label */,
+				0A76BAA12997CFED004E16C4 /* ImageView */,
+				0A76BAA22997CFF9004E16C4 /* View */,
+				0A76BAA32997D00E004E16C4 /* Stepper */,
+				0A76BAA42997D016004E16C4 /* DatePicker */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -792,7 +840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = D92DSFPJZF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cheliz/Info.plist;
@@ -808,8 +856,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sani.cheliz;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sani.cheliztest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -823,7 +871,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = D92DSFPJZF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cheliz/Info.plist;
@@ -839,8 +887,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sani.cheliz;
+				MARKETING_VERSION = 1.0.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sani.cheliztest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

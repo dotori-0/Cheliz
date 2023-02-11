@@ -298,7 +298,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         print("🍬", totalPages)
-        for indexPath in indexPaths {
+        for indexPath in indexPaths {  // indexPaths: prefetch되는 셀들
             if searchResults.count - 1 == indexPath.item && page < totalPages {
                 isPaginating = true
                 page += 1

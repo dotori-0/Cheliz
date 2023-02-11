@@ -130,38 +130,6 @@
             endingLineNumber = "169"
             landmarkName = "fetchCredits()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9D16F9C8-639A-4352-85C6-2B41FEAEEF24 - 88975cf9baad1694"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.Data) -&gt; () in closure #1 () -&gt; () in Cheliz.DetailViewController.fetchCredits() -&gt; ()"
-                  moduleName = "Cheliz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/SESAN/Documents/iOS/SeSAC/Cheliz/Cheliz/Scenes/Home/Details/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "170"
-                  endingLineNumber = "170"
-                  offsetFromSymbolStart = "1220">
-               </Location>
-               <Location
-                  uuid = "9D16F9C8-639A-4352-85C6-2B41FEAEEF24 - 88975cf9baad1694"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.Data) -&gt; () in closure #1 () -&gt; () in Cheliz.DetailViewController.fetchCredits() -&gt; ()"
-                  moduleName = "Cheliz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/SESAN/Documents/iOS/SeSAC/Cheliz/Cheliz/Scenes/Home/Details/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "170"
-                  endingLineNumber = "170"
-                  offsetFromSymbolStart = "1404">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -194,38 +162,6 @@
             endingLineNumber = "172"
             landmarkName = "fetchCredits()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "24A8FCDF-4FEA-4368-B9A4-BC4D0F4865F5 - 88975cf9baad1510"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.Data) -&gt; () in closure #1 () -&gt; () in Cheliz.DetailViewController.fetchCredits() -&gt; ()"
-                  moduleName = "Cheliz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/SESAN/Documents/iOS/SeSAC/Cheliz/Cheliz/Scenes/Home/Details/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "174"
-                  endingLineNumber = "174"
-                  offsetFromSymbolStart = "1596">
-               </Location>
-               <Location
-                  uuid = "24A8FCDF-4FEA-4368-B9A4-BC4D0F4865F5 - 88975cf9baad1510"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.Data) -&gt; () in closure #1 () -&gt; () in Cheliz.DetailViewController.fetchCredits() -&gt; ()"
-                  moduleName = "Cheliz"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/SESAN/Documents/iOS/SeSAC/Cheliz/Cheliz/Scenes/Home/Details/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "174"
-                  endingLineNumber = "174"
-                  offsetFromSymbolStart = "1780">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -275,7 +211,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "422"
                   endingLineNumber = "422"
-                  offsetFromSymbolStart = "276">
+                  offsetFromSymbolStart = "372">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -334,6 +270,22 @@
             endingLineNumber = "104"
             landmarkName = "setHeaderView()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E0A7698-09E4-47CA-9C73-BB6D23ED2D4A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Cheliz/Scenes/Search/SearchViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

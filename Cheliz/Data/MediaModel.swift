@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// 
 //struct MediaModel {
 //    let title: String
 //    let mediaType: MediaType
