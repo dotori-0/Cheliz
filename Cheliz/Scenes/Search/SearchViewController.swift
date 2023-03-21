@@ -37,7 +37,9 @@ final class SearchViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         logEvent()
+        checkNetwork()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -306,5 +308,34 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
             }
         }
 //        print("=====\(indexPaths)=====")
+    }
+}
+
+// MARK: - Network
+extension SearchViewController {
+    private func checkNetwork() {
+        let alertHandler = { [weak self] in
+            self?.alert(title: Notice.NetworkError.networkError,
+                        message: Notice.NetworkError.networkErrorMessage,
+                        actionTitle: Notice.Action.tryAgain, allowsCancel: true) { [weak self] _ in
+                self?.checkNetwork()
+            }
+        }
+        
+        NetworkMonitor.shared.startMonitoring { //[weak self] in
+            print("🚨 alert")
+            alertHandler()
+        }
+        
+        print("🪺 \(NetworkMonitor.shared.monitor.currentPath.status)")
+        
+        if NetworkMonitor.shared.monitor.currentPath.status == .satisfied {
+            // Connected
+            print("// Connected")
+        } else {
+            // No connection
+            print("// No connection")
+            alertHandler()
+        }
     }
 }

@@ -77,4 +77,16 @@ enum Notice {
     static let baMeringue = "Ba머랭머랭"
     static let updatePlanned = "업데이트 예정입니다."
     static let chelizUTType = "com.app.cheliz"
+    
+    enum NetworkError {
+        static let networkError = "네트워크 연결 에러"
+        static let networkErrorMessage = "네트워크 연결이 원활하지 않습니다.\n연결 상태를 확인하고 다시 시도해 주세요."
+    }
+    
+    enum Action {
+        static let ok = "확인"
+        static let tryAgain = "재시도"
+        static let next = "다음"
+        static let cancel = "취소"
+    }
 }
