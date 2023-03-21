@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PosterView: BaseView {
+final class PosterView: BaseView {
     // MARK: - Properties
     let defaultImageView = PosterImageView(backgroundColor: .tintColor.withAlphaComponent(0.1))
     let posterImageView = PosterImageView(backgroundColor: .clear)

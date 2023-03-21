@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchView: BaseView {
+final class SearchView: BaseView {
     // MARK: - Properties
     let searchController = UISearchController(searchResultsController: nil).then {
         $0.searchBar.placeholder = Notice.searchMedia

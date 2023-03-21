@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAnalytics
 
-class SettingsViewController: BaseViewController {
+final class SettingsViewController: BaseViewController {
     // MARK: - Properties
     let settingsView = SettingsView()
     

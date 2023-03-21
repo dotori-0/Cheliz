@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SingleSelectionButton: UIButton {
+final class SingleSelectionButton: UIButton {
     // MARK: - Properties
     override var isSelected: Bool {
         didSet {

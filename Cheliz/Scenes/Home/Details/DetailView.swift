@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailView: BaseView {
+final class DetailView: BaseView {
     // MARK: - Properties
     let tableView = UITableView(frame: .zero, style: .insetGrouped).then {
         $0.register(WatchCountTableViewCell.self, forCellReuseIdentifier: WatchCountTableViewCell.reuseIdentifier)

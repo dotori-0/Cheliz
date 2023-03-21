@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MediaPassableStepper: UIStepper {
+final class MediaPassableStepper: UIStepper {
     // MARK: - Properties
     var media: Media?
     

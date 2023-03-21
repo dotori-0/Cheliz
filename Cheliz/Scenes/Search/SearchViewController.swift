@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAnalytics
 import Toast
 
-class SearchViewController: BaseViewController {
+final class SearchViewController: BaseViewController {
     // MARK: - Properties
     private let searchView = SearchView()
     

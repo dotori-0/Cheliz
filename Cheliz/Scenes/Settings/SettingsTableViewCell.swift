@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsTableViewCell: BaseTableViewCell {
+final class SettingsTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let symbolImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit

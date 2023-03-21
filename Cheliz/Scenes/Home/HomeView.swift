@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeView: BaseView {
+final class HomeView: BaseView {
     // MARK: - Properties
     var deleteCompletion: ((Int) -> Void)?
     

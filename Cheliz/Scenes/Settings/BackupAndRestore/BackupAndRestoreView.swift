@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackupAndRestoreView: BaseView {
+final class BackupAndRestoreView: BaseView {
     // MARK: - Properties
     let cloudImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit

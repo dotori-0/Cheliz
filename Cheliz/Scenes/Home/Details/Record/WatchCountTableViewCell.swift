@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WatchCountTableViewCell: BaseTableViewCell {
+final class WatchCountTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let countLabel = CustomLabel(textSize: 18)
     let stepper = MediaPassableStepper()

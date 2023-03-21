@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PosterImageView: UIImageView {
+final class PosterImageView: UIImageView {
     // MARK: - Properties
     var customBackgroundColor: UIColor?
     

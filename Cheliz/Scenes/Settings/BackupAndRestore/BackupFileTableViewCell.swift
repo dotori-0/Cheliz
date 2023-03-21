@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackupFileTableViewCell: BaseTableViewCell {
+final class BackupFileTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let fileSymbolImageView = UIImageView().then {
         $0.image = UIImage(systemName: SFSymbol.file)

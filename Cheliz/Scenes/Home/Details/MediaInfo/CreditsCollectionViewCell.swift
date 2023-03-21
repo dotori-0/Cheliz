@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CreditsCollectionViewCell: BaseCollectionViewCell {
+final class CreditsCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
     let profileView = ProfileView()
 //    let profileImageView = UIImageView().then {

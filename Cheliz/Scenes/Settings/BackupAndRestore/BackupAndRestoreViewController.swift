@@ -8,7 +8,7 @@
 import UIKit
 import UniformTypeIdentifiers
 
-class BackupAndRestoreViewController: BaseViewController {
+final class BackupAndRestoreViewController: BaseViewController {
     // MARK: - Properties
     let backupAndRestoreView = BackupAndRestoreView()
     var backupFileNames: [String] = [] {

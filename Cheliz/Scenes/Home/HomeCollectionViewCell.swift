@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class HomeCollectionViewCell: BaseCollectionViewCell {
+final class HomeCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
     let checkButton = MediaPassableButton()//.then {
 //        var configuration = UIButton.Configuration.plain()

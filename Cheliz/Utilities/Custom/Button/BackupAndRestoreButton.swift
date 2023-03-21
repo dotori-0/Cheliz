@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BackupAndRestoreButton: UIButton {
+final class BackupAndRestoreButton: UIButton {
     // MARK: - Properties
     var title: String?
 

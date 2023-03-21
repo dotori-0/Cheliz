@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FontTableViewCell: BaseTableViewCell {
+final class FontTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let button = SingleSelectionButton()
     let fontLabel = CustomLabel(textSize: 15)

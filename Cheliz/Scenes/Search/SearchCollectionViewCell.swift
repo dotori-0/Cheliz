@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class SearchCollectionViewCell: BaseCollectionViewCell {
+final class SearchCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
 //    var media: Media?
 //    var addErrorHandler: (() -> Void)?

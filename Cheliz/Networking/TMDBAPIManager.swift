@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class TMDBAPIManager {
+final class TMDBAPIManager {
     static let shared = TMDBAPIManager()
     
     private init() { }

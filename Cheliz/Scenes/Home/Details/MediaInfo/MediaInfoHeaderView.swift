@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MediaInfoHeaderView: BaseView {
+final class MediaInfoHeaderView: BaseView {
     // MARK: - Properties
     var directorsExist = true
     var castExists = true

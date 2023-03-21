@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FontsViewController: BaseViewController {
+final class FontsViewController: BaseViewController {
     // MARK: - Properties
     let fontsView = FontsView()
 

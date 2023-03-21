@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddRecordTableViewCell: BaseTableViewCell {
+final class AddRecordTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let addButton = MediaPassableButton()
     let buttonConfiguration: UIButton.Configuration = {

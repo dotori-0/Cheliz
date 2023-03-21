@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotesTableViewCell: BaseTableViewCell {
+final class NotesTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let notesTextView = UITextView().then {
         $0.backgroundColor = .clear

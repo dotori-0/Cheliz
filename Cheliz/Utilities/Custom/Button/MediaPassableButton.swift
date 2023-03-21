@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MediaPassableButton: UIButton {
+final class MediaPassableButton: UIButton {
     // MARK: - Properties
     var media: Media?
     

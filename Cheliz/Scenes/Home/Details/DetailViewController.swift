@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class DetailViewController: BaseViewController {
+final class DetailViewController: BaseViewController {
     // MARK: - Properties
     var isFromSearchView = false
     let detailView = DetailView()

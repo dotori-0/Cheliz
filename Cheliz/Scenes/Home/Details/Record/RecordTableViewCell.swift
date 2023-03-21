@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import WSTagsField
 
-class RecordTableViewCell: BaseTableViewCell {
+final class RecordTableViewCell: BaseTableViewCell {
     // MARK: - Properties
 //    let datePicker = MediaAndRecordPassableDatePicker()
     let datePicker = UIDatePicker()

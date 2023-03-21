@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MediaAndRecordPassableDatePicker: UIDatePicker {
+final class MediaAndRecordPassableDatePicker: UIDatePicker {
     // MARK: - Properties
     var media: Media?
     var record: Record?

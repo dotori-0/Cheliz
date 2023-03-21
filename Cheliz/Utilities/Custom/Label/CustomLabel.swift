@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomLabel: UILabel {
+final class CustomLabel: UILabel {
     // MARK: - Initializers
     init(textSize: CGFloat, textColor: UIColor = .label) {
         super.init(frame: .zero)

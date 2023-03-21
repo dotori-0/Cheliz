@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FontsView: BaseView {
+final class FontsView: BaseView {
     // MARK: - Properties
     let tableView = UITableView(frame: .zero, style: .insetGrouped).then {
         $0.register(FontTableViewCell.self, forCellReuseIdentifier: FontTableViewCell.reuseIdentifier)

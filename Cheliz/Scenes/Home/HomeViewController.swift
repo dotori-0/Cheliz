@@ -12,7 +12,7 @@ import FirebaseAnalytics
 import RealmSwift
 //import Toast
 
-class HomeViewController: BaseViewController {
+final class HomeViewController: BaseViewController {
     // MARK: - Properties
     private let homeView = HomeView()
     private let repository = MediaRepository()

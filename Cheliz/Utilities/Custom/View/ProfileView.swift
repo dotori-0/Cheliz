@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileView: BaseView {
+final class ProfileView: BaseView {
     // MARK: - Properties
     let defaultImageView = ProfileImageView(backgroundColor: .tintColor.withAlphaComponent(0.1))
     let profileImageView = ProfileImageView(backgroundColor: .clear)
