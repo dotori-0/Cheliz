@@ -9,10 +9,8 @@ import Foundation
 
 enum Notice {
     static let home = "홈"
-    static let cancel = "취소"
     static let search = "검색"
     static let searchMedia = "타이틀을 입력해 보세요"
-    static let ok = "확인"
     
     static let deleteWarningTitle = "정말 삭제하시겠습니까?"
     static let deleteWarningMessage = "삭제된 항목은 복구가 불가합니다."

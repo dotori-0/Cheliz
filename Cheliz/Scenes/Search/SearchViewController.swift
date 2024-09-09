@@ -65,7 +65,7 @@ final class SearchViewController: BaseViewController {
     
     private func setSearchController() {
         searchView.searchController.searchResultsUpdater = self
-//        searchView.searchController.searchBar.placeholder = Notice.cancel
+//        searchView.searchController.searchBar.placeholder = Notice.Action.cancel
     }
     
     private func setSearchBar() {
