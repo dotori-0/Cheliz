@@ -1,4 +1,5 @@
 {
+  "originHash" : "58cc22ffb947a6eb2b8cc3b27351615a62604d189f155a112a4e0502e5b2d93e",
   "pins" : [
     {
       "identity" : "abseil-cpp-swiftpm",
@@ -95,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher",
       "state" : {
-        "revision" : "be1a1acb283a702b99b630f586877ba02234b4cb",
-        "version" : "7.3.2"
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
+        "version" : "7.12.0"
       }
     },
     {
@@ -208,5 +209,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
