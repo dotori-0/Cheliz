@@ -668,16 +668,7 @@ extension DetailViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // item 개수가 0이 아니어야만 호출이 되는듯?
-//        print("🌊")
-
-        // 🐋 -> 🌊 -> 🐳
-        // setCollectionViewLayout() -> sizeForItemAt -> cellForItemAt
-
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreditsCollectionViewCell.reuseIdentifier, for: indexPath) as? CreditsCollectionViewCell else {
-            print("Cannot find CreditsCollectionViewCell")
-            return .zero
-        }
+        let cell = CreditsCollectionViewCell()
 
         // ❔map은 $0가 없다면 아예 뛰어 넘는 구조인지?
         let directorNames = directors.map { $0.name }
