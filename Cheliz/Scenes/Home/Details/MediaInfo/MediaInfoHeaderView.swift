@@ -341,7 +341,6 @@ final class MediaInfoHeaderView: BaseView {
     // MARK: - Collection View Layout
 //    private func setCollectionViewLayout() {
     func setCollectionViewLayout() {
-        print("🐋")
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 8
         layout.scrollDirection = .horizontal
@@ -364,7 +363,6 @@ final class MediaInfoHeaderView: BaseView {
     }
     
     func setDirectorCollectionViewLayout() {
-        print("🐋")
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 8
         layout.scrollDirection = .horizontal
@@ -377,7 +375,6 @@ final class MediaInfoHeaderView: BaseView {
 //        let itemWidth = screenWidth / 5
         
 //        layout.itemSize = CGSize(width: itemWidth, height: directorItemHeight)
-        print("🎬", directorItemHeight)
         
         directorCollectionView.collectionViewLayout = layout
 //        castCollectionView.collectionViewLayout = layout
@@ -386,7 +383,6 @@ final class MediaInfoHeaderView: BaseView {
     }
     
     func setCastCollectionViewLayout() {
-        print("🐋")
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 8
         layout.scrollDirection = .horizontal
@@ -400,7 +396,6 @@ final class MediaInfoHeaderView: BaseView {
         
 //        layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
 //        layout.itemSize = CGSize(width: itemWidth, height: castItemHeight)
-        print("🍿", castItemHeight)
         
 //        directorCollectionView.collectionViewLayout = layout
         castCollectionView.collectionViewLayout = layout
