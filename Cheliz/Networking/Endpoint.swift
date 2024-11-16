@@ -34,7 +34,7 @@ struct Endpoint {
     // https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
     // https://api.themoviedb.org/3/genre/tv/list?api_key=<<api_key>>&language=en-US
     static func genresURL(mediaType: MediaType) -> String {
-        return "\(baseURL)/genre/\(mediaType.string)/list?api_key=\(APIKey.TMDB)&language=ko-KR"
+        return "\(baseURL)genre/\(mediaType.string)/list?api_key=\(APIKey.TMDB)&language=ko-KR"
     }
     
     // Credits
