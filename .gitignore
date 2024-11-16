@@ -1,3 +1,6 @@
 APIKey.swift
 Assets.xcassets
 Cheliz/Resources
+
+# Ignore Xcode breakpoint files
+*.xcbkptlist
