@@ -14,21 +14,7 @@ enum SortingOrder: Int {
     case reverseAlphabetical
     
     var state: UIMenuElement.State {
-//        switch self {
-//            case .oldestToNewest:
-//                if UserDefaultsHelper.standard.sortingOrder == self.rawValue {
-//                    return .on
-//                } else {
-//                    return .off
-//                }
-//            case .newestToOldest:
-//                <#code#>
-//            case .alphabetical:
-//                <#code#>
-//            case .reverseAlphabetical:
-//                <#code#>
-//        }
-        if UserDefaultsHelper.standard.sortingOrder == self.rawValue {
+        if UserDefaults.sortingOrder == self.rawValue {
             return .on
         } else {
             return .off

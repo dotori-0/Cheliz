@@ -55,24 +55,20 @@ struct MediaRepository: RealmProtocol {
         }
     }
     
-//    func sort(by sortingOrder: SortingOrder) -> Results<Media> {  // 👻 SortingOrder는 UserDefaults에 저장해도 될지?
+//    func sort(by sortingOrder: SortingOrder) -> Results<Media> {
     func sortAndFilter() -> Results<Media>? {
-        let sortingOrder: SortingOrder = SortingOrder(rawValue: UserDefaultsHelper.standard.sortingOrder) ?? .oldestToNewest
+        let sortingOrder: SortingOrder = SortingOrder(rawValue: UserDefaults.sortingOrder) ?? .oldestToNewest
         
         var media: Results<Media>?
         
         switch sortingOrder {
             case .oldestToNewest:  // 오래된 등록순
-//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
                 media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: true)
             case .newestToOldest:  // 최신 등록순
-//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
                 media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.registerDate, ascending: false)
             case .alphabetical:
-//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: true)
                 media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: true)
             case .reverseAlphabetical:
-//                return realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: false)
                 media = realm.objects(Media.self).sorted(byKeyPath: RealmKey.title, ascending: false)
         }
         
@@ -81,8 +77,7 @@ struct MediaRepository: RealmProtocol {
             return nil
         }
 
-        
-        let filterOption: FilterOption = FilterOption(rawValue: UserDefaultsHelper.standard.filterOption) ?? .showWatched
+        let filterOption: FilterOption = FilterOption(rawValue: UserDefaults.filterOption) ?? .showWatched
         
         switch filterOption {
             case .showWatched:
@@ -91,19 +86,6 @@ struct MediaRepository: RealmProtocol {
                 return media.where { $0.watched == false }
         }
     }
-    
-//    func filter(by filterOption: FilterOption) -> Results<Media> {
-//        switch filterOption {
-//            case .showWatched:
-//                print(fetch())
-//                return fetch()
-//            case .hideWatched:
-//                print(fetch())
-////                return fetch().where { !($0.watched) }  // Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: 'Unable to parse the format string "watched"'
-//                // You can use Swift comparison operators with the Realm Swift Query API (==, !=, >, >=, <, <=).
-//                return fetch().where { $0.watched == false }
-//        }
-//    }
     
     func toggleWatched(of media: Media, errorHandler: @escaping () -> Void) {
         do {

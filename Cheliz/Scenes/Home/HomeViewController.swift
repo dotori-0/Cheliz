@@ -154,41 +154,30 @@ final class HomeViewController: BaseViewController {
     }
     
     private func sortMenu() -> UIMenu {
-        print("🥢 sort")
-        
-//        func sortAndFilter() {
-//            self.media = self.repository.sortAndFilter()
-//        }
-        
-        
         let newestToOldest = UIAction(title: MenuTitle.newestToOldest,
                                       state: SortingOrder.newestToOldest.state) { _ in
-            UserDefaultsHelper.standard.sortingOrder = SortingOrder.newestToOldest.rawValue
-//            self.media = self.repository.sort(by: .newestToOldest)
+            UserDefaults.sortingOrder = SortingOrder.newestToOldest.rawValue
             self.sortAndFilter()
         }
         
         let oldestToNewest = UIAction(title: MenuTitle.oldestToNewest,
                                       state: SortingOrder.oldestToNewest.state) { _ in
-            UserDefaultsHelper.standard.sortingOrder = SortingOrder.oldestToNewest.rawValue
-//            self.media = self.repository.sort(by: .oldestToNewest)
+            UserDefaults.sortingOrder = SortingOrder.oldestToNewest.rawValue
             self.sortAndFilter()
         }
         
         let alphabetical = UIAction(title: MenuTitle.alphabetical,
                                     state: SortingOrder.alphabetical.state) { _ in
-            UserDefaultsHelper.standard.sortingOrder = SortingOrder.alphabetical.rawValue
-//            self.media = self.repository.sort(by: .alphabetical)
+            UserDefaults.sortingOrder = SortingOrder.alphabetical.rawValue
             self.sortAndFilter()
         }
         
         let reverseAlphabetical = UIAction(title: MenuTitle.reverseAlphabetical,
                                            state: SortingOrder.reverseAlphabetical.state) { _ in
-            UserDefaultsHelper.standard.sortingOrder = SortingOrder.reverseAlphabetical.rawValue
-//            self.media = self.repository.sort(by: .reverseAlphabetical)
+            UserDefaults.sortingOrder = SortingOrder.reverseAlphabetical.rawValue
             self.sortAndFilter()
         }
-//
+
 //        let a = UIAction(title: <#T##String#>, image: <#T##UIImage?#>, identifier: <#T##UIAction.Identifier?#>, discoverabilityTitle: <#T##String?#>, attributes: ., state: ., handler: <#T##UIActionHandler##UIActionHandler##(UIAction) -> Void#>)
         
         let menu = UIMenu(title: MenuTitle.sort,
@@ -202,16 +191,14 @@ final class HomeViewController: BaseViewController {
         let showWatched = UIAction(title: MenuTitle.showWatched,
                                    image: UIImage(systemName: SFSymbol.eye),
                                    state: FilterOption.showWatched.state) { _ in
-            UserDefaultsHelper.standard.filterOption = FilterOption.showWatched.rawValue
-//            self.media = self.repository.filter(by: .showWatched)
+            UserDefaults.filterOption = FilterOption.showWatched.rawValue
             self.sortAndFilter()
         }
         
         let hideWatched = UIAction(title: MenuTitle.hideWatched,
                                    image: UIImage(systemName: SFSymbol.eyeSlash),
                                    state: FilterOption.hideWatched.state) { _ in
-            UserDefaultsHelper.standard.filterOption = FilterOption.hideWatched.rawValue
-//            self.media = self.repository.filter(by: .hideWatched)
+            UserDefaults.filterOption = FilterOption.hideWatched.rawValue
             self.sortAndFilter()
         }
         

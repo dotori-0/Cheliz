@@ -12,7 +12,7 @@ enum FilterOption: Int {
     case hideWatched
     
     var state: UIMenuElement.State {
-        if UserDefaultsHelper.standard.filterOption == self.rawValue {
+        if UserDefaults.filterOption == self.rawValue {
             return .on
         } else {
             return .off
