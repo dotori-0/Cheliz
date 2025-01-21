@@ -52,6 +52,8 @@
 		0A4737AC2961F1BF00A9ED8E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0A4737AB2961F1BF00A9ED8E /* FirebaseCrashlytics */; };
 		0A4737AE2961F4A400A9ED8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A4737AD2961F4A400A9ED8E /* GoogleService-Info.plist */; };
 		0A4D96E929C9C7F0009766CF /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4D96E829C9C7F0009766CF /* NetworkMonitor.swift */; };
+		0A65C29B2D3F7D710078CD07 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65C29A2D3F7D710078CD07 /* UserDefault.swift */; };
+		0A65C29E2D3F7F760078CD07 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A65C29D2D3F7F760078CD07 /* UserDefaults+Extension.swift */; };
 		0A6DB5E728DF51FE004481E4 /* BaMeringue.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0A6DB5E628DF51FE004481E4 /* BaMeringue.ttf */; };
 		0A7FFD6C28E8927F00AB6DDF /* WatchCountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD6B28E8927F00AB6DDF /* WatchCountTableViewCell.swift */; };
 		0A7FFD6E28E8944200AB6DDF /* RecordSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */; };
@@ -149,6 +151,8 @@
 		0A439CBD28E1EB5C0032A687 /* DateFormatterHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterHelper.swift; sourceTree = "<group>"; };
 		0A4737AD2961F4A400A9ED8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A4D96E829C9C7F0009766CF /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		0A65C29A2D3F7D710078CD07 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		0A65C29D2D3F7F760078CD07 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		0A6DB5E628DF51FE004481E4 /* BaMeringue.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BaMeringue.ttf; sourceTree = "<group>"; };
 		0A7FFD6B28E8927F00AB6DDF /* WatchCountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCountTableViewCell.swift; sourceTree = "<group>"; };
 		0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSection.swift; sourceTree = "<group>"; };
@@ -346,6 +350,15 @@
 			path = BackupAndRestore;
 			sourceTree = "<group>";
 		};
+		0A65C29C2D3F7F660078CD07 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				0A65C29A2D3F7D710078CD07 /* UserDefault.swift */,
+				0A65C29D2D3F7F760078CD07 /* UserDefaults+Extension.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		0A76BA9F2997CF63004E16C4 /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +535,7 @@
 				0AB10D3728D9A309007033E2 /* SortingOrder.swift */,
 				0AB10D3C28DA39F7007033E2 /* FilterOption.swift */,
 				0AB10D4328DBB65F007033E2 /* UserDefaultsHelper.swift */,
+				0A65C29C2D3F7F660078CD07 /* UserDefaults */,
 				0A439C8428E0BDE00032A687 /* SettingsSection.swift */,
 				0A439CBD28E1EB5C0032A687 /* DateFormatterHelper.swift */,
 				0A7FFD6D28E8944200AB6DDF /* RecordSection.swift */,
@@ -653,6 +667,7 @@
 				0A7FFD9228EAF20D00AB6DDF /* FontsView.swift in Sources */,
 				0A31E08C28E3463200D0C79B /* Person.swift in Sources */,
 				0A31E0A328E6E77500D0C79B /* Credit.swift in Sources */,
+				0A65C29E2D3F7F760078CD07 /* UserDefaults+Extension.swift in Sources */,
 				0A439C7E28E0610C0032A687 /* SettingsTableViewCell.swift in Sources */,
 				0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */,
 				0A7FFD6C28E8927F00AB6DDF /* WatchCountTableViewCell.swift in Sources */,
@@ -667,6 +682,7 @@
 				0AB10D4028DA4069007033E2 /* MediaPassableButton.swift in Sources */,
 				0A31E09328E4A42100D0C79B /* DetailViewController.swift in Sources */,
 				0AF8837328D39DC0008A4B51 /* MediaType.swift in Sources */,
+				0A65C29B2D3F7D710078CD07 /* UserDefault.swift in Sources */,
 				0A8AA9CC28CF2D3800EB2AF8 /* UIFont+Extension.swift in Sources */,
 				0A7FFD9628EB572300AB6DDF /* PosterView.swift in Sources */,
 				0A8AA9D328CF624B00EB2AF8 /* HomeCollectionViewCell.swift in Sources */,
