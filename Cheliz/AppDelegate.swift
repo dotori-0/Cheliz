@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         
+//        configureAppUI()
+        
         return true
     }
 
@@ -39,6 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    private func configureAppUI() {
+        let attributes = [
+//            NSAttributedString.Key.font: UIFont(name: "Georgia-Bold", size: 24)!
+            NSAttributedString.Key.font: UIFont.meringue(size: 18)
+        ]
 
+        UINavigationBar.appearance().titleTextAttributes = attributes
+    }
 }
 
