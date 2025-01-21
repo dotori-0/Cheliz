@@ -43,8 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func configureAppUI() {
         let attributes = [
-//            NSAttributedString.Key.font: UIFont(name: "Georgia-Bold", size: 24)!
-            NSAttributedString.Key.font: UIFont.meringue(size: 18)
+            NSAttributedString.Key.font: FontManager.preferredFont(ofSize: 18)
         ]
 
         UINavigationBar.appearance().titleTextAttributes = attributes

@@ -17,7 +17,7 @@ final class RecordTableViewCell: BaseTableViewCell {
     let tagsField = WSTagsField().then {
         $0.spaceBetweenTags  = 5
         $0.spaceBetweenLines = 13
-        $0.font = .meringue(size: 14)
+        $0.font = FontManager.preferredFont(ofSize: 14)
 //        $0.textColor = .secondaryLabel
         $0.tintColor = .tintColor.withAlphaComponent(0.3)
         $0.selectedColor = .tintColor.withAlphaComponent(0.5)

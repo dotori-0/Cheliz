@@ -32,7 +32,7 @@ class BaseViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(backgroundImageView)
         
-        toastStyle.messageFont = .meringue(size: 15)
+        toastStyle.messageFont = FontManager.preferredFont(ofSize: 15)
     }
     
     func setConstraints() {

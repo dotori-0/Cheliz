@@ -53,7 +53,6 @@ extension FontsViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             cell.fontLabel.text = Notice.systemFont
             cell.button.isSelected = false
-            
         } else {
             cell.fontLabel.text = Notice.baMeringue
             cell.button.isSelected = true

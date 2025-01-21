@@ -12,7 +12,7 @@ final class CustomLabel: UILabel {
     init(textSize: CGFloat, textColor: UIColor = .label) {
         super.init(frame: .zero)
         
-        font = UIFont.meringue(size: textSize)
+        font = FontManager.preferredFont(ofSize: textSize)
         self.textColor = textColor
     }
     

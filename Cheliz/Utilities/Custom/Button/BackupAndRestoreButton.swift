@@ -31,7 +31,8 @@ final class BackupAndRestoreButton: UIButton {
         }
 
         var container = AttributeContainer()
-        container.font = .meringue(size: 15)
+//        container.font = .meringue(size: 15)
+        container.font = FontManager.preferredFont(ofSize: 15)
         container.foregroundColor = .label
         
         var buttonConfiguration = UIButton.Configuration.filled()

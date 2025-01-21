@@ -10,6 +10,7 @@ import Foundation
 extension UserDefaults {
     enum Key: String {
         case sortingOrder, filterOption
+        case fontPreference
     }
     
     // MARK: - UserDefaults
@@ -18,4 +19,7 @@ extension UserDefaults {
     
     @UserDefault(key: Key.filterOption.rawValue, defaultValue: Int.zero)
     static var filterOption: Int
+    
+    @UserDefault(key: Key.fontPreference.rawValue, defaultValue: "Meringue")
+    static var fontPreference: String
 }

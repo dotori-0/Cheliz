@@ -11,7 +11,7 @@ final class NotesTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     let notesTextView = UITextView().then {
         $0.backgroundColor = .clear
-        $0.font = .meringue(size: 14)
+        $0.font = FontManager.preferredFont(ofSize: 14)
         $0.text = Notice.addNotes
         $0.textColor = .secondaryLabel
     }

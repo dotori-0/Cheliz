@@ -740,7 +740,7 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             let label = UILabel(frame: CGRect(x: 0, y: 0, width: itemWidth, height: CGFloat.greatestFiniteMagnitude))
             label.numberOfLines = 0
             label.lineBreakMode = NSLineBreakMode.byWordWrapping
-            label.font = UIFont.meringue(size: textSize)
+            label.font = FontManager.preferredFont(ofSize: textSize)
             label.text = text
             label.sizeToFit()
 
@@ -899,7 +899,7 @@ extension DetailViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: itemWidth, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont.meringue(size: textSize)
+        label.font = FontManager.preferredFont(ofSize: textSize)
         label.text = text
         label.sizeToFit()
         
@@ -919,7 +919,7 @@ extension DetailViewController {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: labelWidth, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.font = UIFont.meringue(size: 14)
+        label.font = FontManager.preferredFont(ofSize: 14)
         label.text = media.overview
         label.sizeToFit()
         
