@@ -20,7 +20,7 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
 //        $0.backgroundColor = .tintColor
 //    }
   
-    let titleLabel = CustomLabel(textSize: 19)
+    let titleLabel = CustomLabel(textSize: 17)
     
     let releaseYearLabel = CustomLabel(textSize: 14)
   

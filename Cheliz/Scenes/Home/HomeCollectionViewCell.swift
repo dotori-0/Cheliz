@@ -36,7 +36,7 @@ final class HomeCollectionViewCell: BaseCollectionViewCell {
 //        $0.backgroundColor = .tintColor.withAlphaComponent(0.5)
 //    }
     
-    let titleLabel = CustomLabel(textSize: 18)
+    let titleLabel = CustomLabel(textSize: 17)
     
     let releaseYearLabel = CustomLabel(textSize: 14, textColor: .systemGray)
     
