@@ -9,8 +9,8 @@ import UIKit
 
 final class FontTableViewCell: BaseTableViewCell {
     // MARK: - Properties
-    let button = SingleSelectionButton()
-    let fontLabel = CustomLabel(textSize: 15)
+    private let fontLabel = UILabel()
+    private let labelTextSize: CGFloat = 16
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -23,24 +23,34 @@ final class FontTableViewCell: BaseTableViewCell {
     
     // MARK: - Design Methods
     override func setUI() {
-        [button, fontLabel].forEach {
-            contentView.addSubview($0)
-        }
+        contentView.addSubview(fontLabel)
         backgroundColor = .secondarySystemGroupedBackground.withAlphaComponent(0.5)
     }
     
     override func setConstraints() {
-        button.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(18)
-            make.width.equalToSuperview().multipliedBy(0.1)
-            make.height.equalTo(button.snp.width)
-        }
-        
         fontLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.leading.equalTo(button.snp.trailing).offset(4)
-            make.trailing.equalToSuperview().offset(-24)
+            make.leading.equalToSuperview().inset(24)
         }
+    }
+    
+    // MARK: - Configurations
+    func configure(with font: AppFont) {
+        fontLabel.text = font.title
+        configureEachFont(font)
+        accessoryType = UserDefaults.fontPreference == font.rawValue ? .checkmark : .none
+    }
+    
+    private func configureEachFont(_ font: AppFont) {
+        let uiFont: UIFont?
+        
+        switch font {
+            case .system:
+                uiFont = UIFont.systemFont(ofSize: labelTextSize)
+            case .meringue:
+                uiFont = UIFont(name: "BaMeringue", size: labelTextSize)
+        }
+        
+        fontLabel.font = uiFont
     }
 }

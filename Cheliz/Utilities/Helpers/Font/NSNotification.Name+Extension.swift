@@ -8,5 +8,5 @@
 import Foundation
 
 extension NSNotification.Name {
-    static let fontPreferedDidChange = NSNotification.Name("fontPreferedDidChange")
+    static let fontPreferenceDidChange = NSNotification.Name("fontPreferenceDidChange")
 }

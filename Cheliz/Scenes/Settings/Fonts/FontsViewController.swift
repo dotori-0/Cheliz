@@ -26,7 +26,6 @@ final class FontsViewController: BaseViewController {
     private func setTableView() {
         fontsView.tableView.dataSource = self
         fontsView.tableView.delegate = self
-//        fontsView.tableView.allowsSelection = false
     }
     
     // MARK: - Design Methods
@@ -49,14 +48,9 @@ extension FontsViewController: UITableViewDataSource {
             print("Cannot find FontTableViewCell")
             return UITableViewCell()
         }
-                
-        if indexPath.row == 0 {
-            cell.fontLabel.text = Notice.systemFont
-            cell.button.isSelected = false
-        } else {
-            cell.fontLabel.text = Notice.baMeringue
-            cell.button.isSelected = true
-        }
+
+        let font = AppFont.allCases[indexPath.row]
+        cell.configure(with: font)
         
         let backgroundView = UIView()
         backgroundView.backgroundColor = .selectedBackgroundColor
@@ -75,10 +69,21 @@ extension FontsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 0 {
-            view.makeToast(Notice.updatePlanned,
-                           duration: 1,
-                           position: .center, style: self.toastStyle)
-        } 
+        if UserDefaults.fontPreference == AppFont.allCases[indexPath.row].rawValue {
+            return
+        }
+        
+        // 기존에 선택한 폰트
+        if let selectedFont = AppFont(rawValue: UserDefaults.fontPreference),
+           let previousIndex = AppFont.allCases.firstIndex(of: selectedFont), let previousCell = tableView.cellForRow(at: IndexPath(row: previousIndex, section: indexPath.section)) {
+            previousCell.accessoryType = .none
+        }
+        
+        // 새로 선택한 폰트
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+        }
+        
+        FontManager.configureFont(to: AppFont.allCases[indexPath.row])
     }
 }

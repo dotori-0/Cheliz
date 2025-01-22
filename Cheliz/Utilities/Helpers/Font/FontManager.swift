@@ -13,19 +13,19 @@ enum FontManager {
     }
     
     static func configureFont(to font: AppFont) {
+        guard font != currentFont else { return }
         UserDefaults.fontPreference = font.rawValue
-//        NotificationCenter.default.post(name: .font, object: <#T##Any?#>)
-        NotificationCenter.default.post(name: .fontPreferedDidChange, object: nil)
+        NotificationCenter.default.post(name: .fontPreferenceDidChange, object: nil)
     }
     
     static func preferredFont(ofSize: CGFloat) -> UIFont {
         let font: UIFont?
         
         switch currentFont {
-            case .meringue:
-                font =  UIFont(name: "BaMeringue", size: ofSize)
             case .system:
                 font = UIFont.systemFont(ofSize: ofSize)
+            case .meringue:
+                font =  UIFont(name: "BaMeringue", size: ofSize)
         }
         
         return font ?? UIFont.systemFont(ofSize: ofSize)
