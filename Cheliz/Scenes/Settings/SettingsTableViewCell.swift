@@ -13,7 +13,7 @@ final class SettingsTableViewCell: BaseTableViewCell {
         $0.contentMode = .scaleAspectFit
     }
     
-    let titleLabel = CustomLabel(textSize: 18)
+    let titleLabel = CustomLabel(textSize: 17)
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

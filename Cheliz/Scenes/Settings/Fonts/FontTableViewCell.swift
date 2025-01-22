@@ -10,7 +10,7 @@ import UIKit
 final class FontTableViewCell: BaseTableViewCell {
     // MARK: - Properties
     private let fontLabel = UILabel()
-    private let labelTextSize: CGFloat = 16
+    private let labelTextSize: CGFloat = 17
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
