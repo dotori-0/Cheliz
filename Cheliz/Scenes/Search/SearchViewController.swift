@@ -19,8 +19,6 @@ final class SearchViewController: BaseViewController {
     private var page = 1
     private var totalPages = 0
     private var isPaginating = false
-    private var isCancelClicked = false
-    
     
     // MARK: - Life Cycle
     override func loadView() {
@@ -95,25 +93,6 @@ final class SearchViewController: BaseViewController {
     
     // MARK: - Search Methods
     private func search() {
-//        print("🔍")
-        searchView.searchAndAddLabel.isHidden = true
-//        if !searchResults.isEmpty {
-//            print("searchResults is not empty")
-//            searchView.searchAndAddLabel.isHidden = true
-//        } else {
-//            searchView.searchAndAddLabel.isHidden = false
-//        }
-        
-        if isCancelClicked {
-            searchView.searchAndAddLabel.isHidden = false
-            isCancelClicked = false
-            return
-        } else {
-            searchView.searchAndAddLabel.isHidden = true
-        }
-        
-//        isCancelClicked = false
-        
 //        print("searchText: \(searchText)")
         if searchText.isEmpty { return }
 //        print("isPaginating: \(isPaginating)")
@@ -230,8 +209,8 @@ extension SearchViewController: UICollectionViewDelegate {
 // MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        print(#function)
-        print(searchController.searchBar.text)
+//        print("🔄 updateSearchResults: \(searchController.searchBar.text ?? "nil")")
+
         guard let text = searchController.searchBar.text else {
             print("No text")  // 👻 화면에 검색하라고 띄워 주기
             return
@@ -241,20 +220,21 @@ extension SearchViewController: UISearchResultsUpdating {
         page = 1
         searchText = text.lowercased()
         if !searchResults.isEmpty { searchView.collectionView.scrollToItem(at: [0, 0], at: .top, animated: true) }
-//        isCancelClicked = false
         search()
     }
 }
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print(#function)
-        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {   // updateSearchResults 호출됨
 //        searchBar.text = nil  // nil로 지정해도 updateSearchResults에서 Optional("")로 잡힘
         searchResults = []
         searchView.collectionView.reloadData()
-        isCancelClicked = true
+        searchView.searchAndAddLabel.isHidden = false
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchView.searchAndAddLabel.isHidden = true
     }
 }
 
@@ -299,7 +279,6 @@ extension SearchViewController: UISearchBarDelegate {
 // MARK: - UICollectionViewDataSourcePrefetching
 extension SearchViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print("🍬", totalPages)
         for indexPath in indexPaths {  // indexPaths: prefetch되는 셀들
             if searchResults.count - 1 == indexPath.item && page < totalPages {
                 isPaginating = true
@@ -307,7 +286,6 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
                 search()
             }
         }
-//        print("=====\(indexPaths)=====")
     }
 }
 
