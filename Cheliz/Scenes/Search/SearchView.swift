@@ -67,7 +67,7 @@ final class SearchView: BaseView {
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
         
-        layout.itemSize = CGSize(width: screenWidth, height: screenHeight * 0.15)
+        layout.itemSize = CGSize(width: floor(screenWidth), height: floor(screenHeight * 0.15))
         
         collectionView.collectionViewLayout = layout
     }
