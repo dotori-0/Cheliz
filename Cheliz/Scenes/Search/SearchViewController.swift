@@ -57,6 +57,7 @@ final class SearchViewController: BaseViewController {
         searchView.collectionView.dataSource = self
         searchView.collectionView.delegate = self
         searchView.collectionView.prefetchDataSource = self
+//        searchView.collectionView.isPagingEnabled = false
         
         searchView.collectionView.keyboardDismissMode = .onDrag
     }
@@ -93,23 +94,28 @@ final class SearchViewController: BaseViewController {
     
     // MARK: - Search Methods
     private func search() {
-//        print("searchText: \(searchText)")
         if searchText.isEmpty { return }
-//        print("isPaginating: \(isPaginating)")
-        TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText, page: page) { data in
-//            print("fetched page \(self.page)")
-//            self.searchResults = ParsingManager.parseData(data)
-//            self.searchResults = ParsingManager.parseDataToRealmModel(data)
-            let data = ParsingManager.parseDataToRealmModel(data)
-//            self.searchResults.append(contentsOf: data.0)
-//            self.searchResults = data.0
+
+        TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText, page: page) { [weak self] data in
+            guard let self = self else { return }
             
+            let data = ParsingManager.parseDataToRealmModel(data)
+
             if self.isPaginating {
+                let startIndex = self.searchResults.count // 기존 데이터 개수
+                
                 self.searchResults.append(contentsOf: data.0)
+                
+                let endIndex = self.searchResults.count - 1 // 업데이트 후의 마지막 인덱스 (startIndex + newItems.count - 1)
+                let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
+                self.searchView.collectionView.performBatchUpdates {
+                    self.searchView.collectionView.insertItems(at: indexPaths)
+                }
             } else {
-//                self.searchView.collectionView.scrollsToTop = true
                 self.searchResults = data.0
                 self.totalPages = data.1
+                
+                self.searchView.collectionView.reloadData()
             }
             
             // 타이틀만 출력하기
@@ -118,9 +124,10 @@ final class SearchViewController: BaseViewController {
 //            }
 //            print(titles)
             
-            print("searchResults.count: \(self.searchResults.count)")
-//            self.totalPages = data.1
-            self.searchView.collectionView.reloadData()
+//            print("============ search end ============")
+//            for index in 0..<self.searchResults.count {
+//                print("\(index): \(self.searchResults[index].title)")
+//            }
         }
     }
 }
@@ -164,9 +171,6 @@ extension SearchViewController: UICollectionViewDataSource {
         let repository = MediaRepository()
         
         if repository.sameMediaExists(as: media) {
-//            alert(title: nil,
-//            alert(title: Notice.sameMediaAlreadyExistsTitle,
-//            alert(title: "",
             alert(title: Notice.sameMediaAlreadyExistsTitle,
                   message: Notice.sameMediaAlreadyExistsMessage)
             return
@@ -239,6 +243,13 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 // MARK: - UIScrollViewDelegate
+extension SearchViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+}
+
+
 //extension SearchViewController {
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        isPaginating = true
@@ -300,7 +311,7 @@ extension SearchViewController {
             }
         }
         
-        NetworkMonitor.shared.startMonitoring { //[weak self] in
+        NetworkMonitor.shared.startMonitoring {
             print("🚨 alert")
             alertHandler()
         }
