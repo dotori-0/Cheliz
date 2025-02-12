@@ -110,17 +110,24 @@ final class HomeCollectionViewCell: BaseCollectionViewCell {
 //        checkButton.setContentHuggingPriority(.required, for: .horizontal)
 
         posterView.snp.makeConstraints { make in
-//            make.leading.equalTo(checkButton.snp.trailing).offset(16)
             make.leading.equalTo(checkButton.snp.trailing).offset(8)
             make.centerY.equalToSuperview()
-//            make.height.equalToSuperview().multipliedBy(0.8)
 
             let screenHeight = UIScreen.main.bounds.height
             let imageHeight = screenHeight * 0.12
             make.height.equalTo(imageHeight)
-            make.height.equalToSuperview().multipliedBy(0.85)
+            make.height.equalToSuperview().multipliedBy(0.85).priority(.high)
             make.width.equalTo(posterView.snp.height).multipliedBy(0.67)
         }
+
+//        contentView.snp.makeConstraints { make in
+//            make.edges.equalToSuperview()
+//            make.height.equalTo(posterView.snp.height).dividedBy(0.85)
+//        }
+        
+//        self.snp.makeConstraints { make in
+//            make.height.equalTo(posterView.snp.height).multipliedBy(0.85) // 셀 높이의 0.85배
+//        }
 
         stackView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

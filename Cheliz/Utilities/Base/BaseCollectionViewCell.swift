@@ -24,7 +24,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
-    func setUI () { }
+    func setUI() { }
     
     func setConstraints() { }
 }
