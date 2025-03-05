@@ -27,6 +27,7 @@
 		0A31E09D28E5DA5400D0C79B /* Gradient+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E09C28E5DA5400D0C79B /* Gradient+Extension.swift */; };
 		0A31E0A128E6067B00D0C79B /* CreditsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E0A028E6067B00D0C79B /* CreditsCollectionViewCell.swift */; };
 		0A31E0A328E6E77500D0C79B /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E0A228E6E77500D0C79B /* Credit.swift */; };
+		0A3335042D78494A0041193E /* RealmRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335032D78494A0041193E /* RealmRepositoryProtocol.swift */; };
 		0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */; };
 		0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */; };
 		0A3F32FF28CB4B7600B51DEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F32FE28CB4B7600B51DEA /* Assets.xcassets */; };
@@ -130,6 +131,7 @@
 		0A31E09C28E5DA5400D0C79B /* Gradient+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradient+Extension.swift"; sourceTree = "<group>"; };
 		0A31E0A028E6067B00D0C79B /* CreditsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A31E0A228E6E77500D0C79B /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
+		0A3335032D78494A0041193E /* RealmRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepositoryProtocol.swift; sourceTree = "<group>"; };
 		0A3F32F228CB4B7500B51DEA /* Cheliz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheliz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -258,14 +260,9 @@
 		0A22A81E28D245BA002D2C34 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0A22A82028D24A7A002D2C34 /* MediaModel.swift */,
-				0AF8837228D39DC0008A4B51 /* MediaType.swift */,
-				0AF8837C28D6EE3D008A4B51 /* Media.swift */,
-				0AB10D2B28D75A55007033E2 /* MediaRepository.swift */,
-				0A31E08728E2E53C00D0C79B /* Record.swift */,
-				0A31E08B28E3463200D0C79B /* Person.swift */,
-				0A31E09A28E5610700D0C79B /* Genres.swift */,
-				0A31E0A228E6E77500D0C79B /* Credit.swift */,
+				0A3335022D7848D50041193E /* Repositories */,
+				0A8AA9A328CE1B0700EB2AF8 /* Networking */,
+				0A22A81328D2002F002D2C34 /* Resources */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -290,6 +287,69 @@
 			path = MediaInfo;
 			sourceTree = "<group>";
 		};
+		0A3334FA2D7847320041193E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AA9B528CF236A00EB2AF8 /* Scenes */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		0A3334FB2D7847660041193E /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0A3334FE2D7847910041193E /* Entities */,
+				0A3334FF2D7848310041193E /* UseCases */,
+				0A3335002D78483F0041193E /* Interfaces */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0A3334FE2D7847910041193E /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				0A22A82028D24A7A002D2C34 /* MediaModel.swift */,
+				0AF8837228D39DC0008A4B51 /* MediaType.swift */,
+				0AF8837C28D6EE3D008A4B51 /* Media.swift */,
+				0A31E08728E2E53C00D0C79B /* Record.swift */,
+				0A31E08B28E3463200D0C79B /* Person.swift */,
+				0A31E09A28E5610700D0C79B /* Genres.swift */,
+				0A31E0A228E6E77500D0C79B /* Credit.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		0A3334FF2D7848310041193E /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		0A3335002D78483F0041193E /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				0A3335012D7848500041193E /* Repositories */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		0A3335012D7848500041193E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0A3335032D78494A0041193E /* RealmRepositoryProtocol.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0A3335022D7848D50041193E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				0AB10D2B28D75A55007033E2 /* MediaRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		0A3F32E928CB4B7500B51DEA = {
 			isa = PBXGroup;
 			children = (
@@ -310,11 +370,10 @@
 		0A3F32F428CB4B7500B51DEA /* Cheliz */ = {
 			isa = PBXGroup;
 			children = (
+				0A3334FA2D7847320041193E /* Presentation */,
+				0A3334FB2D7847660041193E /* Domain */,
 				0A22A81E28D245BA002D2C34 /* Data */,
 				0A8AA9B828CF249800EB2AF8 /* Utilities */,
-				0A8AA9A328CE1B0700EB2AF8 /* Networking */,
-				0A8AA9B528CF236A00EB2AF8 /* Scenes */,
-				0A22A81328D2002F002D2C34 /* Resources */,
 				0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */,
 				0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */,
 				0A7FFD6F28E89BCD00AB6DDF /* Main.storyboard */,
@@ -707,6 +766,7 @@
 				0A7FFD9628EB572300AB6DDF /* PosterView.swift in Sources */,
 				0A8AA9D328CF624B00EB2AF8 /* HomeCollectionViewCell.swift in Sources */,
 				0A22A80428D1CC85002D2C34 /* SearchCollectionViewCell.swift in Sources */,
+				0A3335042D78494A0041193E /* RealmRepositoryProtocol.swift in Sources */,
 				0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */,
 				0A8AA9BB28CF24A900EB2AF8 /* BaseViewController.swift in Sources */,
 				0A7FFD9028EAF1FD00AB6DDF /* FontsViewController.swift in Sources */,
