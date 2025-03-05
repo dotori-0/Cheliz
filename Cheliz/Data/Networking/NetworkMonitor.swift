@@ -18,11 +18,11 @@ final class NetworkMonitor {
     func startMonitoring(noConnectionHandler: @escaping () -> Void) {
         monitor.start(queue: DispatchQueue.global())
         print("🛰 startMonitoring")
-        monitor.pathUpdateHandler = { [weak self] path in
+        monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
-                print("인터넷 연결 ⭕️")
+//                print("인터넷 연결 ⭕️")
             } else {
-                print("인터넷 연결 ❌")
+//                print("인터넷 연결 ❌")
                 DispatchQueue.main.async {
                     noConnectionHandler()
                 }

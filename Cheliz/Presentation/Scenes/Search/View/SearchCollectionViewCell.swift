@@ -10,15 +10,7 @@ import Kingfisher
 
 final class SearchCollectionViewCell: BaseCollectionViewCell {
     // MARK: - Properties
-//    var media: Media?
-//    var addErrorHandler: (() -> Void)?
-//    var addCompletionHandler: (() -> Void)?
-
-        let posterView = PosterView()
-//    let posterImageView = PosterImageView()
-//        .then {
-//        $0.backgroundColor = .tintColor
-//    }
+    let posterView = PosterView()
   
     let titleLabel = CustomLabel(textSize: 17)
     
@@ -48,7 +40,6 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         posterView.posterImageView.image = nil
-//        posterImageView.image = nil
     }
     
     override init(frame: CGRect) {
@@ -101,15 +92,6 @@ final class SearchCollectionViewCell: BaseCollectionViewCell {
     }
     
     // MARK: - Internal Methods
-//    func showResult(with media: MediaModel) {
-//        titleLabel.text = media.title
-//        releaseYearLabel.text = media.releaseDate
-//        mediaTypeLabel.text = media.mediaType.rawValue
-//
-//        let url = URL(string: Endpoint.imageConfigurationURL + media.posterPath)
-//        posterImageView.kf.setImage(with: url)
-//    }
-    
     func showResult(of media: Media) {
 //    func showResult(errorHandler: @escaping () -> Void) {
 //        guard let media = media else {

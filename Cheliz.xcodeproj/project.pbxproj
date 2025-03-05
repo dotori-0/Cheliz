@@ -31,6 +31,10 @@
 		0A3335062D7853970041193E /* APIRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335052D7853970041193E /* APIRepositoryProtocol.swift */; };
 		0A3335082D7859A10041193E /* MultiSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335072D7859940041193E /* MultiSearchUseCase.swift */; };
 		0A33350A2D785BC50041193E /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335092D785BC50041193E /* APIRepository.swift */; };
+		0A33350E2D7DF7650041193E /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33350D2D7DF7650041193E /* SearchViewModel.swift */; };
+		0A3335122D8727C90041193E /* SearchResultMediaAdditionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335112D8727C90041193E /* SearchResultMediaAdditionUseCase.swift */; };
+		0A3335152D874A950041193E /* MediaAdditionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335142D874A950041193E /* MediaAdditionError.swift */; };
+		0A3335172D874F270041193E /* SearchResultMediaAdditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335162D874F270041193E /* SearchResultMediaAdditionViewModel.swift */; };
 		0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */; };
 		0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */; };
 		0A3F32FF28CB4B7600B51DEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F32FE28CB4B7600B51DEA /* Assets.xcassets */; };
@@ -138,6 +142,10 @@
 		0A3335052D7853970041193E /* APIRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepositoryProtocol.swift; sourceTree = "<group>"; };
 		0A3335072D7859940041193E /* MultiSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSearchUseCase.swift; sourceTree = "<group>"; };
 		0A3335092D785BC50041193E /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
+		0A33350D2D7DF7650041193E /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		0A3335112D8727C90041193E /* SearchResultMediaAdditionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultMediaAdditionUseCase.swift; sourceTree = "<group>"; };
+		0A3335142D874A950041193E /* MediaAdditionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaAdditionError.swift; sourceTree = "<group>"; };
+		0A3335162D874F270041193E /* SearchResultMediaAdditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultMediaAdditionViewModel.swift; sourceTree = "<group>"; };
 		0A3F32F228CB4B7500B51DEA /* Cheliz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheliz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -236,9 +244,8 @@
 		0A22A7FC28D0DBDB002D2C34 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				0A22A7FF28D0DC0E002D2C34 /* SearchView.swift */,
-				0A22A7FD28D0DBED002D2C34 /* SearchViewController.swift */,
-				0A22A80328D1CC85002D2C34 /* SearchCollectionViewCell.swift */,
+				0A33350F2D7DF7E30041193E /* View */,
+				0A3335102D7DF7EE0041193E /* ViewModel */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -307,6 +314,7 @@
 				0A3334FE2D7847910041193E /* Entities */,
 				0A3334FF2D7848310041193E /* UseCases */,
 				0A3335002D78483F0041193E /* Interfaces */,
+				0A3335132D8746F20041193E /* Errors */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -329,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3335072D7859940041193E /* MultiSearchUseCase.swift */,
+				0A3335112D8727C90041193E /* SearchResultMediaAdditionUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -357,6 +366,33 @@
 				0A3335092D785BC50041193E /* APIRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		0A33350F2D7DF7E30041193E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A22A7FF28D0DC0E002D2C34 /* SearchView.swift */,
+				0A22A7FD28D0DBED002D2C34 /* SearchViewController.swift */,
+				0A22A80328D1CC85002D2C34 /* SearchCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0A3335102D7DF7EE0041193E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0A33350D2D7DF7650041193E /* SearchViewModel.swift */,
+				0A3335162D874F270041193E /* SearchResultMediaAdditionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0A3335132D8746F20041193E /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				0A3335142D874A950041193E /* MediaAdditionError.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		0A3F32E928CB4B7500B51DEA = {
@@ -770,6 +806,7 @@
 				0A31E09528E4A45100D0C79B /* DetailView.swift in Sources */,
 				0AB10D4028DA4069007033E2 /* MediaPassableButton.swift in Sources */,
 				0A31E09328E4A42100D0C79B /* DetailViewController.swift in Sources */,
+				0A3335172D874F270041193E /* SearchResultMediaAdditionViewModel.swift in Sources */,
 				0AF8837328D39DC0008A4B51 /* MediaType.swift in Sources */,
 				0A65C29B2D3F7D710078CD07 /* UserDefault.swift in Sources */,
 				0A8AA9CC28CF2D3800EB2AF8 /* UIFont+Extension.swift in Sources */,
@@ -779,6 +816,7 @@
 				0A3335042D78494A0041193E /* RealmRepositoryProtocol.swift in Sources */,
 				0A7FFD7628E95C8F00AB6DDF /* MediaAndRecordPassableDatePicker.swift in Sources */,
 				0A8AA9BB28CF24A900EB2AF8 /* BaseViewController.swift in Sources */,
+				0A3335152D874A950041193E /* MediaAdditionError.swift in Sources */,
 				0A7FFD9028EAF1FD00AB6DDF /* FontsViewController.swift in Sources */,
 				0A22A82128D24A7A002D2C34 /* MediaModel.swift in Sources */,
 				0AB10D3028D75BD8007033E2 /* RealmKey.swift in Sources */,
@@ -789,6 +827,7 @@
 				0AF8837128D33CFD008A4B51 /* ParsingManager.swift in Sources */,
 				0A7FFD6E28E8944200AB6DDF /* RecordSection.swift in Sources */,
 				0AB10D3228D76A87007033E2 /* Alert+Extension.swift in Sources */,
+				0A3335122D8727C90041193E /* SearchResultMediaAdditionUseCase.swift in Sources */,
 				0AF8837D28D6EE3D008A4B51 /* Media.swift in Sources */,
 				0A8AA9D828D0761A00EB2AF8 /* ReusableView.swift in Sources */,
 				0A8AA9B728CF239100EB2AF8 /* HomeViewController.swift in Sources */,
@@ -804,6 +843,7 @@
 				0A8AA9D128CF622900EB2AF8 /* BaseCollectionViewCell.swift in Sources */,
 				0AB10D4228DB4371007033E2 /* UIImage+Extension.swift in Sources */,
 				0A3335082D7859A10041193E /* MultiSearchUseCase.swift in Sources */,
+				0A33350E2D7DF7650041193E /* SearchViewModel.swift in Sources */,
 				0A22A82328D2CC07002D2C34 /* UIViewController+Extension.swift in Sources */,
 				0A22A81228D1FD74002D2C34 /* Notice.swift in Sources */,
 				0AB10D3B28DA3734007033E2 /* MenuTitle.swift in Sources */,

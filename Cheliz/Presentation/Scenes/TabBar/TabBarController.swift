@@ -13,7 +13,7 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
         delegate = self
         
-        let searchVC = SearchViewController(multiSearchUseCase: makeMultiSearchUseCase())
+        let searchVC = makeSearchViewController()
         let searchNC = UINavigationController(rootViewController: searchVC)
         searchNC.tabBarItem.image = UIImage(systemName: SFSymbol.magnifyingGlass,
                                              withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
@@ -79,14 +79,10 @@ final class TabBarController: UITabBarController {
 }
 
 extension TabBarController: UITabBarControllerDelegate {
-//    tabbar
-//    tabb
-    
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print("🥯")
         let index = tabBarController.selectedIndex
         if index != 0 {
-            let searchVC = SearchViewController(multiSearchUseCase: makeMultiSearchUseCase())
+            let searchVC = makeSearchViewController()
             let searchNC = UINavigationController(rootViewController: searchVC)
             searchNC.tabBarItem.image = UIImage(systemName: SFSymbol.magnifyingGlass,
                                                  withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
@@ -98,11 +94,33 @@ extension TabBarController: UITabBarControllerDelegate {
 
 /// Dependency Injection
 extension TabBarController {
+    private func makeSearchViewController() -> SearchViewController {
+        let searchViewModel = SearchViewModel(multiSearchUseCase: makeMultiSearchUseCase())
+        let mediaAdditionViewModel = SearchResultMediaAdditionViewModel(useCase: makeSearchResultMediaAdditionUseCase())
+        
+        return SearchViewController(searchViewModel: searchViewModel,
+                                    mediaAdditionViewModel: mediaAdditionViewModel)
+    }
+}
+
+// MARK: - Use Cases
+extension TabBarController {
     private func makeMultiSearchUseCase() -> MultiSearchUseCase {
         MultiSearchUseCase(apiRepository: makeAPIRepository())
     }
     
+    private func makeSearchResultMediaAdditionUseCase() -> SearchResultMediaAdditionUseCase {
+        SearchResultMediaAdditionUseCase(mediaRepository: makeMediaRepository())
+    }
+}
+
+// MARK: - Repositories
+extension TabBarController {
     private func makeAPIRepository() -> APIRepositoryProtocol {
         APIRepository()
+    }
+    
+    private func makeMediaRepository() -> RealmRepositoryProtocol {
+        MediaRepository()
     }
 }

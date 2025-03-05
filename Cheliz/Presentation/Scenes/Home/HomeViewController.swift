@@ -18,7 +18,6 @@ final class HomeViewController: BaseViewController {
     private let repository = MediaRepository()
     private var media: Results<Media>! {
         didSet {
-            print("Media Changed")
             homeView.collectionView.reloadData()
         }
     }
@@ -231,12 +230,7 @@ final class HomeViewController: BaseViewController {
     private func sortAndFilter() {
         media = repository.sortAndFilter()
         
-//        print(media)
-        print(media.count)
-        print("Is media empty? \(media.isEmpty)")
-        
         if !media.isEmpty {
-            print("media is not empty")
             homeView.searchAndAddLabel.isHidden = true
         } else {
             homeView.searchAndAddLabel.isHidden = false

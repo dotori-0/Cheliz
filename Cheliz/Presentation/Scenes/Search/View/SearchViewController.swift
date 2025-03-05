@@ -6,25 +6,22 @@
 //
 
 import UIKit
-
+import Combine
 import FirebaseAnalytics
 import Toast
 
 final class SearchViewController: BaseViewController {
     // MARK: - Properties
     private let searchView = SearchView()
-    private let multiSearchUseCase: MultiSearchUseCaseProtocol
-    
-    private var searchText = ""
-    private var searchResults: [Media] = []
-    private var page = 1
-    private var totalPages = 0
-    private var isPaginating = false
+    private let searchViewModel: SearchViewModel
+    private let mediaAdditionViewModel: SearchResultMediaAdditionViewModel
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Life Cycle
-    /// Dependency Injection
-    init(multiSearchUseCase: MultiSearchUseCaseProtocol) {
-        self.multiSearchUseCase = multiSearchUseCase
+    init(searchViewModel: SearchViewModel,
+         mediaAdditionViewModel: SearchResultMediaAdditionViewModel) {
+        self.searchViewModel = searchViewModel
+        self.mediaAdditionViewModel = mediaAdditionViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -43,6 +40,7 @@ final class SearchViewController: BaseViewController {
         setCollectionView()
         setSearchController()
         setSearchBar()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,6 +56,57 @@ final class SearchViewController: BaseViewController {
         print("🚫", #function)
     }
     
+    // MARK: - Binding
+    private func bindViewModel() {
+        bindSearchResultsUpdateType()
+        bindScrollReset()
+        bindMediaAdditionResult()
+    }
+    
+    private func bindSearchResultsUpdateType() {
+        searchViewModel.$searchResultsUpdateType
+            .compactMap { $0 }
+            .sink { [weak self] updateType in
+                switch updateType {
+                    case .newSearch:
+                        self?.searchView.collectionView.reloadData()
+                    case .pagination(let newIndexPaths):
+                        self?.searchView.collectionView.performBatchUpdates {
+                            self?.searchView.collectionView.insertItems(at: newIndexPaths)
+                        }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindScrollReset() {
+        searchViewModel.$shouldResetScroll
+            .sink { [weak self] shouldReset in
+                if shouldReset { self?.resetScrollPosition() }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func bindMediaAdditionResult() {
+        mediaAdditionViewModel.$additionResult
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                    case .success():
+                        self.searchView.makeToast(Notice.addSucceeded,
+                                                   duration: 1,
+                                                   position: .center, style: self.toastStyle)
+                    case .failure(let error):
+                        self.alert(title: error.title,
+                                   message: error.errorDescription)
+                }
+                self.mediaAdditionViewModel.resetAdditionResult()
+            }
+            .store(in: &cancellables)
+    }
+    
     // MARK: - Setting Methods
     private func logEvent() {
         Analytics.logEvent("SearchVC", parameters: [
@@ -70,7 +119,6 @@ final class SearchViewController: BaseViewController {
         searchView.collectionView.delegate = self
         searchView.collectionView.prefetchDataSource = self
 //        searchView.collectionView.isPagingEnabled = false
-        
         searchView.collectionView.keyboardDismissMode = .onDrag
     }
     
@@ -96,55 +144,24 @@ final class SearchViewController: BaseViewController {
         
         navigationItem.title = Notice.search
         
-//        navigationController?.navigationBar.topItem?.title = ""  // nil: Back, 리터럴: 앞 화면의 타이틀까지 바뀜
 //        navigationItem.backButtonTitle = "?"
 //        searchView.searchController.hidesNavigationBarDuringPresentation = false
     }
     
+    private func resetScrollPosition() {
+        searchView.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                               at: .top,
+                                               animated: true)
+    }
+    
     // MARK: - Action Methods
 //    private func
-    
-    // MARK: - Search Methods
-    private func search() {
-        guard !searchText.isEmpty else { return }
-        
-        multiSearchUseCase.fetch(query: searchText, page: page) { [weak self] results, totalPages in
-            guard let self = self else { return }
-            
-            if self.isPaginating {
-                let startIndex = self.searchResults.count  // 기존 데이터 개수
-                self.searchResults.append(contentsOf: results)
-                
-                let endIndex = self.searchResults.count - 1 // 업데이트 후의 마지막 인덱스
-                let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
-                
-                self.searchView.collectionView.performBatchUpdates {
-                    self.searchView.collectionView.insertItems(at: indexPaths)
-                }
-            } else {
-                self.searchResults = results
-                self.totalPages = totalPages
-                self.searchView.collectionView.reloadData()
-            }
-            
-            // 타이틀만 출력하기
-//            let titles = data.0.map { media in
-//                media.title
-//            }
-//            print(titles)
-            
-//            print("============ search end ============")
-//            for index in 0..<self.searchResults.count {
-//                print("\(index): \(self.searchResults[index].title)")
-//            }
-        }
-    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        searchResults.count
+        return searchViewModel.searchResults.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -153,58 +170,22 @@ extension SearchViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let media = searchResults[indexPath.row]
+        let media = searchViewModel.searchResults[indexPath.row]
         
         cell.addButton.media = media
         cell.addButton.addTarget(self, action: #selector(addButtonClicked), for: .touchUpInside)
-
-//        cell.showResult {
-//            self.alert(title: Notice.errorTitle,
-//                       message: Notice.errorInSearchMessage)
-//        }
         cell.showResult(of: media)
         
         return cell
     }
     
     @objc private func addButtonClicked(sender: MediaPassableButton) {
-//        if let media = media, let addErrorHandler = addErrorHandler, let addCompletionHandler = addCompletionHandler {
-//            let repository = MediaRepository()
-//            repository.add(media: media, completionHandler: addCompletionHandler, errorHandler: addErrorHandler)
-//        }
         guard let media = sender.media else {
             print("Cannot find media in MediaPassableButton")  // 👻 alert
             return
         }
         
-        let repository = MediaRepository()
-        
-        if repository.sameMediaExists(as: media) {
-            alert(title: Notice.sameMediaAlreadyExistsTitle,
-                  message: Notice.sameMediaAlreadyExistsMessage)
-            return
-        }
-        
-        repository.add(media: media) {
-            self.searchView.makeToast(Notice.addSucceeded,
-                                      duration: 1,
-                                      position: .center, style: self.toastStyle)
-        } errorHandler: {
-            self.alert(title: Notice.errorTitle,
-                       message: Notice.errorInAddMessage)
-        }
-        
-//        Record(id: <#T##ObjectId#>, watchCount: 0, watchedDate: [Date.now], rate: <#T##Double#>, watchedWith: <#T##String?#>, review: <#T##String?#>)
-//
-//        repository.add(review: ) {
-//            self.searchView.makeToast(Notice.addSucceeded,
-//                                      duration: 1,
-//                                      position: .center, style: self.toastStyle)
-//        } errorHandler: {
-//            self.alert(title: Notice.errorTitle,
-//                       message: Notice.errorInAddMessage)
-//        }
-
+        mediaAdditionViewModel.add(media: media)
     }
 }
 
@@ -213,7 +194,7 @@ extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
         detailVC.isFromSearchView = true
-        detailVC.media = searchResults[indexPath.row]  // 👻 item?
+        detailVC.media = searchViewModel.searchResults[indexPath.row]
         
         transit(to: detailVC, transitionStyle: .push)
     }
@@ -224,25 +205,18 @@ extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
 //        print("🔄 updateSearchResults: \(searchController.searchBar.text ?? "nil")")
 
-        guard let text = searchController.searchBar.text else {
-            print("No text")  // 👻 화면에 검색하라고 띄워 주기
-            return
-        }
-          
-        isPaginating = false
-        page = 1
-        searchText = text.lowercased()
-        if !searchResults.isEmpty { searchView.collectionView.scrollToItem(at: [0, 0], at: .top, animated: true) }
-        search()
+        guard let text = searchController.searchBar.text else { return }
+        
+        searchViewModel.search(query: text)
+        return
     }
 }
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {   // updateSearchResults 호출됨
-//        searchBar.text = nil  // nil로 지정해도 updateSearchResults에서 Optional("")로 잡힘
-        searchResults = []
-        searchView.collectionView.reloadData()
+
+        searchViewModel.clearResults()
         searchView.searchAndAddLabel.isHidden = false
     }
     
@@ -300,11 +274,7 @@ extension SearchViewController: UIScrollViewDelegate {
 extension SearchViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {  // indexPaths: prefetch되는 셀들
-            if searchResults.count - 1 == indexPath.item && page < totalPages {
-                isPaginating = true
-                page += 1
-                search()
-            }
+            searchViewModel.loadMoreIfNeeded(at: indexPath.item)
         }
     }
 }
