@@ -28,6 +28,9 @@
 		0A31E0A128E6067B00D0C79B /* CreditsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E0A028E6067B00D0C79B /* CreditsCollectionViewCell.swift */; };
 		0A31E0A328E6E77500D0C79B /* Credit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A31E0A228E6E77500D0C79B /* Credit.swift */; };
 		0A3335042D78494A0041193E /* RealmRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335032D78494A0041193E /* RealmRepositoryProtocol.swift */; };
+		0A3335062D7853970041193E /* APIRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335052D7853970041193E /* APIRepositoryProtocol.swift */; };
+		0A3335082D7859A10041193E /* MultiSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335072D7859940041193E /* MultiSearchUseCase.swift */; };
+		0A33350A2D785BC50041193E /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3335092D785BC50041193E /* APIRepository.swift */; };
 		0A3F32F628CB4B7500B51DEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */; };
 		0A3F32F828CB4B7500B51DEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */; };
 		0A3F32FF28CB4B7600B51DEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3F32FE28CB4B7600B51DEA /* Assets.xcassets */; };
@@ -132,6 +135,9 @@
 		0A31E0A028E6067B00D0C79B /* CreditsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCollectionViewCell.swift; sourceTree = "<group>"; };
 		0A31E0A228E6E77500D0C79B /* Credit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credit.swift; sourceTree = "<group>"; };
 		0A3335032D78494A0041193E /* RealmRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepositoryProtocol.swift; sourceTree = "<group>"; };
+		0A3335052D7853970041193E /* APIRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepositoryProtocol.swift; sourceTree = "<group>"; };
+		0A3335072D7859940041193E /* MultiSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSearchUseCase.swift; sourceTree = "<group>"; };
+		0A3335092D785BC50041193E /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
 		0A3F32F228CB4B7500B51DEA /* Cheliz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cheliz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3F32F528CB4B7500B51DEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A3F32F728CB4B7500B51DEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -322,6 +328,7 @@
 		0A3334FF2D7848310041193E /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				0A3335072D7859940041193E /* MultiSearchUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -338,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3335032D78494A0041193E /* RealmRepositoryProtocol.swift */,
+				0A3335052D7853970041193E /* APIRepositoryProtocol.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -346,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				0AB10D2B28D75A55007033E2 /* MediaRepository.swift */,
+				0A3335092D785BC50041193E /* APIRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -727,6 +736,7 @@
 				0AB10D2C28D75A55007033E2 /* MediaRepository.swift in Sources */,
 				0A22A7FE28D0DBED002D2C34 /* SearchViewController.swift in Sources */,
 				0A7FFD9428EAF5B300AB6DDF /* SingleSelectionButton.swift in Sources */,
+				0A3335062D7853970041193E /* APIRepositoryProtocol.swift in Sources */,
 				0A7FFD7428E8B5A200AB6DDF /* RecordTableViewCell.swift in Sources */,
 				0A21FD2328EBF4560001D0B1 /* ProfileView.swift in Sources */,
 				0A439C8228E0BA8F0032A687 /* SettingsTitle.swift in Sources */,
@@ -793,10 +803,12 @@
 				0A439CA928E1837A0032A687 /* BackupAndRestoreViewController.swift in Sources */,
 				0A8AA9D128CF622900EB2AF8 /* BaseCollectionViewCell.swift in Sources */,
 				0AB10D4228DB4371007033E2 /* UIImage+Extension.swift in Sources */,
+				0A3335082D7859A10041193E /* MultiSearchUseCase.swift in Sources */,
 				0A22A82328D2CC07002D2C34 /* UIViewController+Extension.swift in Sources */,
 				0A22A81228D1FD74002D2C34 /* Notice.swift in Sources */,
 				0AB10D3B28DA3734007033E2 /* MenuTitle.swift in Sources */,
 				0A439CAB28E1838E0032A687 /* BackupAndRestoreView.swift in Sources */,
+				0A33350A2D785BC50041193E /* APIRepository.swift in Sources */,
 				0A8AA9A928CE1C7A00EB2AF8 /* Endpoint.swift in Sources */,
 				0A31E08828E2E53C00D0C79B /* Record.swift in Sources */,
 				0A439C7A28E060E90032A687 /* SettingsViewController.swift in Sources */,

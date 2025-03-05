@@ -13,7 +13,7 @@ final class TabBarController: UITabBarController {
         super.viewDidLoad()
         delegate = self
         
-        let searchVC = SearchViewController()
+        let searchVC = SearchViewController(multiSearchUseCase: makeMultiSearchUseCase())
         let searchNC = UINavigationController(rootViewController: searchVC)
         searchNC.tabBarItem.image = UIImage(systemName: SFSymbol.magnifyingGlass,
                                              withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
@@ -86,12 +86,23 @@ extension TabBarController: UITabBarControllerDelegate {
         print("🥯")
         let index = tabBarController.selectedIndex
         if index != 0 {
-            let searchVC = SearchViewController()
+            let searchVC = SearchViewController(multiSearchUseCase: makeMultiSearchUseCase())
             let searchNC = UINavigationController(rootViewController: searchVC)
             searchNC.tabBarItem.image = UIImage(systemName: SFSymbol.magnifyingGlass,
                                                  withConfiguration: UIImage.SymbolConfiguration(font: .systemFont(ofSize: 20)))?.withBaselineOffset(fromBottom: UIFont.systemFontSize * 1.5)
             
             tabBarController.viewControllers?[0] = searchNC
         }
+    }
+}
+
+/// Dependency Injection
+extension TabBarController {
+    private func makeMultiSearchUseCase() -> MultiSearchUseCase {
+        MultiSearchUseCase(apiRepository: makeAPIRepository())
+    }
+    
+    private func makeAPIRepository() -> APIRepositoryProtocol {
+        APIRepository()
     }
 }

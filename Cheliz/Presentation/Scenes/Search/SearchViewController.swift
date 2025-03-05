@@ -13,6 +13,7 @@ import Toast
 final class SearchViewController: BaseViewController {
     // MARK: - Properties
     private let searchView = SearchView()
+    private let multiSearchUseCase: MultiSearchUseCaseProtocol
     
     private var searchText = ""
     private var searchResults: [Media] = []
@@ -21,6 +22,17 @@ final class SearchViewController: BaseViewController {
     private var isPaginating = false
     
     // MARK: - Life Cycle
+    /// Dependency Injection
+    init(multiSearchUseCase: MultiSearchUseCaseProtocol) {
+        self.multiSearchUseCase = multiSearchUseCase
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = searchView
     }
@@ -94,27 +106,24 @@ final class SearchViewController: BaseViewController {
     
     // MARK: - Search Methods
     private func search() {
-        if searchText.isEmpty { return }
-
-        TMDBAPIManager.shared.fetchMultiSearchResults(query: searchText, page: page) { [weak self] data in
+        guard !searchText.isEmpty else { return }
+        
+        multiSearchUseCase.fetch(query: searchText, page: page) { [weak self] results, totalPages in
             guard let self = self else { return }
             
-            let data = ParsingManager.parseDataToRealmModel(data)
-
             if self.isPaginating {
-                let startIndex = self.searchResults.count // 기존 데이터 개수
+                let startIndex = self.searchResults.count  // 기존 데이터 개수
+                self.searchResults.append(contentsOf: results)
                 
-                self.searchResults.append(contentsOf: data.0)
-                
-                let endIndex = self.searchResults.count - 1 // 업데이트 후의 마지막 인덱스 (startIndex + newItems.count - 1)
+                let endIndex = self.searchResults.count - 1 // 업데이트 후의 마지막 인덱스
                 let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
+                
                 self.searchView.collectionView.performBatchUpdates {
                     self.searchView.collectionView.insertItems(at: indexPaths)
                 }
             } else {
-                self.searchResults = data.0
-                self.totalPages = data.1
-                
+                self.searchResults = results
+                self.totalPages = totalPages
                 self.searchView.collectionView.reloadData()
             }
             
